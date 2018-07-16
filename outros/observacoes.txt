@@ -2,6 +2,15 @@ observcaoes:
 
 cor: acul claro
 
-nome: 
+nome: med4you, med2you
+
+
+Arquitetura:
+back: hibernate, jpa, mysql, springboot, maven, devtools, 
+front: AngularJS, bootstrap, login no facebook
+app: Android, notificações com firebase, login no facebook
+
+
+
 
 
