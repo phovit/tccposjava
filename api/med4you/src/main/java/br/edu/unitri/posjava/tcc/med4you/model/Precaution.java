@@ -1,6 +1,7 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -10,9 +11,10 @@ import javax.persistence.Id;
 public class Precaution {
 
     @Id
+    @GeneratedValue
     private Long id;
 
-    private String tittle;
+    private String title;
 
     private String description;
 
@@ -25,11 +27,11 @@ public class Precaution {
     }
 
     public String getTittle() {
-        return tittle;
+        return title;
     }
 
     public void setTittle(String tittle) {
-        this.tittle = tittle;
+        this.title = tittle;
     }
 
     public String getDescription() {
