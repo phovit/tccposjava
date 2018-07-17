@@ -11,6 +11,11 @@ front: AngularJS, bootstrap, login no facebook
 app: Android, notificações com firebase, login no facebook
 
 
+Para o BackEnd
+criar Banco de dados MySQL, na porta 3306 , com:
+user: med4u
+pass: med4u
+
 
 
 
