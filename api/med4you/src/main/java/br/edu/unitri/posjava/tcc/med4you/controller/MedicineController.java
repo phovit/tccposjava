@@ -1,7 +1,7 @@
 package br.edu.unitri.posjava.tcc.med4you.controller;
 
-import br.edu.unitri.posjava.tcc.med4you.model.Precaution;
-import br.edu.unitri.posjava.tcc.med4you.service.PrecautionService;
+import br.edu.unitri.posjava.tcc.med4you.model.Medicine;
+import br.edu.unitri.posjava.tcc.med4you.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,19 +15,19 @@ import java.util.List;
  * Created by pauloho on 17/07/18.
  */
 @RestController
-@RequestMapping("precaution")
-public class PrecautionController {
+@RequestMapping("medicine")
+public class MedicineController {
 
     @Autowired
-    private PrecautionService service;
+    private MedicineService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Precaution findById(@PathVariable("id") Long id) {
+    public Medicine findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Precaution> findAll() {
+    public List<Medicine> findAll() {
         return service.findAll();
     }
 
@@ -37,12 +37,12 @@ public class PrecautionController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void update(@RequestBody Precaution precaution) {
-        service.update(precaution);
+    public void update(@RequestBody Medicine medicine) {
+        service.update(medicine);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void save(@RequestBody Precaution precaution) {
-        service.save(precaution);
+    public void save(@RequestBody Medicine medicine) {
+        service.save(medicine);
     }
 }
