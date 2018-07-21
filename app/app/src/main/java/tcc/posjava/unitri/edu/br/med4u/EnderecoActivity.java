@@ -9,7 +9,7 @@ import android.view.View;
 
 public class EnderecoActivity extends AppCompatActivity {
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_endereco);
@@ -24,6 +24,6 @@ public class EnderecoActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
+    }*/
 
 }

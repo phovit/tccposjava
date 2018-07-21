@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CadMedicoActivity">
+        <activity android:name=".PrincipalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,9 +17,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnderecoActivity"
+            android:name=".CadCidadeActivity"
             android:label="@string/title_activity_endereco"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-    </application>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadEnderecoActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadEstadoActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadFabricanteActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadFarmaciaActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadMedicoActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".CadReceitaActivity"
+            android:label="@string/title_activity_endereco"
+            android:theme="@style/AppTheme.NoActionBar">
 
+        </activity>
+    </application>
 </manifest>

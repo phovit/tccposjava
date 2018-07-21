@@ -44,20 +44,32 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/etCep"
+            android:id="@+id/edCadEnderecoCep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="CEP"
-            android:inputType="textPersonName" />
+            android:inputType="textPostalAddress" />
 
-        <Spinner
-            android:id="@+id/spinnerCidade"
+        <TextView
+            android:id="@+id/tvCadEnderecoEstado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Selecione o Estado:" />
 
         <Spinner
             android:id="@+id/spinnerEstado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvCadEndereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione a cidade:" />
+
+        <Spinner
+            android:id="@+id/spinnerCidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

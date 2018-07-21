@@ -1,13 +1,13 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class CadMedicoActivity extends AppCompatActivity {
+public class CadReceitaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cad_medico);
+        setContentView(R.layout.activity_cad_receita);
     }
 }
