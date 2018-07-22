@@ -15,6 +15,7 @@ public class Medicine {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
     private String indication;
     private String contraindication;
     private String adverseReactions;
@@ -25,7 +26,7 @@ public class Medicine {
     private boolean generic;
 
     @OneToOne
-    @JoinColumn( name = "ORIGINAL_MEDICINE_ID", referencedColumnName = "ID" )
+    @JoinColumn(name = "ORIGINAL_MEDICINE_ID", referencedColumnName = "ID")
     private Medicine originalMedicine;
 
     public Long getId() {
@@ -106,5 +107,13 @@ public class Medicine {
 
     public void setOriginalMedicine(Medicine originalMedicine) {
         this.originalMedicine = originalMedicine;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

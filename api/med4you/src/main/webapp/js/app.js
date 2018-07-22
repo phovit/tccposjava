@@ -5,13 +5,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/home");
 
 	$stateProvider
-	  /*.state('home', {
-		url : "/home",
-		templateUrl : "partials/home.html",
-		controller: "homecontroller"
-	})*/.state('user', {
+	  .state('medicine', {
+		url : "/medicine",
+		templateUrl : "screens/medicine.html",
+		controller: "medicinecontroller"
+	}).state('user', {
 		url : "/user",
-		templateUrl : "partials/user.html",
+		templateUrl : "screens/user.html",
 		controller: "usercontroller"
 	});
 });

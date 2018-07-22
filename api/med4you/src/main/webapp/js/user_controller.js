@@ -6,6 +6,5 @@ app.controller('usercontroller', function ($scope) {
 
 	$scope.banana = 'melancia';
 
-	alert('opa');
-	console.log('opa');
+
 });
