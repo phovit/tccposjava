@@ -1,0 +1,61 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Cadastro">
+        <menu>
+            <item
+                android:id="@+id/cadCidade"
+                android:title="Cidade" />
+            <item
+                android:id="@+id/cadEndereco"
+                android:title="Endereço" />
+            <item
+                android:id="@+id/cadEstado"
+                android:title="Estado" />
+            <item
+                android:id="@+id/cadFabricante"
+                android:title="Fabricante" />
+            <item
+                android:id="@+id/cadFarmacia"
+                android:title="Farmácia" />
+            <item
+                android:id="@+id/cadMedico"
+                android:title="Médico" />
+            <item android:id="@+id/cadReceita"
+                android:title="Receita" />
+        </menu>
+
+    </item>
+    <item
+        android:title="Consulta">
+        <menu>
+            <item
+                android:id="@+id/consEndereco"
+                android:title="Endereço" />
+            <item
+                android:id="@+id/consFabricante"
+                android:title="Fabricante" />
+            <item
+                android:id="@+id/consFarmacia"
+                android:title="Farmácia" />
+            <item
+                android:id="@+id/consMedico"
+                android:title="Médico" />
+
+            <item android:id="@+id/consReceita"
+                android:title="Receita" />
+        </menu>
+    </item>
+    <item
+        android:title="Perfil">
+        <menu>
+            <item android:id="@+id/perfilEditar"
+                android:title="Editar"
+                />
+            <item android:id="@+id/perfilVisualizar"
+                android:title="Visualizar" />
+        </menu>
+    </item>
+    <item
+
+        android:title="Sair"/>
+</menu>

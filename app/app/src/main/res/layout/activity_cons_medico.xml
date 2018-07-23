@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadMedicoActivity">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/tvTitlefindMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consulta - Médico" />
+
+        <EditText
+            android:id="@+id/edFindCrmMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite o CRM do Médico"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvFindMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OU:" />
+
+        <EditText
+            android:id="@+id/edFindNameMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite o nome do Médico"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/btConsMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

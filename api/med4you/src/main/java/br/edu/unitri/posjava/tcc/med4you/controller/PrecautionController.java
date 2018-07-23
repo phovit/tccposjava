@@ -15,6 +15,7 @@ import java.util.List;
  * Created by pauloho on 17/07/18.
  */
 @RestController
+@RequestMapping("precaution")
 public class PrecautionController {
 
     @Autowired

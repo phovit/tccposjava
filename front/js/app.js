@@ -5,11 +5,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/home");
 
 	$stateProvider
-	  .state('home', {
+	  /*.state('home', {
 		url : "/home",
 		templateUrl : "partials/home.html",
 		controller: "homecontroller"
-	}).state('usercontroller', {
+	})*/.state('user', {
 		url : "/user",
 		templateUrl : "partials/user.html",
 		controller: "usercontroller"
