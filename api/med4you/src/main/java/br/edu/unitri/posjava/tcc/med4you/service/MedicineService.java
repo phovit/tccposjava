@@ -35,4 +35,8 @@ public class MedicineService {
     public void save(Medicine medicine) {
         repository.save(medicine);
     }
+
+    public List<Medicine> findByName(String name) {
+        return repository.findByName(name);
+    }
 }

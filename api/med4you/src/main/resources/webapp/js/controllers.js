@@ -1,3 +1,3 @@
 angular.module('app.controllers', 
-		['user','medicine']
+		['user','medicine','medicineregister','medicinesearch','medicineedit']
 );
