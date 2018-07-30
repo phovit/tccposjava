@@ -1,0 +1,61 @@
+<div data-ng-controller="medicineeditcontroller">
+    <div style="max-width: 800px; margin: auto; margin-top: 20px;">
+        <h2>Editar Medicamento</h2>
+        <form>
+            <div class="row">
+                <div class="form-group col-md-6">
+
+                    <div class="col-md-12" style="text-align: left"><label for="name">Nome</label></div>
+                    <input id="name" class="form-control" type="text" ng-model="medicine.name"/>
+                </div>
+                <div class="form-group col-md-6">
+
+                    <div class="col-md-12" style="text-align: left"><label for="codebar">Codigo de barras</label></div>
+                    <input id="codebar" class="form-control" type="text" ng-model="medicine.codebar"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+
+                    <div class="col-md-12" style="text-align: left"><label for="msRecord">Registro MS</label></div>
+                    <input id="msRecord" class="form-control" type="text" ng-model="medicine.msRecord"/>
+                </div>
+                <div class="form-group col-md-6" style="display: flex; margin-top: 25px">
+                    <div class="col-md-6" style="text-align: left"><label for="generic">Medicamento Genérico</label></div>
+                    <input id="generic" type="checkbox" ng-model="medicine.generic" style="margin-left: 20px"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="col-md-12" style="text-align: left"><label for="indication">Indicação</label></div>
+                    <textarea id="indication" class="form-control" type="text"
+                              ng-model="medicine.indication"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12" style="text-align: left"><label
+                            for="contraindication">Contraindicação</label>
+                    </div>
+                    <textarea id="contraindication" class="form-control" type="text"
+                              ng-model="medicine.contraindication"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12" style="text-align: left"><label for="adverseReactions">Reações
+                        adversas</label>
+                    </div>
+                    <textarea id="adverseReactions" class="form-control" type="text"
+                              ng-model="medicine.adverseReactions"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="col-md-12" style="text-align: left"><label for="precautions">Precauções</label></div>
+                    <textarea id="precautions" class="form-control" type="text"
+                              ng-model="medicine.precautions"></textarea>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                    <button class="btn btn-primary" ng-click="save()">Salvar</button>
+                    <button class="btn btn-primary" ng-click="clear()">Limpar</button>
+                </div>
+        </form>
+    </div>
+</div>

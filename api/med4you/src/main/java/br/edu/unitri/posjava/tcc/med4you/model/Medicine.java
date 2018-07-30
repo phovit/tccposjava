@@ -1,9 +1,12 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 /**
@@ -13,7 +16,7 @@ import javax.persistence.OneToOne;
 public class Medicine {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String indication;
@@ -24,6 +27,10 @@ public class Medicine {
     private String activeIngredients;
     private Long msRecord;
     private boolean generic;
+    @Lob
+    @Column(name = "IMAGE", nullable = true, columnDefinition = "mediumblob")
+    private byte[] image;
+
 
     @OneToOne
     @JoinColumn(name = "ORIGINAL_MEDICINE_ID", referencedColumnName = "ID")
@@ -115,5 +122,13 @@ public class Medicine {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

@@ -1,0 +1,32 @@
+<div data-ng-controller="medicinesearchcontroller">
+    <div style="max-width: 800px; margin: auto; margin-top: 20px;">
+
+        <h2>Buscar Medicamento</h2>
+        <form>
+            <div class="row" style="display: flex">
+
+                <label class="col-md-1" for="name">Nome</label>
+                <input id="name" class="form-control col-md-9" type="text" ng-model="medicine.name"/>
+
+
+                <button class="btn btn-primary col-md-2" style="margin-left: 10px" ng-click="findByName()">Buscar
+                </button>
+            </div>
+
+
+        </form>
+
+        <div class="col-md-3" ng-repeat="medicine in medicines">
+            <a ui-sref="medicineedit({id: medicine.id})">
+                <div class="thumbnail">
+                    <img src="https://static.ultrafarma.com.br/media/imagens_produtos/800px/00/000/50/0/00050088.jpg"
+                         alt="Imagem Responsiva">
+                    <div class="right-caption">
+                        <p>{{medicine.name}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>

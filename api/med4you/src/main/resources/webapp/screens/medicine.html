@@ -1,13 +1,20 @@
 <div data-ng-controller="medicinecontroller">
-    <div class="row"><h2>Medicamentos</h2></div>
-        <div class="col-md-3" ng-repeat="medicine in medicines">
-            <div class="thumbnail">
-                <img src="https://static.ultrafarma.com.br/media/imagens_produtos/800px/00/000/50/0/00050088.jpg" alt="Imagem Responsiva">
+    <div class="row">
+        <h2>Medicamentos
+        </h2>
+    </div>
+    <div class="col-md-3" ng-repeat="medicine in medicines">
+        <a ui-sref="medicineedit({id: medicine.id})">
+            <div class="thumbnail" style="text-align: -webkit-center">
+                <div style="width: 80%; height:  auto; left:10%">
+                    <img src="{{'data:image/png;base64, '+medicine.image}}" style="width: 200px; height:  200px">
+                </div>
                 <div class="right-caption">
                     <p>{{medicine.name}}</p>
                 </div>
             </div>
-        </div>
+        </a>
+    </div>
 
 
 </div>
