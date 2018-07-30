@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadMedicoActivity">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/tvTitlefindFarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consulta - Farmácia" />
+
+        <EditText
+            android:id="@+id/edFindCnpjFarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite o CNPJ"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvFindFarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OU:" />
+
+        <EditText
+            android:id="@+id/edFindRazaoFarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite a Razão Social"
+            android:inputType="textPostalAddress" />
+
+        <Button
+            android:id="@+id/btConsFarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
