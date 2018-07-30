@@ -45,10 +45,4 @@ public class MedicineController {
     public void save(@RequestBody Medicine medicine) {
         service.save(medicine);
     }
-
-    @RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET)
-    public List<Medicine> findByName(@PathVariable("name") String name) {
-        return service.findByName(name);
-    }
-
 }
