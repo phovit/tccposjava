@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">med4u</string>
     <string name="title_activity_endereco">EnderecoActivity</string>
-<<<<<<< HEAD
     <string name="facebook_app_id">[APP_ID]</string>
     <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
-=======
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
 </resources>

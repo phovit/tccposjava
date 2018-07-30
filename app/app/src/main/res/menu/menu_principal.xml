@@ -29,21 +29,9 @@
         android:title="Consulta">
         <menu>
             <item
-<<<<<<< HEAD
                 android:id="@+id/consEndereco"
                 android:title="Endereço" />
             <item
-=======
-                android:id="@+id/consCidade"
-                android:title="Cidade" />
-            <item
-                android:id="@+id/consEndereco"
-                android:title="Endereço" />
-            <item
-                android:id="@+id/consEstado"
-                android:title="Estado" />
-            <item
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
                 android:id="@+id/consFabricante"
                 android:title="Fabricante" />
             <item
@@ -52,10 +40,7 @@
             <item
                 android:id="@+id/consMedico"
                 android:title="Médico" />
-<<<<<<< HEAD
 
-=======
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             <item android:id="@+id/consReceita"
                 android:title="Receita" />
         </menu>

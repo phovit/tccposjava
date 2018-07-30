@@ -18,61 +18,36 @@
         </activity>
         <activity
             android:name=".CadCidadeActivity"
-<<<<<<< HEAD
             android:label="CadCidadeActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadEnderecoActivity"
-<<<<<<< HEAD
             android:label="CadEnderecoActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadEstadoActivity"
-<<<<<<< HEAD
             android:label="CadEstadoActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadFabricanteActivity"
-<<<<<<< HEAD
             android:label="CadFabricanteActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadFarmaciaActivity"
-<<<<<<< HEAD
             android:label="CadFarmaciaActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadMedicoActivity"
-<<<<<<< HEAD
             android:label="CadMedicoActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".CadReceitaActivity"
-<<<<<<< HEAD
             android:label="CadReceitaActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -122,15 +97,9 @@
         <activity
             android:name=".ConsReceitaActivity"
             android:label="ConsReceitaActivity"
-=======
-            android:label="@string/title_activity_endereco"
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
-=======
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
 </manifest>

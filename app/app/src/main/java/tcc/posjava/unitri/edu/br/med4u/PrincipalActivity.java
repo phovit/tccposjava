@@ -37,11 +37,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 Intent cadastroEstado = new Intent(this, CadEstadoActivity.class);
                 startActivity(cadastroEstado);
                 break;
-<<<<<<< HEAD
             case R.id.cadFabricante:
-=======
-            case R.id.btCadastroFab:
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
                 Intent cadastroFabricante = new Intent(this, CadFabricanteActivity.class);
                 startActivity(cadastroFabricante);
                 break;
@@ -57,7 +53,6 @@ public class PrincipalActivity extends AppCompatActivity {
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
                 startActivity(cadastroReceita);
                 break;
-<<<<<<< HEAD
             case R.id.consEndereco:
                 Intent consultaEndereco = new Intent(this, ConsEnderecoActivity.class);
                 startActivity(consultaEndereco);
@@ -73,8 +68,6 @@ public class PrincipalActivity extends AppCompatActivity {
             case R.id.consReceita:
                 Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
                 startActivity(consultaReceita);
-=======
->>>>>>> 7cfec237960048e892a7a1a3221c53a395af99f2
 
             default:
                 return false;
