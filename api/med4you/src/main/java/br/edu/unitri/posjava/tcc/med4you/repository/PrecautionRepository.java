@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by pauloho on 16/07/18.
  */
-
 public interface PrecautionRepository extends JpaRepository<Precaution, Long> {
 
 }
