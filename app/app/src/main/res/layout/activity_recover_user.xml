@@ -22,45 +22,18 @@
             android:textSize="10pt" />
 
         <EditText
-            android:id="@+id/etMailLogin"
+            android:id="@+id/etMailRecover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Digite seu E-mail ou nome de usuário"
+            android:hint="Digite o e-mail cadastrado"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/etPassLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite sua senha"
-            android:inputType="textPassword" />
-
         <Button
-            android:id="@+id/btLogin"
+            android:id="@+id/btRecover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Efetuar Login" />
-
-        <TextView
-            android:id="@+id/tvRecoverPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Esqueceu? Clique aqui" />
-
-        <!--<com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />-->
-
-        <TextView
-            android:id="@+id/tvNewUserLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ainda não tem cadastro? Clique aqui" />
+            android:text="Enviar" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

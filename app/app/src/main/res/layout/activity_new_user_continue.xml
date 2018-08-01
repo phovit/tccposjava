@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/textViewNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Cadastro de novo usuário"
+            android:textAlignment="center"
+            android:textSize="10pt" />
+
+        <EditText
+            android:id="@+id/etNameNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu nome"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etUserNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu nome de usuário"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etBirthdayNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite a data do seu nascimento"
+            android:inputType="textPersonName|date" />
+
+        <EditText
+            android:id="@+id/etAdressNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu endereço"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etPhoneNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu telefone fixo"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etCellNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu telefone celular"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etPassNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/etPassNewUser2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirme sua senha"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonCad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

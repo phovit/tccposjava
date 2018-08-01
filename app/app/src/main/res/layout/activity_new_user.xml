@@ -22,43 +22,11 @@
             android:textSize="10pt" />
 
         <EditText
-            android:id="@+id/etNameNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu nome"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etUserNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu nome de usuário"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etBirthdayNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite a data do seu nascimento"
-            android:inputType="textPersonName|date" />
-
-        <EditText
             android:id="@+id/etCPFNewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite seu CPF"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etAdressNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu endereço"
             android:inputType="textPersonName" />
 
         <EditText
@@ -69,39 +37,11 @@
             android:hint="Digite seu E-mail"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/etPhoneNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu telefone fixo"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etCellNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu telefone celular"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etPassNewUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite sua senha"
-            android:inputType="textPassword" />
-
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonCadastro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Efetuar Login" />
+            android:text="Continuar" />
 
-        <TextView
-            android:id="@+id/NewUserButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ainda não tem cadastro? Clique aqui" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
