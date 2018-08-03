@@ -19,6 +19,7 @@ public class splashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        getSupportActionBar().hide();
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
             @Override
@@ -29,7 +30,7 @@ public class splashActivity extends AppCompatActivity {
 
     }
     private void chamaPrincipal() {
-        Intent intent = new Intent(splashActivity.this, LoginActivity.class);
+        Intent intent = new Intent(splashActivity.this, PrincipalActivity.class);
         startActivity(intent);
         finish();
     }

@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -13,6 +16,22 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        ImageView imageView = findViewById(R.id.ivMedicamento);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent buscaMedicamento = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
+                startActivity(buscaMedicamento);
+            }
+        });
+        Button login = findViewById(R.id.btLoginPrincipal);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent telaLogin = new Intent(PrincipalActivity.this, LoginActivity.class);
+                startActivity(telaLogin);
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
