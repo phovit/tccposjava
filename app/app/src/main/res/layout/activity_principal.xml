@@ -65,17 +65,17 @@
 
     <TextView
         android:id="@+id/tvMedicament"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remédio"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="371dp" />
+        android:layout_width="99dp"
+        android:layout_height="20dp"
+        android:text="Medicamentos"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="370dp" />
 
     <TextView
         android:id="@+id/tvPharm2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Farmácia"
+        android:text="Farmácias"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="372dp" />
 
@@ -83,7 +83,7 @@
         android:id="@+id/tvMedic2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Médico"
+        android:text="Médicos"
         tools:layout_editor_absoluteX="278dp"
         tools:layout_editor_absoluteY="369dp" />
 
