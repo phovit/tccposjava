@@ -16,7 +16,7 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        ImageView imageView = findViewById(R.id.ivMedicamento);
+        ImageView imageView = findViewById(R.id.ivMedicament);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +32,34 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivity(telaLogin);
             }
         });
+        ImageView findPharm = findViewById(R.id.ivPharm);
+        findPharm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent fPharm = new Intent(PrincipalActivity.this, ConsFarmaciaActivity.class);
+                startActivity(fPharm);
+            }
+        });
+        ImageView findMedicament = findViewById(R.id.ivMedicament);
+        findMedicament.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent fMedicament = new Intent(PrincipalActivity.this, ConsFabricanteActivity.class);
+                startActivity(fMedicament);
+            }
+        });
+        ImageView findMedic = findViewById(R.id.ivMedic);
+        findMedic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent fMedic = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
+                startActivity(fMedic);
+            }
+        });
     }
+
+
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

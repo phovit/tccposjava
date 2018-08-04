@@ -4,87 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadMedicoActivity">
+    tools:context=".PrincipalActivity">
 
-    <TextView
-        android:id="@+id/tvTitleIndex"
+   <!-- <android.widget.RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Med4U"
-        android:textAlignment="center"
-        android:textSize="90px"
-        tools:layout_editor_absoluteX="8dp" />
-
-    <ImageView
-        android:id="@+id/ivMedicamento"
-        android:layout_width="83dp"
-        android:layout_height="71dp"
-        app:srcCompat="@drawable/buscamedicamento"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="289dp" />
-
-    <Button
-        android:id="@+id/btLoginPrincipal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
+        android:layout_height="match_parent">&ndash;&gt;-->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="435dp" />
+        tools:layout_editor_absoluteY="0dp">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="83dp"
-        android:layout_height="71dp"
-        app:srcCompat="@drawable/iconpharm"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="289dp" />
+        <TextView
+            android:id="@+id/tvTitleIndex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Med4U"
+            android:textAlignment="center"
+            android:textSize="90px" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="83dp"
-        android:layout_height="71dp"
-        app:srcCompat="@drawable/iconmedico"
-        tools:layout_editor_absoluteX="267dp"
-        tools:layout_editor_absoluteY="289dp" />
+        <ImageView
+            android:id="@+id/ivMedicament"
+            android:layout_width="83dp"
+            android:layout_height="71dp"
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="219dp"
-        android:layout_height="146dp"
-        app:srcCompat="@drawable/iconbluehealth"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="67dp" />
+            android:layout_alignStart="@+id/tvTitleIndex"
+            android:layout_alignTop="@+id/ivPharm"
+            android:src="@drawable/buscamedicamento" />
 
-    <TextView
-        android:id="@+id/tvPrincipal01"
-        android:layout_width="85dp"
-        android:layout_height="18dp"
-        android:text="Busque aqui"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="237dp" />
+        <Button
+            android:id="@+id/btLoginPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
 
-    <TextView
-        android:id="@+id/tvMedicament"
-        android:layout_width="99dp"
-        android:layout_height="20dp"
-        android:text="Medicamentos"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="370dp" />
+            android:layout_marginBottom="46dp"
 
-    <TextView
-        android:id="@+id/tvPharm2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Farmácias"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="372dp" />
+            android:text="Login" />
 
-    <TextView
-        android:id="@+id/tvMedic2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Médicos"
-        tools:layout_editor_absoluteX="278dp"
-        tools:layout_editor_absoluteY="369dp" />
+        <ImageView
+            android:id="@+id/ivPharm"
+            android:layout_width="83dp"
+            android:layout_height="71dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
 
+            android:layout_marginBottom="189dp"
+
+            android:src="@drawable/iconpharm" />
+
+        <ImageView
+            android:id="@+id/ivMedic"
+            android:layout_width="83dp"
+            android:layout_height="71dp"
+
+
+            android:layout_alignEnd="@+id/tvTitleIndex"
+            android:layout_alignTop="@+id/ivMedicament"
+            android:src="@drawable/iconmedico" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="219dp"
+            android:layout_height="146dp"
+            android:layout_below="@+id/tvTitleIndex"
+            android:layout_centerHorizontal="true"
+
+            android:src="@drawable/iconbluehealth" />
+
+        <TextView
+            android:id="@+id/tvPrincipal01"
+            android:layout_width="85dp"
+            android:layout_height="18dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="217dp"
+
+            android:text="Busque aqui" />
+
+        <TextView
+            android:id="@+id/tvMedicament"
+            android:layout_width="99dp"
+            android:layout_height="20dp"
+
+
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Medicamentos" />
+
+        <TextView
+            android:id="@+id/tvPharm2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Farmácias" />
+
+        <TextView
+            android:id="@+id/tvMedic2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerVertical="true"
+
+
+            android:layout_toEndOf="@+id/imageView5"
+            android:text="Médicos" />
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
