@@ -17,10 +17,10 @@ public class Reminder {
     @GeneratedValue
     private Long id;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	private User user;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Medicine medicine;
 	
 	private String dosage;

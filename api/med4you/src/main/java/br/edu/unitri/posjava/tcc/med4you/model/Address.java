@@ -1,10 +1,9 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -12,80 +11,79 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Address {
-	
-	@Id
+
+    @Id
     @GeneratedValue
     private Long id;
-	
-	private String logradouro;
-	private Integer number;
-	private String complement;
-	private String cep;
-	
-	@OneToMany
-	private List<City> cities;
-	
-	@OneToMany
-	private List<State> state;
 
-	public Address() {
-		super();
-	}
+    private String logradouro;
+    private Integer number;
+    private String complement;
+    private String cep;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    private City city;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    private State state;
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public Address() {
+        super();
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Integer getNumber() {
-		return number;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public String getComplement() {
-		return complement;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public void setComplement(String complement) {
-		this.complement = complement;
-	}
+    public Integer getNumber() {
+        return number;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public String getComplement() {
+        return complement;
+    }
 
-	public List<City> getCities() {
-		return cities;
-	}
+    public void setComplement(String complement) {
+        this.complement = complement;
+    }
 
-	public void setCities(List<City> cities) {
-		this.cities = cities;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public List<State> getState() {
-		return state;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public void setState(List<State> state) {
-		this.state = state;
-	}
-	
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
 }

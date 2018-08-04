@@ -3,47 +3,44 @@ package br.edu.unitri.posjava.tcc.med4you.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by edufratari on 18/07/18.
  */
 @Entity
 public class City {
-	
-	@Id
+
+    @Id
     @GeneratedValue
     private Long id;
-	
-	private String uf;
-	
-	private String name;
 
-	public City() {
-		super();
-	}
+    @ManyToOne
+    private State state;
 
-	public Long getId() {
-		return id;
-	}
+    private String name;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getUf() {
-		return uf;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
+    public State getState() {
+        return state;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setState(State state) {
+        this.state = state;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

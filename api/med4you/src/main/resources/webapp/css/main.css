@@ -1,3 +1,8 @@
+body{
+    margin:0;
+    padding: 0;
+}
+
 #page {
     margin-bottom: 0;
     height:: 100%;
@@ -59,13 +64,25 @@
 
 }
 
+#user_area_photo_not_logged {
+    width: 40px;
+    margin-top: 5px;
+    margin-right: 15px;
+    height: 40px;
+    border-radius: 100%;
+    background-image: url('https://png.icons8.com/color/1600/person-male.png');
+    background-size: 100%;
+
+}
+
+
+
 #content {
     width: 100%;
     top: 50px;
     position: absolute;
     margin: 0px;
-    padding;
-    0px;
+    padding: 0px;
     text-align: center;
 }
 

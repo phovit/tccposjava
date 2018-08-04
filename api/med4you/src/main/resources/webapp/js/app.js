@@ -31,3 +31,34 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: "usercontroller"
         });
 });
+app.controller('indexcontroller', function ($scope, $http) {
+
+    $scope.modal = {};
+
+    $scope.loginOptions = function () {
+        $scope.modal.url = "screens/partials/login.html";
+
+    };
+
+
+    $scope.autenticate = function () {
+        $http({
+            method: 'POST',
+            url: '/med4you/autenticate',
+            data: $scope.user
+        }).then(function (response) {
+            $scope.session = response.data;
+            $scope.isLogged = true;
+            $scope.modal.url = "";
+        }, function (error) {
+            console.log(error);
+            $scope.isLogged = true;
+            $scope.modal.url = "";
+        });
+    };
+
+
+
+
+
+});
