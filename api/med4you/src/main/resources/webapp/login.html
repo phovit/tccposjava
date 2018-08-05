@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Med4You - Login</title>
+    <link rel="icon" type="image/x-icon"
+          href="https://cdn6.aptoide.com/imgs/6/c/4/6c4816bd064cf2631b051c74816fcf15_icon.png?w=256">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+
+
+</head>
+
+<body>
+<div style="background-color: #337aa0;height: 100%;" data-ng-app="login">
+    <script src="js/login_controller.js"></script>
+    <div style="padding-top: 12%;" class="form-check" data-ng-controller="logincontroller">
+
+        <div id="boxLogin">
+
+            <input type="text" placeholder="Email" id="emailField" ng-model="user.email"/>
+            <input type="password" placeholder="Senha" id="passwordField" ng-model="user.password"/>
+
+
+            <div class="row">
+                <button class="btn" id="btnAccess" ng-click="autenticate()">
+                    Acessar
+                </button>
+            </div>
+
+            <div class="row divLine">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox">
+                <label class="form-check-label" for="checkbox">Lembrar-me
+                </label>
+            </div>
+            <a href="#">
+                <div class="row divLine">
+                    Esqueci minha senha
+                </div>
+            </a>
+            <a href="#">
+                <div class="row divLine">Cadastrar-se
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

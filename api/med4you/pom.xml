@@ -67,7 +67,7 @@
 
 
         <!--SPRING SECURITY-->
-        <!--dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>5.0.7.RELEASE</version>
@@ -76,7 +76,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>5.0.7.RELEASE</version>
-        </dependency-->
+        </dependency>
     </dependencies>
 
     <build>

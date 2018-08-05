@@ -5,3 +5,6 @@ insert into medicine (id, name, generic) values (4, 'Dipirona',0);
 insert into medicine (id, name, generic) values (5, 'Bromoprida',0);
 insert into medicine (id, name, generic) values (6, 'Carvedilol',0);
 insert into medicine (id, name, generic) values (7, 'Rivotril',0);
+
+
+insert into user (id, name, username, password) values (1,'Paulo Henrique', 'admin','admin');

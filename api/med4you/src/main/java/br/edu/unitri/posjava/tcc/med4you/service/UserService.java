@@ -48,4 +48,18 @@ public class UserService {
         }
         return false;
     }
+
+    public boolean autenticate(User user) {
+
+        User u = repository.findByUsername(user.getUsername());
+
+        if (u == null)
+            return false;
+
+        if (u.getPassword().equals(user.getPassword())) {
+            return true;
+        }
+        return false;
+
+    }
 }
