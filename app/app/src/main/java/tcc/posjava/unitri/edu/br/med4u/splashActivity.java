@@ -14,7 +14,7 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class splashActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 3000;
+    /*private static int SPLASH_TIME_OUT = 3000;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
