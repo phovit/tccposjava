@@ -13,6 +13,22 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <ImageView
+            android:id="@+id/ivCadRec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_image"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/button_image"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="takePicture"
+            android:text="Tirar Foto da Receita!" />
+
         <TextView
             android:id="@+id/tvTitleCadRec"
             android:layout_width="match_parent"
@@ -62,10 +78,11 @@
             android:inputType="number" />
 
         <Button
-            android:id="@+id/btCadastroEndereco"
+            android:id="@+id/btCadaRec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cadastrar" />
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

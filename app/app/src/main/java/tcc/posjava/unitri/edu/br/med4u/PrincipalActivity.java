@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -56,9 +57,16 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivity(fMedic);
             }
         });
+        TextView testCamera = findViewById(R.id.tvTestCamera);
+        testCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tCamera = new Intent(PrincipalActivity.this, CadReceitaActivity.class);
+                startActivity(tCamera);
+            }
+        });
+
     }
-
-
 
 
     public boolean onCreateOptionsMenu(Menu menu) {

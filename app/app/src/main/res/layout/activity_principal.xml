@@ -18,6 +18,39 @@
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
+            android:id="@+id/tvTestAgend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="110dp"
+            android:layout_toEndOf="@+id/tvMedicament"
+            android:text="Testar agenda" />
+
+        <TextView
+            android:id="@+id/tvTestCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignEnd="@+id/tvMedic2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="119dp"
+            android:text="Testar calendario" />
+
+        <TextView
+            android:id="@+id/tvTestCamera"
+            android:layout_width="99dp"
+            android:layout_height="20dp"
+
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/tvTitleIndex"
+            android:layout_marginBottom="150dp"
+            android:text="Testar camera" />
+
+        <TextView
             android:id="@+id/tvTitleIndex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
