@@ -1,36 +1,51 @@
 <html>
 
 <head>
-<link href="css/main.css" rel="stylesheet">
-<link href="css/login.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<title>Med4You - Login</title>
-<link rel="icon" type="image/x-icon"
-	href="https://cdn6.aptoide.com/imgs/6/c/4/6c4816bd064cf2631b051c74816fcf15_icon.png?w=256">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Med4You - Login</title>
+    <link rel="icon" type="image/x-icon"
+          href="https://cdn6.aptoide.com/imgs/6/c/4/6c4816bd064cf2631b051c74816fcf15_icon.png?w=256">
 </head>
 
 <body>
-	<div style="background-color: #337aa0; height: 100%;">
-		<div style="padding-top: 12%;" class="form-check">
+<div style="background-color: #337aa0; height: 100%;">
+    <div style="padding-top: 12%;" class="form-check">
 
-			<div id="boxLogin">
+        <div id="boxLogin">
 
-				        <form name="f" action="/med4you/login" method="post">               
-            <fieldset>
+            <form name="f" action="/med4you/login" method="POST">
+                <fieldset>
 
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username"/>        
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"/>    
-                <div class="form-actions">
-                    <button type="submit" class="btn">Log in</button>
-                </div>
-            </fieldset>
-        </form>
-			</div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"/>
+                    <br>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password"/>
+                    <br>
+                    <div class="form-actions">
+                        <input name="submit" class="btn" type="submit" value="Login">
+                    </div>
+                    <br>
+                </fieldset>
+                <input name="_csrf" type="hidden" value="87dc5e47-b257-4689-9689-aa4dec04ac13">
+            </form>
 
-		</div>
-	</div>
+
+
+<!--            <form name="f" action="/med4you/login" method="POST">
+                <table>
+                    <tbody><tr><td>User:</td><td><input type="text" name="username" value=""></td></tr>
+                    <tr><td>Password:</td><td><input type="password" name="password"></td></tr>
+                    <tr><td colspan="2"><input name="submit" type="submit" value="Login"></td></tr>
+                    <input name="_csrf" type="hidden" value="87dc5e47-b257-4689-9689-aa4dec04ac13">
+                    </tbody></table>
+            </form>-->
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

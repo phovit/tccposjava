@@ -7,4 +7,6 @@ insert into medicine (id, name, generic) values (6, 'Carvedilol',0);
 insert into medicine (id, name, generic) values (7, 'Rivotril',0);
 
 
-insert into user (id, name, username, password) values (1,'Paulo Henrique', 'admin','admin');
+insert into user (id, name, username, password) values (1,'Paulo Henrique', 'paulo','admin');
+insert into user (id, name, username, password) values (2,'Eduardo', 'eduardo','admin');
+insert into user (id, name, username, password) values (3,'Filipe', 'filipe','admin');
