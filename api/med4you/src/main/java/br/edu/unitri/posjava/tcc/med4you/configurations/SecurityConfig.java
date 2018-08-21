@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import br.edu.unitri.posjava.tcc.med4you.security.WSAuthenticationProvider;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -26,22 +26,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authProvider);
 
 	}
-/*	@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 
-		http.authorizeRequests()
-			.anyRequest().authenticated().antMatchers("/css/**, /js/**, /login.html").permitAll()
-			.and()
-		.formLogin()
-			.loginPage("/login.html")
-			.permitAll();
+//		http.authorizeRequests()
+//			.anyRequest().authenticated().antMatchers("/css/**, /js/**, /login.html").permitAll()
+//			.and()
+//		.formLogin()
+//			.loginPage("/login.html")
+//			.permitAll();
 
 		http.csrf().disable();
 
-
-
-	}*/
-
+	}
 
 }
