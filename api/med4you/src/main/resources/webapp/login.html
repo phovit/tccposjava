@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<div style="background-color: #337aa0; height: 100%;">
+<div style="background-color: #337ab7; height: 100%;">
     <div style="padding-top: 12%;" class="form-check">
 
         <div id="boxLogin">
@@ -19,30 +19,19 @@
             <form name="f" action="/med4you/login" method="POST">
                 <fieldset>
 
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
-                    <br>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password"/>
+
+                    <input type="text" placeholder="Usuario" id="username" name="username"/>
+                    <input type="password" placeholder="Senha" id="password" name="password"/>
+
                     <br>
                     <div class="form-actions">
-                        <input name="submit" class="btn" type="submit" value="Login">
+                        <input name="submit" class="btn" id="btnAccess" type="submit" value="Login">
                     </div>
                     <br>
                 </fieldset>
-                <input name="_csrf" type="hidden" value="87dc5e47-b257-4689-9689-aa4dec04ac13">
             </form>
 
 
-
-<!--            <form name="f" action="/med4you/login" method="POST">
-                <table>
-                    <tbody><tr><td>User:</td><td><input type="text" name="username" value=""></td></tr>
-                    <tr><td>Password:</td><td><input type="password" name="password"></td></tr>
-                    <tr><td colspan="2"><input name="submit" type="submit" value="Login"></td></tr>
-                    <input name="_csrf" type="hidden" value="87dc5e47-b257-4689-9689-aa4dec04ac13">
-                    </tbody></table>
-            </form>-->
         </div>
 
     </div>

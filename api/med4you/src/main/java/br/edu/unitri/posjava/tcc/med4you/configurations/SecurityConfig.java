@@ -1,18 +1,20 @@
 package br.edu.unitri.posjava.tcc.med4you.configurations;
 
+import br.edu.unitri.posjava.tcc.med4you.security.WSAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 
-import br.edu.unitri.posjava.tcc.med4you.security.WSAuthenticationProvider;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-@Configuration
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -26,19 +28,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authProvider);
 
 	}
-	@Override
+
+
 	protected void configure(HttpSecurity http) throws Exception {
-
-
-//		http.authorizeRequests()
-//			.anyRequest().authenticated().antMatchers("/css/**, /js/**, /login.html").permitAll()
-//			.and()
-//		.formLogin()
-//			.loginPage("/login.html")
-//			.permitAll();
-
-		http.csrf().disable();
-
+		http
+				.csrf()
+				.disable()
+				.authorizeRequests()
+				.antMatchers("/login/error").permitAll()
+				.antMatchers( "/js/**", "/css/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.loginPage("/login.html").permitAll()
+				.loginProcessingUrl("/login").permitAll()
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/logout.html").permitAll();
 	}
+
+
 
 }

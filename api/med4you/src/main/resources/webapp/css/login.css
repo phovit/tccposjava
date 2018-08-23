@@ -20,7 +20,7 @@
     color: #FFF;
 }
 
-#emailField {
+#username {
     border: 2px solid fuchsia;
     border-radius: 30px ;
     outline: none;
@@ -32,7 +32,7 @@
     height: 35px;
 }
 
-#passwordField {
+#password {
     border: 2px solid fuchsia;
     border-radius: 30px;
     outline: none;
