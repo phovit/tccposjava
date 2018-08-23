@@ -14,7 +14,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
-    @Query("SELECT u FROM User u WHERE upper(u.username) = upper(username)")
-    User findByUsername(@Param("username") String username);
+    @Query("SELECT u FROM User u WHERE upper(u.username) = upper( ?1 )")
+    User findByUsername(@Param("login") String login);
 
 }

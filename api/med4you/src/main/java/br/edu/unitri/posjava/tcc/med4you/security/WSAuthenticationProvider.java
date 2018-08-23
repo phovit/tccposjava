@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,8 +21,6 @@ import br.edu.unitri.posjava.tcc.med4you.service.UserService;
 @Component
 public class WSAuthenticationProvider implements AuthenticationProvider {
 
-	private static final String URL = "http://localhost:8080/med4you/users/authenticate";
-	
 	@Autowired
 	private UserService userservice;
 
@@ -32,16 +31,18 @@ public class WSAuthenticationProvider implements AuthenticationProvider {
 
 		User user = new User();
 		user.setPassword(password);
-		user.setName(username);
+		user.setUsername(username);
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<Void> resposta = restTemplate.postForEntity(URL, user, Void.class);
+		ResponseEntity<Void> resposta;
 
-		if(	!userservice.autenticate(user) ) {
-			throw new RuntimeException("Erro ao autenticar");			
+		if( userservice.autenticate(user) ) {
+			resposta = ResponseEntity.status(HttpStatus.OK).build();
+		}else {
+			resposta = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
-		
+
 		if (resposta.getStatusCode().is2xxSuccessful() == false) {
 			throw new RuntimeException("Erro ao autenticar");
 		}
