@@ -3,9 +3,15 @@ package tcc.posjava.unitri.edu.br.med4u;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,22 +21,28 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class CadReceitaActivity extends AppCompatActivity {
 
+    //variaveis para criação da imagem
     private Button takePictureButton;
     private ImageView imageView;
     private Uri file;
 
-    private static String TAG = "CadReceitaActivity";
+   private static String TAG = "CadReceitaActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +56,11 @@ public class CadReceitaActivity extends AppCompatActivity {
             takePictureButton.setEnabled(false);
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
+        /*ImageView campoFoto = findViewById(R.id.ivCadRec);*/
 
-        /*ImageView campoFoto = findViewById(R.id.ivCadRec);
-        Bitmap bitmap = CarregadorDeFoto.carrega("foto_supimpa.jpg");
-        campoFoto.setImageBitmap(bitmap);*/
-
-        Button cadRec = findViewById(R.id.btCadaRec);
-        cadRec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // primeiro cria a intenção
-                Intent it = new Intent("EXECUTAR_ALARME");
-                PendingIntent p = PendingIntent.getBroadcast(CadReceitaActivity.this, 0, it, 0);
-                // precisamos pegar agora + 10segundos
-                Calendar c = Calendar.getInstance();
-                c.setTimeInMillis(System.currentTimeMillis());
-                c.add(Calendar.SECOND, 10); // +10 segundos
-                // agendar o alarme
-                AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-                long time = c.getTimeInMillis();
-                alarme.set(AlarmManager.RTC_WAKEUP, time, p);
-                // debug:
-                Log.i("Alarme", "Alarme agendado!");
-            }
-        });
+        /*String caminho = returnPath();*/
+        /*Bitmap bitmap = CarregadorDeFoto.carrega(returnPath());*/
+        /*campoFoto.setImageBitmap(bitmap);*/
 
     }
 
@@ -87,8 +80,12 @@ public class CadReceitaActivity extends AppCompatActivity {
 
         file = FileProvider.getUriForFile(
                 CadReceitaActivity.this,
-                "unitri.edu.br.camera",
+                "tcc.posjava.unitri.edu.br.med4u",
                 getOutputMediaFile());
+
+        Log.d(TAG, "Tirou foto");
+
+
 
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
@@ -111,6 +108,7 @@ public class CadReceitaActivity extends AppCompatActivity {
         }
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        /*file = ajustaFoto(file);*/
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 

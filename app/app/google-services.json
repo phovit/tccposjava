@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1086155159243",
+    "firebase_url": "https://med4u-71629.firebaseio.com",
+    "project_id": "med4u-71629",
+    "storage_bucket": "med4u-71629.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086155159243:android:cca2fa82433dc4c0",
+        "android_client_info": {
+          "package_name": "tcc.posjava.unitri.edu.br.med4u"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086155159243-1dt9qocn81opn0rfm5ki5sbm2vn0j462.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHiAWCHYo3FvsPJpfDeUDYteo8wkFWdtY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

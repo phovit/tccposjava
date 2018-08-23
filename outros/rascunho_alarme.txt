@@ -1,0 +1,32 @@
+/*Button cadRec = findViewById(R.id.btCadaRec);
+        cadRec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // primeiro cria a intenção
+                Intent it = new Intent("EXECUTAR_ALARME");
+                PendingIntent p = PendingIntent.getBroadcast(CadReceitaActivity.this, 0, it, 0);
+                // precisamos pegar agora + 10segundos
+                Calendar c = Calendar.getInstance();
+                c.setTimeInMillis(System.currentTimeMillis());
+                c.add(Calendar.MINUTE, 01); // +10 segundos
+                // agendar o alarme
+                AlarmManager alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, p);
+
+                *//*AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
+                long time = c.getTimeInMillis();
+                alarme.set(AlarmManager.RTC_WAKEUP, time, p);
+*//*
+                *//*Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 8);
+
+                //Passa-se a constante AlarmManager.INTERVAL_DAY ao terceiro parâmetro
+                //para indicar que a periocidade é diária
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);*//*
+                // debug:
+                Log.i("Alarme", "Alarme agendado!");
+            }
+        });*/
