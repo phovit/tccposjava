@@ -1,0 +1,38 @@
+
+<link href="css/login.css" rel="stylesheet">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.js"></script>
+
+
+<div id="body" style="background-color: #337ab7;  margin-left: -50%;  border-radius: 20px 20px 20px 20px;  " data-ng-app="login">
+    <div style="padding-top: 12%;" class="form-check" data-ng-controller="logincontroller">
+
+        <div id="boxLogin">
+
+            <form name="f" action="/med4you/login" method="POST">
+                <input type="text" placeholder="Usuário" id="username" name="username"/>
+                <input type="password" placeholder="Senha" id="password" name="password"/>
+                <input name="submit" class="btn" id="btnAccess" type="submit" value="Login">
+
+
+            </form>
+
+
+            <div class="row divLine">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox">
+                <label class="form-check-label" for="checkbox">Lembrar-me
+                </label>
+            </div>
+            <a href="#">
+                <div class="row divLine">
+                    Esqueci minha senha
+                </div>
+            </a>
+            <a href="#">
+                <div class="row divLine">Cadastrar-se
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

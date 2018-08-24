@@ -1,10 +1,15 @@
-#page{
+body{
+    margin:0;
+    padding: 0;
+}
+
+#page {
     margin-bottom: 0;
-    height: : 100%;
+    height:: 100%;
 }
 
 #header {
-	width: 100%;
+    width: 100%;
     height: 50px;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     text-align: center;
@@ -13,7 +18,7 @@
 }
 
 #logo {
-    height: 100%;  
+    height: 100%;
     position: relative;
     font-size: 24px;
     width: fit-content;
@@ -23,69 +28,155 @@
     line-height: 50px;
 
 }
-#menu{
-	width: fit-content;
-    height: 100%;  
-    text-align: center;     
+
+#menu {
+    width: fit-content;
+    height: 100%;
+    text-align: center;
     position: relative;
 
-    cursor:pointer;
+    cursor: pointer;
     display: inline;
 
 }
-#user_area{
-    height: 50px;  
+
+#user_area {
+    height: 50px;
     position: absolute;
     font-size: 16px;
     width: fit-content;
     display: inline;
     line-height: 50px;
-    right:15px;
+    right: 15px;
     font-weight: bold;
     display: inline-flex;
 
 }
-#user_area_photo{
+
+#user_area_photo {
     width: 40px;
-    margin-top:5px;
-    margin-right:15px;
-    height: 40px;  
+    margin-top: 5px;
+    margin-right: 15px;
+    height: 40px;
     border-radius: 100%;
     background-image: url('https://scontent.fudi1-1.fna.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/26992634_1380732198698921_4856067253155580376_n.jpg?_nc_cat=0&oh=627af9e78bc35fbb2e00d418986cbbf6&oe=5BD12BE3');
     background-size: 100%;
 
 }
 
+#user_area_photo_not_logged {
+    width: 40px;
+    margin-top: 5px;
+    margin-right: 15px;
+    height: 40px;
+    border-radius: 100%;
+    background-image: url('https://png.icons8.com/color/1600/person-male.png');
+    background-size: 100%;
+
+}
 
 
 
-
-
-
-#content{
-	width: 100%;
-    top:50px;
+#content {
+    width: 100%;
+    top: 50px;
     position: absolute;
     margin: 0px;
-    padding;0px;
+    padding: 0px;
     text-align: center;
 }
-#divContent{
+
+#divContent {
     max-width: 800px;
     text-align: center;
     margin: 0 auto;
 }
 
-
-
-
-
-
-#footer{
+#footer {
     width: 100%;
     height: 20px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     text-align: center;
 
+}
+
+#arrowDown {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #000000;
+}
+
+.dropbtn {
+    border: none;
+    cursor: pointer;
+}
+
+#menu ul li a:hover{
+    color: #000000;
+
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background-color: #337ab7;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #EEEEEE;
+    text-decoration: none;
+    color:#000000 !important;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+
+}
+
+
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
