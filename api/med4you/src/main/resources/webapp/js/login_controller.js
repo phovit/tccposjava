@@ -2,7 +2,7 @@
 
 var app = angular.module('login', []);
 
-app.controller('logincontroller', function ($scope, $http) {
+app.controller('logincontroller', function ($scope, $http, $state) {
 
 
     $scope.autenticate = function () {
@@ -19,7 +19,13 @@ app.controller('logincontroller', function ($scope, $http) {
         });
     };
 
-
+    $scope.hideLoginBox = function(){
+        if(!!$scope.modal.url || $scope.modal.url!=""){
+            $scope.modal.url="";
+        }else{
+            $state.go("medicine")
+        }
+    }
 
 
 

@@ -1,8 +1,10 @@
 package br.edu.unitri.posjava.tcc.med4you.service;
 
+import br.edu.unitri.posjava.tcc.med4you.dto.UserDTO;
 import br.edu.unitri.posjava.tcc.med4you.model.User;
 import br.edu.unitri.posjava.tcc.med4you.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -61,5 +63,47 @@ public class UserService {
         }
         return false;
 
+    }
+
+    public boolean isLogged() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof User) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public UserDTO findLogged() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof User) {
+            User u = (User) principal;
+
+            UserDTO user = new UserDTO();
+            user.setName(u.getName());
+            user.setUsername(u.getUsername());
+            user.setAddress(u.getAddress());
+            user.setBirthDate(u.getBirthDate());
+            user.setCellPhone(u.getCellPhone());
+            user.setCpf(u.getCpf());
+            user.setEmail(u.getEmail());
+            user.setId(u.getId());
+            user.setIdentity(u.getIdentity());
+            user.setPhone(u.getPhone());
+
+            return user;
+        } else {
+            String nome = principal.toString();
+            UserDTO user = new UserDTO();
+            user.setName(nome);
+            user.setUsername(nome);
+            return user;
+        }
+    }
+
+    public User findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 }

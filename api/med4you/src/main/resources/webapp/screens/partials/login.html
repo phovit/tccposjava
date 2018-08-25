@@ -1,12 +1,19 @@
-
 <link href="css/login.css" rel="stylesheet">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.js"></script>
 
 
-<div id="body" style="background-color: #337ab7;  margin-left: -50%;  border-radius: 20px 20px 20px 20px;  " data-ng-app="login">
-    <div style="padding-top: 12%;" class="form-check" data-ng-controller="logincontroller">
+<div id="body" style="margin-left:50%;
+                      top: 80px;
+                      z-index:999" data-ng-app="login" data-ng-controller="logincontroller">
+    <div style = "margin-top: 5px;margin-left: 161px;font-size: 30px;position:  absolute;color: #FFF;cursor: pointer;"
+        ng-click="hideLoginBox()">
+        x
+    </div>
+    <div style="padding-top: 35%;padding-bottom: 35%;background-color: #337ab7;
+                      border-radius: 20px 20px 20px 20px; margin-left: -200px;
+                      width: 400px;" class="form-check" >
 
         <div id="boxLogin">
 
