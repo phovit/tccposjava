@@ -1,5 +1,7 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -19,14 +22,24 @@ public class Medicine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String indication;
-    private String contraindication;
-    private String adverseReactions;
-    private String precautions;
+    
+    @OneToMany
+    private List<Indication> indications;
+    
+    @OneToMany
+    private List<AgainstIndication> contraindications;
+    
+    @OneToMany
+    private List<AdverseReactions> adverseReactions;
+    
+    @OneToMany
+    private List<Precaution> precautions;
+    
     private Long codebar;
     private String activeIngredients;
     private Long msRecord;
     private boolean generic;
+    
     @Lob
     @Column(name = "IMAGE", nullable = true, columnDefinition = "mediumblob")
     private byte[] image;
@@ -44,39 +57,39 @@ public class Medicine {
         this.id = id;
     }
 
-    public String getIndication() {
-        return indication;
-    }
+    public List<Indication> getIndications() {
+		return indications;
+	}
 
-    public void setIndication(String indication) {
-        this.indication = indication;
-    }
+	public void setIndications(List<Indication> indications) {
+		this.indications = indications;
+	}
 
-    public String getContraindication() {
-        return contraindication;
-    }
+	public List<AgainstIndication> getContraindications() {
+		return contraindications;
+	}
 
-    public void setContraindication(String contraindication) {
-        this.contraindication = contraindication;
-    }
+	public void setContraindications(List<AgainstIndication> contraindications) {
+		this.contraindications = contraindications;
+	}
 
-    public String getAdverseReactions() {
-        return adverseReactions;
-    }
+    public List<AdverseReactions> getAdverseReactions() {
+		return adverseReactions;
+	}
 
-    public void setAdverseReactions(String adverseReactions) {
-        this.adverseReactions = adverseReactions;
-    }
+	public void setAdverseReactions(List<AdverseReactions> adverseReactions) {
+		this.adverseReactions = adverseReactions;
+	}
 
-    public String getPrecautions() {
-        return precautions;
-    }
+	public List<Precaution> getPrecautions() {
+		return precautions;
+	}
 
-    public void setPrecautions(String precautions) {
-        this.precautions = precautions;
-    }
+	public void setPrecautions(List<Precaution> precautions) {
+		this.precautions = precautions;
+	}
 
-    public Long getCodebar() {
+	public Long getCodebar() {
         return codebar;
     }
 

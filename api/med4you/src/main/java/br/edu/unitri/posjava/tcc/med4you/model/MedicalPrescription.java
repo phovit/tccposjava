@@ -6,8 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  * Created by edufratari on 01/08/18.
@@ -19,12 +19,12 @@ public class MedicalPrescription {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne()
 	private Doctor doctor;
 
 	private String cid;
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany()
 	private List<Medicine> medicines;
 
 	private String dosage;

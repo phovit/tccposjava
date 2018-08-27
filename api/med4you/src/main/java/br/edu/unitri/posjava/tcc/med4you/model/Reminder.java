@@ -1,6 +1,5 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,7 +16,7 @@ public class Reminder {
     @GeneratedValue
     private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
 	@ManyToOne
