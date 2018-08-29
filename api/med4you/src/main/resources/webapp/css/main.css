@@ -180,3 +180,10 @@ body{
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+input[type="text"]:disabled {
+    background: #dddddd;
+}
+input[type="password"]:disabled {
+    background: #dddddd;
+}

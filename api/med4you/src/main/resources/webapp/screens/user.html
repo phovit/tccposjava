@@ -1,7 +1,94 @@
-
 <div data-ng-controller="usercontroller">
 
-<h1>OPPPPPPPPPPPPAAAAAAAAAA</h1>
+    <div style="max-width: 800px; margin: auto; margin-top: 20px;">
+        <h2>Configurações de usuário</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="username">Usuário</label></div>
+                        <input id="username" class="form-control" type="text" ng-model="user.username" disabled/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="name">Nome</label></div>
+                        <input id="name" class="form-control" type="text" ng-model="user.name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="identity">RG</label></div>
+                        <input id="identity" class="form-control" type="text" ng-model="user.identity"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="cpf">Cpf</label></div>
+                        <input id="cpf" class="form-control" type="text" ng-model="user.cpf"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="phone">Telefone</label></div>
+                        <input id="phone" class="form-control" type="text" ng-model="user.phone"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="col-md-12" style="text-align: left"><label for="cellPhone">Celular</label></div>
+                        <input id="cellPhone" class="form-control" type="text" ng-model="user.cellPhone"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="top:25px;">
+                <div style="height: 40px;">
+                    <div class="fileUpload"
+                         style="width: 192px; margin: 0; height: 40px; line-height: 40px; background-color: black; opacity:.6; font-weight: bold; top: 4px;left: 4px;"
+                         ng-hide="!showSelectImageButton" ng-mouseleave="showSelectImageButton = false"
+                         ng-mouseenter="showSelectImageButton = true">
+                        <span style="color: #FFF">Selecionar Imagem</span>
+                        <input type="file"
+                               ng-model="image"
+                               class="upload"
+                               fileinput="file"
+                               base-sixty-four-input
+                               accept="image/*"
+                               filepreview="filepreview" style="height: 40px; "/>
+                    </div>
+                </div>
+                <div id="imageField"
+                     style="width: 200px; height: 200px; margin-top: -40px; border: 4px solid #337ab7; border-radius: 2px;"
+                     ng-mouseenter="showSelectImageButton = true"
+                     ng-mouseleave="showSelectImageButton = false"></div>
+            </div>
+        </div>
 
-{{banana}}
+
+        <div class="row">
+            <div class="form-group col-md-8">
+                <div class="col-md-12" style="text-align: left"><label for="email">Email</label></div>
+                <input id="email" class="form-control" type="email" ng-model="user.email"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">
+                <div class="col-md-6" style="text-align: left"><label for="password">Senha</label></div>
+                <div class="col-md-6">
+                    <div style="height: 100%; width: 100%" ng-style="getStyle()">{{forcaSenha > 0 ? forcaSenha : ''}}</div>
+                </div>
+                <input id="password" class="form-control" type="text" ng-model="user.password"
+                       ng-disabled="!!!changePassword"/>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="col-md-12" style="text-align: left"><label for="confirmPassword">Confirme a Senha</label></div>
+                <input id="confirmPassword" class="form-control" type="password" ng-model="user.confirmPassword"
+                       ng-disabled="!!!changePassword"/>
+            </div>
+            <div class="form-group col-md-4" style="line-height: 200%;">
+                <div class="col-md-12" style="text-align: left"><label for="changePassword">Alterar senha</label></div>
+                <input id="changePassword" class="form-control" type="checkbox" ng-model="changePassword"
+                       style="width: 50%;height: 20px;"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <button class="btn btn-primary" ng-click="save()">Salvar</button>
+            <button class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+        </div>
+
+    </div>
 </div>

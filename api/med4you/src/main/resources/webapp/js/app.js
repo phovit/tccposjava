@@ -60,8 +60,6 @@ app.controller('indexcontroller', function ($scope, $http) {
     };
 
 
-    console.log('qualquer coisa');
-
     $scope.getIsLogged();
     $scope.infoUser();
 

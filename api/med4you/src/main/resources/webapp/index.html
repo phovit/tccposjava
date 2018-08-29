@@ -63,17 +63,26 @@
 
 
 
-        <div id="user_area" ng-click="loginOptions()">
-            <div id="user_area_photo" ng-show="!!isLogged"></div>
-            <label class="cor1" id="user_area_name" ng-show="!!isLogged">{{loggedUser.name}}</label>
-
-            <div id="user_area_photo_not_logged" ng-show="!isLogged"></div>
-            <label class="cor1" id="user_area_name" ng-show="!isLogged">Logar-se</label>
+        <div id="user_area">
+            <div style="width: 100%; height: 100%; display: inline-flex;" ng-show="!!isLogged">
+                <div id="user_area_photo"></div>
+                <label class="cor1" id="user_area_name">{{loggedUser.name}}</label>
+            </div>
+            <div style="width: 100%; height: 100%; display: inline-flex;" ng-click="loginOptions()"  ng-show="!isLogged">
+                <div id="user_area_photo_not_logged"></div>
+                <label class="cor1" id="user_area_name">Logar-se</label>
+            </div>
         </div>
     </div>
     <div id="content" class="container">
       <div id="modalArea"  style="margin-left:50%;
-                                left: -12.5%; width: 400px; height: 300px; position:absolute; z-index:999" ng-include="modal.url"></div>
+                                top: 80px;
+                                width: 400px;
+                                height: 300px;
+                                position:absolute;
+                                left: -12.5%;
+                                z-index:999"
+           ng-include="modal.url"></div>
         <div ui-view></div>
 
 

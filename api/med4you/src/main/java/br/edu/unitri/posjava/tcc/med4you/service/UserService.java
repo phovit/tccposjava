@@ -79,7 +79,7 @@ public class UserService {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof User) {
-            User u = (User) principal;
+            User u = this.findById(((User) principal).getId());
 
             UserDTO user = new UserDTO();
             user.setName(u.getName());
