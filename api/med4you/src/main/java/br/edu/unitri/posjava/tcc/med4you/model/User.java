@@ -20,7 +20,7 @@ public class User {
 	private String identity;
 	private String birthDate;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "user")
 	private Address address;
 	
 	private String phone;

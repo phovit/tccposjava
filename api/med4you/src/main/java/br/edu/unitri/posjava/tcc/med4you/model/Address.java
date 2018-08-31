@@ -3,8 +3,9 @@ package br.edu.unitri.posjava.tcc.med4you.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Created by edufratari on 18/07/18.
@@ -22,10 +23,12 @@ public class Address {
     private String cep;
 
     @ManyToOne
+    @JoinColumn(name="city_id")
     private City city;
-
-    @ManyToOne
-    private State state;
+    
+    @OneToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Address() {
         super();
@@ -79,11 +82,4 @@ public class Address {
         this.city = city;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
 }

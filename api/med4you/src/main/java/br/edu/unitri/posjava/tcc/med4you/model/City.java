@@ -1,9 +1,14 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Created by edufratari on 18/07/18.
@@ -15,10 +20,14 @@ public class City {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    private State state;
-
     private String name;
+    
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
+    
+    @OneToMany(mappedBy = "city")
+    private List<Address> addresses = new ArrayList<>();
 
     public Long getId() {
         return id;
