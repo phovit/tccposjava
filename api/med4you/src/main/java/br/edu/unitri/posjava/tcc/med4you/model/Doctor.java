@@ -1,8 +1,12 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Created by edufratari on 01/08/18.
@@ -23,6 +27,9 @@ public class Doctor {
 	private String email;
 
 	private String clinicAddress;
+	
+	@OneToMany(mappedBy = "doctor")
+	private List<MedicalPrescription> medicalPrescriptions = new ArrayList<>();
 
 	public Doctor() {
 		super();

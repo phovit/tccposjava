@@ -2,12 +2,12 @@ package br.edu.unitri.posjava.tcc.med4you.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  * Created by edufratari on 01/08/18.
@@ -20,11 +20,12 @@ public class MedicalPrescription {
 	private Long id;
 
 	@ManyToOne()
+	@JoinColumn(name = "doctor_id")
 	private Doctor doctor;
 
 	private String cid;
 
-	@OneToMany()
+	@ManyToMany(mappedBy = "medicalPrescriptions")
 	private List<Medicine> medicines;
 
 	private String dosage;
