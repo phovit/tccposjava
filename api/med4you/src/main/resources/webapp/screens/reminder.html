@@ -1,0 +1,48 @@
+<div data-ng-controller="remindercontroller">
+
+    <div style="max-width: 800px; margin: auto; margin-top: 20px;">
+        <h2>Lembretes de Medicação</h2>
+
+        <div class="row">
+            <input type="text" placeholder="Medicamento" ng-model="reminder.medicine">
+            <input type="text" placeholder="Dosagem" ng-model="reminder.dosage">
+            <input type="text" placeholder="1ª Dose" ng-model="reminder.firstDose">
+            <input type="text" placeholder="Responsável" ng-model="reminder.responsableUser">
+            <input type="text" placeholder="Observação" ng-model="reminder.observation">
+            <div class="col-md-1 form-group">
+                <button class="btn btn-primary" ng-click="add()">+</button>
+            </div>
+        </div>
+        <div class="row">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Medicamento</th>
+                    <th scope="col">Dosagem</th>
+                    <th scope="col">1ª dose</th>
+                    <th scope="col">Responsável</th>
+                    <th scope="col">Obs.</th>
+                    <th scope="col">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="reminder in reminders">
+                    <td scope="row">{{reminder.medicine.name}}</td>
+                    <td scope="row">{{reminder.dosage}}</td>
+                    <td scope="row">{{reminder.firstDose}}</td>
+                    <td scope="row">{{reminder.responsableUser.name}}</td>
+                    <td scope="row">{{reminder.observation}}</td>
+                    <td scope="row">
+                        <img width="20px" height="20px"
+                            src="https://img.freepik.com/icones-gratis/nota-simbolo-de-interface_318-69447.jpg?size=338&ext=jpg"  ng-click="edit(reminder)">
+                        <img width="20px" height="20px"
+                             src="https://cdn3.iconfinder.com/data/icons/objects/512/Bin-512.png" ng-click="delete(reminder)">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

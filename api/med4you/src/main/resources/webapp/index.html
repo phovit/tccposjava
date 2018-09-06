@@ -25,6 +25,7 @@
     <script src="js/user_controller.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/login_controller.js"></script>
+    <script src="js/reminder_controller.js"></script>
 
     <title>Med4You</title>
 </head>
@@ -45,18 +46,15 @@
                         <a ui-sref="medicinesearch">Buscar</a>
                     </div>
                 </li>
-                <li class="dropdown">
-                    <a ui-sref="medicine"><div class="dropbtn">Medicamentos</div></a>
+
+
+                <li  class="dropdown">
+                    <a ui-sref="user"><div class="dropbtn">Usuários</div></a>
                     <div class="dropdown-content">
-                        <a ui-sref="medicineregister">Cadastrar</a>
-                        <a ui-sref="medicinesearch">Buscar</a>
+                        <a ui-sref="user">Minha conta</a>
+                        <a ui-sref="reminder">Lembretes</a>
                     </div>
-                </li>
 
-
-
-                <li>
-                    <a ui-sref="user">Usuários</a>
                 </li>
             </ul>
         </div>

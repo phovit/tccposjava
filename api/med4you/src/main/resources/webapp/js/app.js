@@ -25,6 +25,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "screens/medicine_search.html",
             controller: "medicinesearchcontroller"
         })
+        .state('reminder', {
+            url: "/reminder",
+            templateUrl: "screens/reminder.html",
+            controller: "remindercontroller"
+        })
         .state('user', {
             url: "/user",
             templateUrl: "screens/user.html",

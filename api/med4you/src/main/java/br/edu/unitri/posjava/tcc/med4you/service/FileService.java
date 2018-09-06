@@ -2,15 +2,21 @@ package br.edu.unitri.posjava.tcc.med4you.service;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,20 +45,19 @@ public class FileService {
 
     private DateFormat format = new SimpleDateFormat("ddMMyyyyHHmmss");
 
-    public String inserImagemDiretorio(String diretory, FileItem item) throws Exception{
-
-        final String PATH_ARQUIVOS  = context.getRealPath("/resources/uploads/") + diretory + "/";
-        final String PATH_ABSOLUTO  = PATH_ARQUIVOS;
+    public String inserImagemDiretorio(String diretory, FileItem item) throws Exception {
+        final String PATH_ARQUIVOS = context.getRealPath("/resources/uploads/") + diretory + "/";
+        final String PATH_ABSOLUTO = PATH_ARQUIVOS;
 
         try {
 
 
-            File diretorio  = new File(PATH_ABSOLUTO);
+            File diretorio = new File(PATH_ABSOLUTO);
 
             // NESSE IF VC PA PERGUNTANDO SE EXISTE UM DIRETÓRIO, CASO NÃO IRÁ CRIAR
             // OU SEJA, SE FOR A PRIMEIRA IMAGEM DO DIA
             // ELE CRIARÁ O DIRETÓRIO <DIR_DATA_ATUAL> EX: 31-07-214
-            if(!diretorio.exists())
+            if (!diretorio.exists())
                 diretorio.mkdir();
 
             String fileName = item.getName();
@@ -61,7 +66,7 @@ public class FileService {
                 fileName = arq[i];
             }
 
-            File file = new File(diretorio,fileName);
+            File file = new File(diretorio, fileName);
             FileOutputStream out = new FileOutputStream(file);
             InputStream in = item.getInputStream();
 
@@ -79,14 +84,48 @@ public class FileService {
             // NO FINAL ELE TE RETORNA O CAMINHO DA PASTA ONDE VC SALVOU A IMAGEN
             // ESSA STRING VC PODE ARMAZENAR NA TABELA DO PRODUTO
             // NO CAMPO : CAMINHO_FOTO
-            return "/" + PATH_ABSOLUTO + "/" +format.format(Calendar.getInstance().getTime())+item.getName();
+            return "/" + PATH_ABSOLUTO + "/" + format.format(Calendar.getInstance().getTime()) + item.getName();
 
         } catch (Exception e) {
             throw new Exception("Erro ao carregar imagem para o diretorio !!\n "
-                    + "Error : "      + e.getMessage()
+                    + "Error : " + e.getMessage()
                     + "\nCausa : " + e.getCause());
         }
 
     }
 
+    public String upload(String diretory, MultipartFile file) {
+
+        final String PATH_ABSOLUTO = context.getRealPath("/resources/uploads/"+ diretory + "/") ;
+
+        Path directoryPath = Paths.get(PATH_ABSOLUTO);
+        Path filePath = directoryPath.resolve(file.getOriginalFilename());
+
+        try {
+            Files.createDirectories(directoryPath);
+            file.transferTo(filePath.toFile());
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar arquivo!");
+        }
+        return PATH_ABSOLUTO + file.getOriginalFilename();
+    }
+
+
+    public Resource loadFile(String filename) {
+
+        final String PATH_ABSOLUTO = context.getRealPath("/resources/uploads/images/") ;
+
+        try {
+            Path absoluto =Paths.get(PATH_ABSOLUTO);
+            Path file = absoluto.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+            if(resource.exists() || resource.isReadable()) {
+                return resource;
+            }else{
+                throw new RuntimeException("FAIL!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error! -> message = " + e.getMessage());
+        }
+    }
 }
