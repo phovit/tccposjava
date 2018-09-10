@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1086155159243-7p8811l9cj70bmqngdtar0b3c2aqui53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tcc.posjava.unitri.edu.br.med4u",
+            "certificate_hash": "7b5d7c1ea384fc0bbae249dad59690b3ecf67086"
+          }
+        },
+        {
           "client_id": "1086155159243-1dt9qocn81opn0rfm5ki5sbm2vn0j462.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086155159243-1dt9qocn81opn0rfm5ki5sbm2vn0j462.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
