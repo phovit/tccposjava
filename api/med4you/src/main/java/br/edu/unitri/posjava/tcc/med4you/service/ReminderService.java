@@ -12,9 +12,12 @@ import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,7 @@ import java.util.Map;
 @Component
 public class ReminderService {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ReminderRepository repository;
 
@@ -55,6 +59,10 @@ public class ReminderService {
 
     public void scheduleNotification(Reminder reminder) {
 
+        if (reminder.getFirstDose().compareTo(new Date()) <= 0) {
+            logger.info("Data no passado, por isso não foi agendado");
+            return;
+        }
         Map map = new HashMap<String, Reminder>();
         map.put("REMINDER", reminder);
 
