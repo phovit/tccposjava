@@ -47,7 +47,7 @@ public class ReminderController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(Long id) {
+    public void delete(@PathVariable("id") Long id) {
         service.delete(id);
     }
 }

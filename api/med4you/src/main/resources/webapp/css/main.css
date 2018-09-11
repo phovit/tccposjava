@@ -187,3 +187,7 @@ input[type="text"]:disabled {
 input[type="password"]:disabled {
     background: #dddddd;
 }
+
+.selectItem:hover{
+    background-color: #337ab7;
+}

@@ -42,17 +42,17 @@
                     <a ui-sref="medicine"><div class="dropbtn">Medicamentos</div></a>
                     <div class="dropdown-content">
                         <a ui-sref="medicine">Todos</a>
-                        <a ui-sref="medicineregister">Cadastrar</a>
+                        <a ui-sref="medicineregister" ng-if="!!isLogged">Cadastrar</a>
                         <a ui-sref="medicinesearch">Buscar</a>
                     </div>
                 </li>
 
 
-                <li  class="dropdown">
+                <li  class="dropdown" ng-if="!!isLogged">
                     <a ui-sref="user"><div class="dropbtn">Usuários</div></a>
                     <div class="dropdown-content">
-                        <a ui-sref="user">Minha conta</a>
-                        <a ui-sref="reminder">Lembretes</a>
+                        <a ui-sref="user" ng-enabled="!!$scope.isLogged">Minha conta</a>
+                        <a ui-sref="reminder"  ng-enabled="!!$scope.isLogged">Lembretes</a>
                     </div>
 
                 </li>

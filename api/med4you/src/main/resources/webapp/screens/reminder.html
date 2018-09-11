@@ -1,16 +1,64 @@
 <div data-ng-controller="remindercontroller">
 
     <div style="max-width: 800px; margin: auto; margin-top: 20px;">
-        <h2>Lembretes de Medicação</h2>
+        <h2>Lembretes de Medicação
+            <button class="btn btn-primary" ng-click="showAddForm = true">+</button>
+        </h2>
+        <div class="row" ng-show="!!showAddForm">
+            <div class="col-md-2 form-group">
+                <div class="row">
+                    <label for="medicine" >Medicamento</label><br>
+                    <input id="medicine"
+                           type="text" class="form-control"
+                           placeholder="Medicamento"
+                           ng-change="findMedicines()"
+                           ng-model="medicineSearch">
 
-        <div class="row">
-            <input type="text" placeholder="Medicamento" ng-model="reminder.medicine">
-            <input type="text" placeholder="Dosagem" ng-model="reminder.dosage">
-            <input type="text" placeholder="1ª Dose" ng-model="reminder.firstDose">
-            <input type="text" placeholder="Responsável" ng-model="reminder.responsableUser">
-            <input type="text" placeholder="Observação" ng-model="reminder.observation">
-            <div class="col-md-1 form-group">
-                <button class="btn btn-primary" ng-click="add()">+</button>
+                </div>
+                <div class="row form-control" style="position:absolute; z-index: 100; height: fit-content; padding: 0px;" ng-if="!!showMedResults">
+                    <ul style="list-style-type:none; margin: 0px; padding: 0px;">
+                        <li ng-repeat="med in medicineSearchResults"
+                            ng-click="selectMedicine( med )"
+                            style="cursor: pointer; margin: 0px; padding: 0px;" class="selectItem">
+                            <div class="row" style=" margin: 0px; padding: 0px;">
+                                <div class="col-md-2" style=" margin: 0px; padding: 0px;">{{med.id}}</div>
+                                <div class="col-md-10"
+                                     style="border-left: 1px solid #337ab7;  margin: 0px; padding: 0px;">{{med.name}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="firstDose" >Primeira Dose</label><br>
+                <input id="firstDose"  class="form-control" type="datetime-local" placeholder="1ª Dose" ng-model="reminder.firstDose" style="padding-left: 4px;padding-right: 2px;">
+            </div>
+
+            <div class="col-md-2 form-group">
+                <label for="dosage" >Dosagem</label><br>
+                <input id="dosage"  class="form-control" type="text" placeholder="Dosagem" ng-model="reminder.dosage">
+            </div>
+
+            <div class="col-md-2 form-group">
+                <label for="qtdDoses" >Quantas Doses</label><br>
+                <input id="qtdDoses"   class="form-control" type="text" placeholder="Doses" ng-model="qtdDoses">
+            </div>
+
+            <div class="col-md-2 form-group">
+                <label for="intervaloEmHoras">Intervalo</label><br>
+                <input id="intervaloEmHoras"   class="form-control" type="text" placeholder="Horas" ng-model="intervalo">
+            </div>
+
+            <div class="col-md-12 form-group" style="padding-left: 0px;">
+                <label for="observation" >Observação</label><br>
+                <textarea ng-model="reminder.observation"  class="form-control"  id="observation"  placeholder="Observação" ></textarea>
+            </div>
+
+            <div class="col-md-12 form-group">
+                <button class="btn btn-primary" ng-click="save(reminder)">Salvar</button>
+                <button class="btn btn-primary" ng-click="showAddForm = false">Cancelar</button>
             </div>
         </div>
         <div class="row">
@@ -21,7 +69,6 @@
                     <th scope="col">Medicamento</th>
                     <th scope="col">Dosagem</th>
                     <th scope="col">1ª dose</th>
-                    <th scope="col">Responsável</th>
                     <th scope="col">Obs.</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -30,14 +77,15 @@
                 <tr ng-repeat="reminder in reminders">
                     <td scope="row">{{reminder.medicine.name}}</td>
                     <td scope="row">{{reminder.dosage}}</td>
-                    <td scope="row">{{reminder.firstDose}}</td>
-                    <td scope="row">{{reminder.responsableUser.name}}</td>
+                    <td scope="row">{{reminder.firstDose | date : 'dd/MM/yyyy HH:mm'}}</td>
                     <td scope="row">{{reminder.observation}}</td>
                     <td scope="row">
                         <img width="20px" height="20px"
-                            src="https://img.freepik.com/icones-gratis/nota-simbolo-de-interface_318-69447.jpg?size=338&ext=jpg"  ng-click="edit(reminder)">
+                             src="https://img.freepik.com/icones-gratis/nota-simbolo-de-interface_318-69447.jpg?size=338&ext=jpg"
+                             ng-click="edit(reminder)">
                         <img width="20px" height="20px"
-                             src="https://cdn3.iconfinder.com/data/icons/objects/512/Bin-512.png" ng-click="delete(reminder)">
+                             src="https://cdn3.iconfinder.com/data/icons/objects/512/Bin-512.png"
+                             ng-click="delete(reminder.id)">
                     </td>
                 </tr>
                 </tbody>
