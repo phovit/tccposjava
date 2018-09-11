@@ -1,0 +1,109 @@
+2018-09-10 23:27:46.848  INFO 13027 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:27:46.851  INFO 13027 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:27:46.866  INFO 13027 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:27:46.984  INFO 13027 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:27:47.455  INFO 13027 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:27:47.735  INFO 13027 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:30:29.714  INFO 13027 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:30:29.724  INFO 13027 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:30:53.011  INFO 13367 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:30:53.014  INFO 13367 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:30:53.024  INFO 13367 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:30:53.255  INFO 13367 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:30:53.798  INFO 13367 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:30:54.141  INFO 13367 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:30:59.810  INFO 13367 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:30:59.819  INFO 13367 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:31:27.990  INFO 13495 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:31:27.993  INFO 13495 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:31:28.006  INFO 13495 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:31:28.169  INFO 13495 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:31:28.638  INFO 13495 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:31:29.075  INFO 13495 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:33:09.303  INFO 13495 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:33:09.311  INFO 13495 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:34:28.332  INFO 13884 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:34:28.335  INFO 13884 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:34:28.346  INFO 13884 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:34:28.504  INFO 13884 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:34:28.980  INFO 13884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:34:29.452  INFO 13884 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:38:01.893  INFO 13884 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:38:01.899  INFO 13884 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:38:32.461  INFO 14333 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:38:32.464  INFO 14333 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:38:32.474  INFO 14333 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:38:32.588  INFO 14333 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:38:33.058  INFO 14333 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:38:33.437  INFO 14333 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:41:03.452  INFO 14333 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-10 23:43:25.323  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2018-09-10 23:43:25.328  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: http-nio-8080-exec-10
+2018-09-10 23:43:25.348  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-09-10 23:43:25.349  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.2.1 created.
+2018-09-10 23:43:25.351  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2018-09-10 23:43:25.353  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.2.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-09-10 23:43:25.353  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-09-10 23:43:25.353  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.2.1
+2018-09-10 23:43:25.354  INFO 14333 --- [http-nio-8080-exec-10] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-09-10 23:43:55.826  INFO 14333 --- [http-nio-8080-exec-1] b.e.u.p.t.m.service.ReminderService      : Data no passado, por isso não foi agendado
+2018-09-10 23:44:00.007  INFO 14333 --- [DefaultQuartzScheduler_Worker-1] b.e.u.p.t.m.j.ReminderNotificationJob    : Notificação enviada com sucesso!
+2018-09-10 23:44:24.698  INFO 14333 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:44:24.711  INFO 14333 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:44:33.093  INFO 14725 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:44:33.097  INFO 14725 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:44:33.111  INFO 14725 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:44:33.232  INFO 14725 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:44:33.457  WARN 14725 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [1F1245D339C6B58AE63EDD087E0C4715]
+2018-09-10 23:44:33.718  INFO 14725 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:44:34.105  INFO 14725 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:44:48.917  INFO 14725 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:44:48.932  INFO 14725 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:45:22.066  INFO 14852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:45:22.070  INFO 14852 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:45:22.084  INFO 14852 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:45:22.216  INFO 14852 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:45:22.688  INFO 14852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:45:23.021  INFO 14852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:49:30.374  INFO 14852 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:49:30.383  INFO 14852 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2018-09-10 23:49:44.180  INFO 15270 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:49:44.183  INFO 15270 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:49:44.197  INFO 15270 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:49:44.319  INFO 15270 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:49:44.738  INFO 15270 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:49:45.140  INFO 15270 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:50:10.297  INFO 15367 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-09-10 23:50:10.300  INFO 15367 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-09-10 23:50:10.311  INFO 15367 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/opt/idea-IU-171.4424.56/bin::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-09-10 23:50:10.440  INFO 15367 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring embedded WebApplicationContext
+2018-09-10 23:50:10.920  INFO 15367 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2018-09-10 23:50:11.298  INFO 15367 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2018-09-10 23:50:18.593  INFO 15367 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/med4you]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-09-10 23:50:38.453  INFO 15367 --- [http-nio-8080-exec-2] b.e.u.p.t.m.service.ReminderService      : Data no passado, por isso não foi agendado
+2018-09-10 23:50:55.476  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2018-09-10 23:50:55.479  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: http-nio-8080-exec-4
+2018-09-10 23:50:55.496  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-09-10 23:50:55.497  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.2.1 created.
+2018-09-10 23:50:55.498  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2018-09-10 23:50:55.500  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.2.1) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-09-10 23:50:55.500  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-09-10 23:50:55.500  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.2.1
+2018-09-10 23:50:55.501  INFO 15367 --- [http-nio-8080-exec-4] org.quartz.core.QuartzScheduler          : Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-09-10 23:52:00.018  INFO 15367 --- [DefaultQuartzScheduler_Worker-1] b.e.u.p.t.m.j.ReminderNotificationJob    : Notificação enviada com sucesso!
+2018-09-10 23:52:04.305  INFO 15367 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2018-09-10 23:52:04.310  INFO 15367 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
