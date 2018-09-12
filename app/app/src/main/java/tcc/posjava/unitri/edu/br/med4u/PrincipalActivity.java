@@ -1,9 +1,12 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +16,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
 public class PrincipalActivity extends AppCompatActivity {
+
+    public static final int CODIGO_CAMERA = 567;
+    private String caminhoFoto;
+    NewUserActivity newUserActivity;
+    private final ImageView campoFoto = newUserActivity.getCampoFoto();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +78,38 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
+        Button botaoFoto = (Button) findViewById(R.id.formulario_botao_foto);
+        botaoFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
+                File arquivoFoto = new File(caminhoFoto);
+                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
+                startActivityForResult(intentCamera, CODIGO_CAMERA);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CODIGO_CAMERA) {
+                carregaImagem(caminhoFoto);
+            }
+        }
+
+    }
+
+    public void carregaImagem(String caminhoFoto) {
+        if (caminhoFoto != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+            campoFoto.setImageBitmap(bitmapReduzido);
+            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
+            campoFoto.setTag(caminhoFoto);
+        }
     }
 
 
@@ -132,43 +174,5 @@ public class PrincipalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        handleNotification();
-    }
 
-    private void handleNotification() {
-
-        String title = "", body = "";
-
-        Bundle bundle = getIntent().getExtras();
-
-        if (getIntent().hasExtra("EXTRA_TITLE")) {
-
-            title = bundle.getString("EXTRA_TITLE");
-        }
-        if (getIntent().hasExtra("EXTRA_BODY")) {
-
-            body = bundle.getString("EXTRA_BODY");
-        }
-
-        if (!title.equals("") || !body.equals("")) {
-
-            showDialog(title, body);
-        }
-    }
-
-    private void showDialog(String title, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(PrincipalActivity.this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
 }
