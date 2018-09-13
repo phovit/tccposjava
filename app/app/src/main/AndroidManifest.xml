@@ -4,8 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
-    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -71,6 +72,10 @@
             android:label="NewUserActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".NewUserContinueActivity"
+            android:label="NewUserContinueActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ConsEnderecoActivity"
             android:label="ConsEnderecoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
@@ -90,11 +95,6 @@
             android:name=".ConsReceitaActivity"
             android:label="ConsReceitaActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!--<activity
-            android:name=".splashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/FullscreenTheme"></activity>-->
 
         <meta-data android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />
@@ -102,12 +102,13 @@
         <!--Permissão para utilização da câmera-->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="tcc.posjava.unitri.edu.br.med4u"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
+
         </provider>
         <!--Permissão para utilização da câmera-->
 

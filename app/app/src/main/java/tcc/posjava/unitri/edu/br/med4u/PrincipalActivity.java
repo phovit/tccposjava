@@ -20,11 +20,6 @@ import java.io.File;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    public static final int CODIGO_CAMERA = 567;
-    private String caminhoFoto;
-    NewUserActivity newUserActivity;
-    private final ImageView campoFoto = newUserActivity.getCampoFoto();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,41 +72,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivity(tCamera);
             }
         });
-
-        Button botaoFoto = (Button) findViewById(R.id.formulario_botao_foto);
-        botaoFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-                File arquivoFoto = new File(caminhoFoto);
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
-                startActivityForResult(intentCamera, CODIGO_CAMERA);
-            }
-        });
-
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CODIGO_CAMERA) {
-                carregaImagem(caminhoFoto);
-            }
-        }
-
-    }
-
-    public void carregaImagem(String caminhoFoto) {
-        if (caminhoFoto != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
-            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-            campoFoto.setImageBitmap(bitmapReduzido);
-            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
-            campoFoto.setTag(caminhoFoto);
-        }
-    }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

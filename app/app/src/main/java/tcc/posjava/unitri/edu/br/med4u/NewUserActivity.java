@@ -6,16 +6,10 @@ import android.widget.ImageView;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    ImageView campoFoto = findViewById(R.id.formulario_foto);
+    /*ImageView campoFoto = findViewById(R.id.formulario_foto);*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user_continue);
+        setContentView(R.layout.activity_new_user);
     }
-
-    public ImageView getCampoFoto(){
-        return campoFoto;
-    }
-
-
 }
