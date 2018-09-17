@@ -12,17 +12,23 @@ import java.io.IOException;
 
 public class CarregadorDeFoto {
     private static String TAG = "CarregadorDeFoto";
+
         public static Bitmap carrega(String caminhoFoto)  {
             Bitmap bitmap = null;
             Log.d(TAG, "Carregador de foto iniciada");
+            Log.d(TAG, "Caminho da foto: " + caminhoFoto);
+            Log.d(TAG, "exif: new exif");
             ExifInterface exif = null;
             try {
+                Log.d(TAG, "exif: new exif dentro do try");
                 exif = new ExifInterface(caminhoFoto);
             } catch (IOException e) {
+                Log.d(TAG, "exif: erro");
                 e.printStackTrace();
             }
-            int orientacao = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
+            /*int orientacao = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);*/
+            int orientacao = 90;
+            Log.d(TAG, "orientacao: " + orientacao);
 
             switch (orientacao) {
                 case ExifInterface.ORIENTATION_NORMAL:

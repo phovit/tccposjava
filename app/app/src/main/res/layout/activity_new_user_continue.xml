@@ -13,7 +13,7 @@
             android:layout_height="225dp">
 
             <ImageView
-                android:id="@+id/formulario_foto"
+                android:id="@+id/imageview"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#00A8EC"
@@ -26,6 +26,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
+                android:onClick="takePicture"
+                android:clickable="true"
                 android:background="@drawable/fundo_camera" />
 
         </RelativeLayout>

@@ -1,8 +1,10 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,6 +12,8 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,10 +27,8 @@ import java.util.Date;
 
 public class NewUserContinueActivity extends AppCompatActivity {
 
-    public static final int CODIGO_CAMERA = 567;
-    private ImageView campoFoto = findViewById(R.id.formulario_foto);
-    private String caminhoFoto;
-    public AlertDialog alerta;
+    private Button takePictureButton;
+    private ImageView imageView;
     private Uri file;
     private static String TAG = "NewUserContinueActivity";
 
@@ -36,27 +38,43 @@ public class NewUserContinueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_continue);
 
-        Button photoButton = findViewById(R.id.btPhotoNW);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*alerta.setTitle("Teste");
-                alerta.setMessage("Clique ok");
-                alerta.show();*/
-                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-                File arquivoFoto = new File(caminhoFoto);
-                file = FileProvider.getUriForFile(NewUserContinueActivity.this, "tcc.posjava.unitri.edu.br.med4u", getOutputMediaFile());
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, file);
-                startActivityForResult(intentCamera, 100);
+        takePictureButton = findViewById(R.id.btPhotoNW);
+        imageView = findViewById(R.id.imageview);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            takePictureButton.setEnabled(false);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                takePictureButton.setEnabled(true);
             }
-        });
+        }
+    }
+
+    public void takePicture(View view) {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        file = FileProvider.getUriForFile(
+                NewUserContinueActivity.this,
+                "tcc.posjava.unitri.edu.br.med4u",
+                getOutputMediaFile());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+
+        startActivityForResult(intent, 100);
     }
 
     private static File getOutputMediaFile(){
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "med4u");
+                Environment.DIRECTORY_PICTURES), "MED4U");
 
         if (!mediaStorageDir.exists()){
 
@@ -72,21 +90,16 @@ public class NewUserContinueActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CODIGO_CAMERA) {
-                carregaImagem(caminhoFoto);
+        Log.d(TAG, "Caminho da foto: " + file.getPath());
+        Bitmap bitmap = CarregadorDeFoto.carrega(file.getPath());
+        if (requestCode == 100) {
+            if (resultCode == RESULT_OK) {
+                if (bitmap == null) {
+                    Log.d(TAG, "bitmap null");
+                }
+                imageView.setImageBitmap(bitmap);
+                /*imageView.setImageURI(bitmap);*/
             }
         }
-
-    }
-
-    public void carregaImagem(String caminhoFoto) {
-        if (caminhoFoto != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
-            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-            campoFoto.setImageBitmap(bitmapReduzido);
-            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
-            campoFoto.setTag(caminhoFoto);
-    }
     }
 }

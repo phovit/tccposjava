@@ -3,9 +3,11 @@
     package="tcc.posjava.unitri.edu.br.med4u">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_CALENDAR" />
@@ -103,12 +105,11 @@
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="tcc.posjava.unitri.edu.br.med4u"
-            android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            android:exported="false">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-
+                android:resource="@xml/filepaths" />
         </provider>
         <!--Permissão para utilização da câmera-->
 
