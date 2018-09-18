@@ -24,7 +24,7 @@ public class CarregadorDeFoto {
         Log.d(TAG, "exif: new exif");
             try {
                 Log.d(TAG, "enttrou no try");
-                
+
                 ExifInterface exif = new ExifInterface(caminhoFoto);
 
                 Log.d(TAG, "codigo orientacao: " + codigoOrientacao);
