@@ -1,6 +1,8 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -13,24 +15,30 @@ import java.io.IOException;
 public class CarregadorDeFoto {
     private static String TAG = "CarregadorDeFoto";
 
-        public static Bitmap carrega(String caminhoFoto)  {
-            Bitmap bitmap = null;
-            Log.d(TAG, "Carregador de foto iniciada");
-            Log.d(TAG, "Caminho da foto: " + caminhoFoto);
-            Log.d(TAG, "exif: new exif");
-            ExifInterface exif = null;
-            try {
-                Log.d(TAG, "exif: new exif dentro do try");
-                exif = new ExifInterface(caminhoFoto);
-            } catch (IOException e) {
-                Log.d(TAG, "exif: erro");
-                e.printStackTrace();
-            }
-            /*int orientacao = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);*/
-            int orientacao = 90;
-            Log.d(TAG, "orientacao: " + orientacao);
+    public static Bitmap carrega(String caminhoFoto){
 
-            switch (orientacao) {
+        int codigoOrientacao = 0;
+        Bitmap bitmap = null;
+        Log.d(TAG, "Carregador de foto iniciada");
+        Log.d(TAG, "Caminho da foto no carregador: " + caminhoFoto);
+        Log.d(TAG, "exif: new exif");
+            try {
+                Log.d(TAG, "enttrou no try");
+                
+                ExifInterface exif = new ExifInterface(caminhoFoto);
+
+                Log.d(TAG, "codigo orientacao: " + codigoOrientacao);
+                codigoOrientacao = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+                Log.d(TAG, "codigo orientacao: " + codigoOrientacao);
+                Log.d(TAG, "criou exif");
+                /*String orientacao = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+                Log.d(TAG, "orientacao: " + orientacao);
+                codigoOrientacao = Integer.parseInt(orientacao);
+                Log.d(TAG, "orientacao int: " + codigoOrientacao);*/
+            }catch (IOException e) {
+                e.getMessage();
+            }
+            switch (codigoOrientacao) {
                 case ExifInterface.ORIENTATION_NORMAL:
                     return abreFotoERotaciona(caminhoFoto, 0);
                 case ExifInterface.ORIENTATION_ROTATE_90:
@@ -42,7 +50,7 @@ public class CarregadorDeFoto {
                 default:
                     return bitmap;
             }
-        }
+    }
 
     private static Bitmap abreFotoERotaciona(String caminhoFoto, int angulo) {
         // Abre o bitmap a partir do caminho da foto
@@ -54,7 +62,7 @@ public class CarregadorDeFoto {
 
         // Cria um novo bitmap a partir do original já com a rotação aplicada
         return Bitmap.createBitmap(bitmap, 0, 0,
-                bitmap.getWidth(), bitmap.getHeight(),
-                matrix, true);
+        bitmap.getWidth(), bitmap.getHeight(),
+        matrix, true);
     }
 }

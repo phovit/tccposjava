@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -89,16 +94,12 @@ public class NewUserContinueActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "Caminho da foto: " + file.getPath());
-        Bitmap bitmap = CarregadorDeFoto.carrega(file.getPath());
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
-                if (bitmap == null) {
-                    Log.d(TAG, "bitmap null");
-                }
+                Bitmap bitmap = CarregadorDeFoto.carrega(file.getPath());
+                /*imageView.setImageURI(file);*/
                 imageView.setImageBitmap(bitmap);
-                /*imageView.setImageURI(bitmap);*/
             }
         }
     }
