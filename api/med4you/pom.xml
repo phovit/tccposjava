@@ -124,7 +124,12 @@
             <artifactId>spring-security-config</artifactId>
             <version>4.2.4.RELEASE</version>
         </dependency>
-
+        <!--JWT Authenticação API-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>

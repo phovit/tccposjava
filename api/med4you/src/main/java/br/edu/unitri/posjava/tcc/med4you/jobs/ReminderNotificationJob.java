@@ -21,6 +21,7 @@ public class ReminderNotificationJob implements Job {
         //TROCAR AQUI PELA CHAMADA DO SERVICO REST QUE ENVIA AS NOTIFICAÇÕES
         logger.info("Notificação enviada com sucesso!");
 
+
     }
 
 }

@@ -26,6 +26,7 @@
     <script src="js/controllers.js"></script>
     <script src="js/login_controller.js"></script>
     <script src="js/reminder_controller.js"></script>
+    <script src="js/medical_prescription.js"></script>
 
     <title>Med4You</title>
 </head>
@@ -52,6 +53,7 @@
                     <a ui-sref="user"><div class="dropbtn">Usuários</div></a>
                     <div class="dropdown-content">
                         <a ui-sref="user" ng-enabled="!!$scope.isLogged">Minha conta</a>
+                        <a ui-sref="medicalprescription"  ng-enabled="!!$scope.isLogged">Receitas</a>
                         <a ui-sref="reminder"  ng-enabled="!!$scope.isLogged">Lembretes</a>
                     </div>
 

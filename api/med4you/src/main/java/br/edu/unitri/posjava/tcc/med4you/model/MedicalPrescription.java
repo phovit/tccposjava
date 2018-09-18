@@ -1,13 +1,12 @@
 package br.edu.unitri.posjava.tcc.med4you.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Created by edufratari on 01/08/18.
@@ -15,83 +14,53 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MedicalPrescription {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	@ManyToOne()
-	@JoinColumn(name = "doctor_id")
-	private Doctor doctor;
+    @ManyToOne()
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
-	private String cid;
+    private String cid;
 
-	@ManyToMany(mappedBy = "medicalPrescriptions")
-	private List<Medicine> medicines;
+    @OneToMany
+    private List<MedicalPrescriptionItem> medicalPrescriptionItem;
 
-	private String dosage;
+    public MedicalPrescription() {
+        super();
+    }
 
-	private Boolean firstDose;
+    public Long getId() {
+        return id;
+    }
 
-	private String period;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public MedicalPrescription() {
-		super();
-	}
+    public Doctor getDoctor() {
+        return doctor;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getCid() {
+        return cid;
+    }
 
-	public Doctor getDoctor() {
-		return doctor;
-	}
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
+    public List<MedicalPrescriptionItem> getMedicalPrescriptionItem() {
+        return medicalPrescriptionItem;
+    }
 
-	public String getCid() {
-		return cid;
-	}
-
-	public void setCid(String cid) {
-		this.cid = cid;
-	}
-
-	public List<Medicine> getMedicines() {
-		return medicines;
-	}
-
-	public void setMedicines(List<Medicine> medicines) {
-		this.medicines = medicines;
-	}
-
-	public String getDosage() {
-		return dosage;
-	}
-
-	public void setDosage(String dosage) {
-		this.dosage = dosage;
-	}
-
-	public Boolean getFirstDose() {
-		return firstDose;
-	}
-
-	public void setFirstDose(Boolean firstDose) {
-		this.firstDose = firstDose;
-	}
-
-	public String getPeriod() {
-		return period;
-	}
-
-	public void setPeriod(String period) {
-		this.period = period;
-	}
+    public void setMedicalPrescriptionItem(List<MedicalPrescriptionItem> medicalPrescriptionItem) {
+        this.medicalPrescriptionItem = medicalPrescriptionItem;
+    }
 
 }

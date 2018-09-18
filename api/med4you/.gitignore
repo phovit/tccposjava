@@ -23,3 +23,12 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+
+
+### Med4You Ignores###
+
+/target/
+/[/
+/logs/
+

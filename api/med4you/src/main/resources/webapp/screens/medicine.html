@@ -1,20 +1,27 @@
 <div data-ng-controller="medicinecontroller">
-    <div class="row">
-        <h2>Medicamentos
-        </h2>
-    </div>
-    <div class="col-md-3" ng-repeat="medicine in medicines">
-        <a ui-sref="medicineedit({id: medicine.id})">
-            <div class="thumbnail" style="text-align: -webkit-center">
-                <div style="width: 80%; height:  auto; left:10%">
-                    <img src="{{'data:image/png;base64, '+medicine.image}}" style="width: 200px; height:  200px">
+
+    <div style="max-width: 800px; margin: auto; margin-top: 20px;">
+        <div class="row">
+            <h2>Medicamentos
+            </h2>
+        </div>
+        <div class="col-md-3" ng-repeat="medicine in medicines">
+            <a ui-sref="medicineedit({id: medicine.id})">
+                <div class="thumbnail" style="text-align: -webkit-center">
+                    <div style="width: 80%; height:  auto; left:10%">
+                        <img ng-if="!!medicine.image" src="{{'data:image/png;base64, '+medicine.image}}"
+                             style="width: 200px; height:  200px">
+                        <img ng-if="!medicine.image"
+                             src="https://st3.depositphotos.com/4060975/17269/v/1600/depositphotos_172694676-stock-illustration-medicine-delivery-box-vector-icon.jpg"
+                             style="width: 200px; height:  200px">
+                    </div>
+                    <div class="right-caption">
+                        <p>{{medicine.name}}</p>
+                    </div>
                 </div>
-                <div class="right-caption">
-                    <p>{{medicine.name}}</p>
-                </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
 
 
+    </div>
 </div>

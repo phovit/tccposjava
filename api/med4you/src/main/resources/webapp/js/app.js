@@ -34,6 +34,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/user",
             templateUrl: "screens/user.html",
             controller: "usercontroller"
+        })
+        .state('medicalprescription', {
+            url: "/medicalprescription",
+            templateUrl: "screens/medical_prescription.html",
+            controller: "medicalprescriptioncontroller"
         });
 });
 
@@ -68,5 +73,9 @@ app.controller('indexcontroller', function ($scope, $http) {
     $scope.getIsLogged();
     $scope.infoUser();
 
+
+    if(location.search.slice(1)==="login=true" &&  !$scope.isLogged ){
+        $scope.loginOptions();
+    }
 
 });
