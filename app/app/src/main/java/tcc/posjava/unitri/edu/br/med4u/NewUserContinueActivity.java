@@ -98,7 +98,7 @@ public class NewUserContinueActivity extends AppCompatActivity {
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
                 Bitmap bitmap = CarregadorDeFoto.carrega(file.getPath());
-                /*imageView.setImageURI(file);*/
+                imageView.setImageURI(file);
                 imageView.setImageBitmap(bitmap);
             }
         }

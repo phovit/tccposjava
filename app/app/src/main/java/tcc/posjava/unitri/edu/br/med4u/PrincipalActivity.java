@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,9 +18,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,6 +45,7 @@ import java.util.Map;
 
 public class PrincipalActivity extends AppCompatActivity {
 
+    private ListView listView;
 
     private static String TAG = "PrincipalActivity";
     @Override
@@ -44,57 +53,56 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        createListView();
 
+        /*String[] dados = new String[] {"     Fármacias", "   Medicamentos", "    Médicos"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dados);*/
 
-        ImageView imageView = findViewById(R.id.ivMedicament);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent buscaMedicamento = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
-                startActivity(buscaMedicamento);
-            }
-        });
+        ListView listView = findViewById(R.id.list);
         Button login = findViewById(R.id.btLoginPrincipal);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent telaLogin = new Intent(PrincipalActivity.this, LoginActivity.class);
-                startActivity(telaLogin);
+            Intent telaLogin = new Intent(PrincipalActivity.this, LoginActivity.class);
+            startActivity(telaLogin);
             }
         });
-        ImageView findPharm = findViewById(R.id.ivPharm);
-        findPharm.setOnClickListener(new View.OnClickListener() {
+
+        /*listView.setAdapter(adapter);*/
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent fPharm = new Intent(PrincipalActivity.this, ConsFarmaciaActivity.class);
-                startActivity(fPharm);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0: searchPharm();
+                        break;
+                    case 1: searchMedicines();
+                        break;
+                    case 2: searchDoctors();
+                        break;
+                    case 3: finish();
+                        break;
+                }
             }
-        });
-        ImageView findMedicament = findViewById(R.id.ivMedicament);
-        findMedicament.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent fMedicament = new Intent(PrincipalActivity.this, ConsFabricanteActivity.class);
-                startActivity(fMedicament);
-            }
-        });
-        ImageView findMedic = findViewById(R.id.ivMedic);
-        findMedic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent fMedic = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
-                startActivity(fMedic);
-            }
-        });
-        TextView testCamera = findViewById(R.id.tvTestCamera);
-        testCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent tCamera = new Intent(PrincipalActivity.this, CadReceitaActivity.class);
-                startActivity(tCamera);
-            }
-        });
+            });
+        }
+
+    private void searchPharm() {
+        Intent it = new Intent(PrincipalActivity.this, ConsFarmaciaActivity.class);
+        startActivity(it);
     }
+
+    private void searchMedicines() {
+        Intent it = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
+        startActivity(it);
+    }
+
+    private void searchDoctors() {
+        Intent it = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
+        startActivity(it);
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -155,6 +163,30 @@ public class PrincipalActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createListView()
+    {
+        //Criamos nossa lista que preenchera o ListView
+        ArrayList itens = new ArrayList<itemList>();
+        itemList item1 = new itemList("Fármacias", R.drawable.buscamedicamento);
+        itemList item2 = new itemList("Medicamentos", R.drawable.buscamedicamento);
+        itemList item3 = new itemList("Médicos", R.drawable.buscamedicamento);
+
+
+        itens.add(item1);
+        itens.add(item2);
+        itens.add(item3);
+
+
+        //Cria o adapter
+        AdapterListView adapterListView = new AdapterListView(this, itens);
+
+        //Define o Adapte
+
+        listView.setAdapter(adapterListView);
+        //Cor quando a lista é selecionada para ralagem.
+        listView.setCacheColorHint(Color.TRANSPARENT);
     }
 
 

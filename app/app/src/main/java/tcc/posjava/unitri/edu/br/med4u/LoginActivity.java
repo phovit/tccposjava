@@ -1,5 +1,6 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -19,15 +21,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
 
     private static String TAG = "LoginActivity";
+    private String nomeUsuario = "";
+    private String senhaUsuario = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +43,26 @@ public class LoginActivity extends AppCompatActivity {
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iNewUser = new Intent(LoginActivity.this, NewUserContinueActivity.class);
+                Intent iNewUser = new Intent(LoginActivity.this, NewUserActivity.class);
                 startActivity(iNewUser);
             }
         });
 
         Button login = findViewById(R.id.btLogin);
+        EditText editTextUsr = findViewById(R.id.etUserLogin);
+        nomeUsuario = nomeUsuario + editTextUsr.getText().toString();
+        EditText editTextPsw = findViewById(R.id.etPassLogin);
+        senhaUsuario = senhaUsuario + editTextPsw.getText().toString();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://med4u.herokuapp.com/login";
+                showDialog("nome2", nomeUsuario);
+                String url = "http://med4u.herokuapp.com/loginApi";
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 JSONObject postRequest = new JSONObject();
                 try {
-                    postRequest.put("username", "admin");
-                    postRequest.put("password", "admin");
+                    postRequest.put("username", nomeUsuario) ;
+                    postRequest.put("password", senhaUsuario);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -64,10 +74,16 @@ public class LoginActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Log.d(TAG, "API Response: " + response.toString());
-                                String message = response.optString("message");
-                                showDialog("Informação", message);
+                                if (response == null) {
+                                    Log.d(TAG, "API Response: null");
+                                } else {
+
+                                    Log.d(TAG, "API Response: " + response.toString());
+                                    String message = response.optString("message");
+                                    showDialog("Informação", message);
+                                }
                             }
+
                         },
 
                         /* Callback chamado em caso de erro */
@@ -79,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
                             }
                         }) {
-                    @Override
+                    /*@Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         //add params <key,value>
@@ -93,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         String auth = "Basic MzgxNTc5ZmEtZDI0MC00Mzg3LTkyNTMtZWY2YjgwYTdhMWEwOmM4NDM4M2Y0LTJiMDgtNGJiYy04MjQwLWI0YjQ5YTFlYWQzZQ==";
                         headers.put("Authorization", auth);
                         return headers;
-                    }
+                    }*/
                 };
 
                 queue.add(jsonObjReq);
@@ -112,5 +128,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
+    }
+
+    private String toString(Object palavra){
+        return palavra + "";
     }
 }
