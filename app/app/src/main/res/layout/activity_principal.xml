@@ -52,13 +52,13 @@
 
         <!--<ListView
             android:id="@+id/lvOptions"
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_width="219dp"
+            android:layout_height="191dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="113dp"
-            android:textAlignment="center"
-            />-->
+            android:foregroundGravity="center"
+            android:textAlignment="center" />-->
         <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/grid"
@@ -71,7 +71,7 @@
             android:numColumns="1"
             android:textAlignment="center" />-->
 
-        <!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/listview"
             android:layout_width="219dp"
             android:layout_height="208dp"
@@ -80,14 +80,14 @@
             android:layout_marginBottom="120dp"
             android:textAlignment="center"
 
-            />-->
-        <ListView
+            />
+        <!--<ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="#ECECEC"
             android:dividerHeight="1sp"
-            />
+            />-->
 
 
     </RelativeLayout>

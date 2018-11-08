@@ -53,12 +53,12 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        createListView();
+        /*createListView();*/
 
-        /*String[] dados = new String[] {"     Fármacias", "   Medicamentos", "    Médicos"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dados);*/
+        String[] dados = new String[] {"             Fármacias", "         Medicamentos", "              Médicos"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dados);
 
-        ListView listView = findViewById(R.id.list);
+        ListView listView = findViewById(R.id.listview);
         Button login = findViewById(R.id.btLoginPrincipal);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
-        /*listView.setAdapter(adapter);*/
+        listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -165,7 +165,7 @@ public class PrincipalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void createListView()
+   /* private void createListView()
     {
         //Criamos nossa lista que preenchera o ListView
         ArrayList itens = new ArrayList<itemList>();
@@ -187,7 +187,7 @@ public class PrincipalActivity extends AppCompatActivity {
         listView.setAdapter(adapterListView);
         //Cor quando a lista é selecionada para ralagem.
         listView.setCacheColorHint(Color.TRANSPARENT);
-    }
+    }*/
 
 
 }
