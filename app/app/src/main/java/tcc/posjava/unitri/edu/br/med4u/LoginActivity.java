@@ -56,7 +56,6 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog("nome2", nomeUsuario);
                 String url = "http://med4u.herokuapp.com/loginApi";
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 JSONObject postRequest = new JSONObject();
@@ -95,21 +94,6 @@ public class LoginActivity extends Activity {
                                 Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
                             }
                         }) {
-                    /*@Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        //add params <key,value>
-                        return params;
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-
-                        Map<String, String> headers = new HashMap<String, String>();
-                        String auth = "Basic MzgxNTc5ZmEtZDI0MC00Mzg3LTkyNTMtZWY2YjgwYTdhMWEwOmM4NDM4M2Y0LTJiMDgtNGJiYy04MjQwLWI0YjQ5YTFlYWQzZQ==";
-                        headers.put("Authorization", auth);
-                        return headers;
-                    }*/
                 };
 
                 queue.add(jsonObjReq);
