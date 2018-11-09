@@ -13,11 +13,23 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:layout_alignParentTop="true"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/iconbluehealth" />
+
         <TextView
             android:id="@+id/tvTitlefindMed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Consulta - Médico" />
+            android:text="Consulta - Médico"
+            android:textSize="50px"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/edFindCrmMed"
@@ -25,13 +37,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite o CRM do Médico"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/tvFindMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="OU:" />
+            android:inputType="textPersonName"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/edFindNameMed"
@@ -39,7 +46,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite o nome do Médico"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textAlignment="center"/>
 
         <Button
             android:id="@+id/btConsMed"
@@ -49,7 +57,8 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

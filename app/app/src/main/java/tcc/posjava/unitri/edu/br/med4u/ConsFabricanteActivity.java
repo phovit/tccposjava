@@ -8,6 +8,6 @@ public class ConsFabricanteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cons_fabricante);
+        setContentView(R.layout.activity_cons_medicines);
     }
 }

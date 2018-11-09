@@ -13,33 +13,32 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:layout_alignParentTop="true"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/iconbluehealth" />
+
         <TextView
             android:id="@+id/tvTitlefindFarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Consulta - Farmácia" />
-
-        <EditText
-            android:id="@+id/edFindCnpjFarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite o CNPJ"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/tvFindFarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="OU:" />
+            android:text="Consulta - Farmácia"
+            android:textSize="50px"
+            android:textAlignment="center"/>
 
         <EditText
             android:id="@+id/edFindRazaoFarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Digite a Razão Social"
-            android:inputType="textPostalAddress" />
+            android:hint="Busque aqui"
+            android:inputType="textPostalAddress"
+            android:textAlignment="center"/>
 
         <Button
             android:id="@+id/btConsFarm"
@@ -49,7 +48,9 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
