@@ -38,7 +38,7 @@
             android:ems="10"
             android:hint="Digite o nome do Medicamento"
             android:inputType="textPersonName"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/btConsMed"
