@@ -49,13 +49,13 @@ public class CadReceitaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_receita);
 
-        takePictureButton = findViewById(R.id.button_image);
-        imageView = findViewById(R.id.ivCadRec);
+        /*takePictureButton = findViewById(R.id.button_image);
+        imageView = findViewById(R.id.ivCadRec);*/
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             takePictureButton.setEnabled(false);
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        }
+        }*/
         /*ImageView campoFoto = findViewById(R.id.ivCadRec);*/
 
         /*String caminho = returnPath();*/

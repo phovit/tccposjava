@@ -49,13 +49,14 @@ public class LoginActivity extends Activity {
         });
 
         Button login = findViewById(R.id.btLogin);
-        EditText editTextUsr = findViewById(R.id.etUserLogin);
-        nomeUsuario = nomeUsuario + editTextUsr.getText().toString();
-        EditText editTextPsw = findViewById(R.id.etPassLogin);
-        senhaUsuario = senhaUsuario + editTextPsw.getText().toString();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editTextUsr = findViewById(R.id.etUserLogin);
+                nomeUsuario = editTextUsr.getText().toString();
+                EditText editTextPsw = findViewById(R.id.etPassLogin);
+                senhaUsuario = editTextPsw.getText().toString();
                 String url = "http://med4u.herokuapp.com/loginApi";
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 JSONObject postRequest = new JSONObject();
@@ -78,8 +79,12 @@ public class LoginActivity extends Activity {
                                 } else {
 
                                     Log.d(TAG, "API Response: " + response.toString());
-                                    String message = response.optString("message");
-                                    showDialog("Informação", message);
+                                    if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
+                                        Intent cadRec = new Intent(LoginActivity.this, CadReceitaActivity.class);
+                                        startActivity(cadRec);
+                                    } else {
+                                        showDialog("Informação", "Nome de usuário ou senha inválidos.");
+                                    }
                                 }
                             }
 
