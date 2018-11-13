@@ -92,6 +92,10 @@
             android:label="ConsMedicoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ConsMedicineActivity"
+            android:label="ConsMedicineActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ConsReceitaActivity"
             android:label="ConsReceitaActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>

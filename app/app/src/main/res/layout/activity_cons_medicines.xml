@@ -47,9 +47,10 @@
             android:text="Buscar" />
 
         <ListView
+            android:id="@+id/lvMedicines"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

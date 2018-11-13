@@ -94,7 +94,7 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void searchMedicines() {
-        Intent it = new Intent(PrincipalActivity.this, ConsMedicoActivity.class);
+        Intent it = new Intent(PrincipalActivity.this, ConsMedicineActivity.class);
         startActivity(it);
     }
 

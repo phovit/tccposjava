@@ -1,27 +1,41 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConsMedicineActivity extends AppCompatActivity {
 
     private static String TAG = "ConsMedicineActivity";
     private String nomeMedicamento = "";
+    private List<String> opcoes;
+    private ArrayAdapter<String> adaptador;
+    private ListView lvOpcoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,51 +50,68 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 nomeMedicamento = edFindNameMedicines.getText().toString();
                 String url = "http://med4u.herokuapp.com/medicine";
                 RequestQueue queue = Volley.newRequestQueue(ConsMedicineActivity.this);
-                JSONObject postRequest = new JSONObject();
-                try {
-                    postRequest.put("username", nomeUsuario) ;
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                        Request.Method.POST,
+                final ListView lvMedicine = findViewById(R.id.lvMedicines);
+
+                // Initialize a new RequestQueue instance
+                RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
+
+                // Initialize a new JsonArrayRequest instance
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                        Request.Method.GET,
                         url,
-                        postRequest,
-                        new Response.Listener<JSONObject>() {
+                        null,
+                        new Response.Listener<JSONArray>() {
                             @Override
-                            public void onResponse(JSONObject response) {
-                                if (response == null) {
-                                    Log.d(TAG, "API Response: null");
-                                } else {
+                            public void onResponse(JSONArray response) {
+                                // Process the JSON
+                                lvOpcoes = findViewById(R.id.lvMedicines);
 
-                                    Log.d(TAG, "API Response: " + response.toString());
-                                    if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
-                                        Intent cadRec = new Intent(LoginActivity.this, CadReceitaActivity.class);
-                                        startActivity(cadRec);
-                                    } else {
-                                        showDialog("Informação", "Nome de usuário ou senha inválidos.");
+                                opcoes = new ArrayList<>();
+
+                                try{
+                                    // Loop through the array elements
+                                    for(int i=0;i<response.length();i++){
+                                        // Get current json object
+                                        JSONObject medicine = response.getJSONObject(i);
+
+                                        opcoes.add(medicine.getString("name"));
+
                                     }
+                                }catch (JSONException e){
+                                    e.printStackTrace();
                                 }
+                                adaptador = new ArrayAdapter<>(ConsMedicineActivity.this, android.R.layout.simple_list_item_1, opcoes);
+
+                                lvOpcoes.setAdapter(adaptador);
                             }
 
                         },
-
-                        /* Callback chamado em caso de erro */
-
-                        new Response.ErrorListener() {
+                        new Response.ErrorListener(){
                             @Override
-                            public void onErrorResponse(VolleyError error) {
+                            public void onErrorResponse(VolleyError error){
 
-                                Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
                             }
-                        }) {
-                };
+                        }
+                );
 
-                queue.add(jsonObjReq);
+                // Add JsonArrayRequest to the RequestQueue
+                requestQueue.add(jsonArrayRequest);
             }
         });
             }
-        });
+    private void showDialog(String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(ConsMedicineActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
-}
+
+        }
+
