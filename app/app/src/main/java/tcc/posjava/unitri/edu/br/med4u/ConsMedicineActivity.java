@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,19 +37,23 @@ public class ConsMedicineActivity extends AppCompatActivity {
     private List<String> opcoes;
     private ArrayAdapter<String> adaptador;
     private ListView lvOpcoes;
+    private String url = "http://med4u.herokuapp.com/medicine";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cons_medicines);
+        //consulta inicial
 
+        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
+
+        //buscar por nome
         Button btConsultaMedicines = findViewById(R.id.btConsMed);
         btConsultaMedicines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText edFindNameMedicines = findViewById(R.id.edFindNameMedicines);
                 nomeMedicamento = edFindNameMedicines.getText().toString();
-                String url = "http://med4u.herokuapp.com/medicine";
                 RequestQueue queue = Volley.newRequestQueue(ConsMedicineActivity.this);
 
                 final ListView lvMedicine = findViewById(R.id.lvMedicines);
@@ -69,16 +74,16 @@ public class ConsMedicineActivity extends AppCompatActivity {
 
                                 opcoes = new ArrayList<>();
 
-                                try{
+                                try {
                                     // Loop through the array elements
-                                    for(int i=0;i<response.length();i++){
+                                    for (int i = 0; i < response.length(); i++) {
                                         // Get current json object
                                         JSONObject medicine = response.getJSONObject(i);
-
-                                        opcoes.add(medicine.getString("name"));
-
+                                        if (medicine.getString("name").toLowerCase().contains(nomeMedicamento.toLowerCase())) {
+                                            opcoes.add(medicine.getString("name"));
+                                        }
                                     }
-                                }catch (JSONException e){
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                                 adaptador = new ArrayAdapter<>(ConsMedicineActivity.this, android.R.layout.simple_list_item_1, opcoes);
@@ -87,9 +92,9 @@ public class ConsMedicineActivity extends AppCompatActivity {
                             }
 
                         },
-                        new Response.ErrorListener(){
+                        new Response.ErrorListener() {
                             @Override
-                            public void onErrorResponse(VolleyError error){
+                            public void onErrorResponse(VolleyError error) {
 
                             }
                         }
@@ -97,9 +102,54 @@ public class ConsMedicineActivity extends AppCompatActivity {
 
                 // Add JsonArrayRequest to the RequestQueue
                 requestQueue.add(jsonArrayRequest);
+                ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
         });
-            }
+    }
+
+    public void populaLista(){
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Process the JSON
+                        lvOpcoes = findViewById(R.id.lvMedicines);
+                        showDialog("passo 1", "recebeu resposta");
+                        opcoes = new ArrayList<>();
+
+                        try {
+                            // Loop through the array elements
+                            showDialog("passo 2", "popular lista");
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject medicine = response.getJSONObject(i);
+
+                                opcoes.add(medicine.getString("name"));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adaptador = new ArrayAdapter<>(ConsMedicineActivity.this, android.R.layout.simple_list_item_1, opcoes);
+
+                        lvOpcoes.setAdapter(adaptador);
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+
+    }
+
     private void showDialog(String title, String message) {
         AlertDialog alertDialog = new AlertDialog.Builder(ConsMedicineActivity.this).create();
         alertDialog.setTitle(title);
@@ -113,5 +163,5 @@ public class ConsMedicineActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-        }
+}
 
