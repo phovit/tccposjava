@@ -54,9 +54,9 @@ public class ConsMedicineActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText edFindNameMedicines = findViewById(R.id.edFindNameMedicines);
                 nomeMedicamento = edFindNameMedicines.getText().toString();
-                RequestQueue queue = Volley.newRequestQueue(ConsMedicineActivity.this);
+                /*RequestQueue queue = Volley.newRequestQueue(ConsMedicineActivity.this);
 
-                final ListView lvMedicine = findViewById(R.id.lvMedicines);
+                final ListView lvMedicine = findViewById(R.id.lvMedicines);*/
 
                 // Initialize a new RequestQueue instance
                 RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
@@ -107,7 +107,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
         });
     }
 
-    public void populaLista(){
+    public void populaLista() {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,

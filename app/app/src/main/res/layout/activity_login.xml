@@ -9,20 +9,23 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="533dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvTitle"
+        <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:text="Bem vindo ao Med4U"
-            android:textAlignment="center"
-            android:textSize="10pt" />
+            android:layout_height="146dp"
+            android:layout_alignParentTop="true"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/iconbluehealth" />
+
 
         <EditText
             android:id="@+id/etUserLogin"
@@ -51,13 +54,13 @@
             android:layout_height="wrap_content"
             android:text="Esqueceu? Clique aqui" />
 
-        <com.facebook.login.widget.LoginButton
+        <!--<com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+            android:layout_marginBottom="30dp" />-->
 
         <TextView
             android:id="@+id/tvNewUserLogin"
