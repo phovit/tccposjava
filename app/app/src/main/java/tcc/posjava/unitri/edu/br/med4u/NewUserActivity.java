@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewUserActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+
+        return true;
+
+    }
 
     /*ImageView campoFoto = findViewById(R.id.formulario_foto);*/
     private static String TAG = "NewUserActivity";
@@ -70,15 +79,15 @@ public class NewUserActivity extends AppCompatActivity {
                                         showDialog("Cpf", (users.getString("cpf")));
                                         showDialog("email", (users.getString("email")));
                                         if ((users.getString("cpf").equalsIgnoreCase(cpf) || (users.getString("email").equalsIgnoreCase(email)))) {
-                                            resp = "Usuário já cadastrado.";
-                                            opcoes.add(users.getString("email"));
+                                            resp = "Usuário já cadastrado!";
                                         }
                                     }
-                                    if (resp != null) {
+                                    if (resp.equalsIgnoreCase("Usuário já cadastrado!")) {
                                         showDialog("Atenção", resp);
                                         Intent newUser = new Intent(NewUserActivity.this, LoginActivity.class);
                                         startActivity(newUser);
                                     } else {
+                                        showDialog("Anteção", "Usuário não encontrado!");
                                         Intent nuContinue = new Intent(NewUserActivity.this, NewUserContinueActivity.class);
                                         nuContinue.putExtra("cpf", cpf);
                                         nuContinue.putExtra("email", email);

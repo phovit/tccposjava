@@ -3,6 +3,7 @@ package tcc.posjava.unitri.edu.br.med4u;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,7 +22,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,6 +48,7 @@ public class NewUserContinueActivity extends AppCompatActivity {
     private ImageView imageView;
     private Uri file;
     private static String TAG = "NewUserContinueActivity";
+    String url = "http://med4u.herokuapp.com/users";
 
 
     @Override
@@ -50,6 +63,93 @@ public class NewUserContinueActivity extends AppCompatActivity {
             takePictureButton.setEnabled(false);
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
         }
+
+        Button btCadNU = findViewById(R.id.buttonCad);
+        btCadNU.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog("Botão", "Clicado");
+                EditText etNameNU = findViewById(R.id.etNameNewUser);
+                String name = etNameNU.getText().toString();
+                EditText etUserNU = findViewById(R.id.etUserNewUser);
+                String userName = etUserNU.getText().toString();
+                EditText etCpf = findViewById(R.id.etCPFNewUserCad);
+                String cpf = etCpf.getText().toString();
+                EditText etEmail = findViewById(R.id.etUserEmailCad);
+                String email = etEmail.getText().toString();
+                /*EditText etPhone = findViewById(R.id.etPhoneNewUser);
+                String phone = etPhone.getText().toString();*/
+                /*EditText etCell = findViewById(R.id.etCellNewUser);
+                String cell = etCell.getText().toString();*/
+                EditText etPass = findViewById(R.id.etPassNewUser);
+                String pass = etPass.getText().toString();
+                /*EditText etPass2 = findViewById(R.id.etPassNewUser2);
+                String pass2 = etPass2.getText().toString();*/
+
+
+                RequestQueue queue = Volley.newRequestQueue(NewUserContinueActivity.this);
+
+                JSONObject postRequest = new JSONObject();
+
+                try {
+                    postRequest.put("name", name);
+                    postRequest.put("username", userName) ;
+                    postRequest.put("cpf", cpf) ;
+                    postRequest.put("email", email) ;
+                    postRequest.put("password", pass) ;
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+
+                        Request.Method.POST,
+                        url,
+                        postRequest,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (response == null) {
+                                    Log.d(TAG, "API Response: null");
+                                } else {
+
+                                    Log.d(TAG, "API Response: " + response.toString());
+
+                                    showDialog("Resposta", response.toString());
+
+                                    /*if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
+                                        Intent cadRec = new Intent(NewUserContinueActivity.this, CadReceitaActivity.class);
+                                        startActivity(cadRec);*/
+                                }
+
+                            }
+
+                        },
+
+                        /* Callback chamado em caso de erro */
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
+                            }
+                        }) {
+                };
+                queue.add(jsonObjReq);
+
+                etCpf.setText("");
+                etEmail.setText("");
+                etNameNU.setText("");
+                etPass.setText("");
+                etUserNU.setText("");
+
+                Intent login = new Intent(NewUserContinueActivity.this, LoginActivity.class);
+                startActivity(login);
+            }
+
+        });
+
 
     }
 
@@ -102,5 +202,18 @@ public class NewUserContinueActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         }
+    }
+
+    private void showDialog(String title, String message) {
+        android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(NewUserContinueActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

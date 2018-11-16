@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">med4u</string>
     <string name="title_activity_endereco">EnderecoActivity</string>
-    <string name="facebook_app_id">273728056776298</string>
-    <string name="fb_login_protocol_scheme">fb273728056776298</string>
     <string name="title_activity_splash">splashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="facebook_app_id">1974833645929912</string>
+    <string name="fb_login_protocol_scheme">fb1974833645929912</string>
+
+    <string name="posts_feed">Posts</string>
+    <string name="logout">Logout</string>
+    <string name="enter_text">Compose a post</string>
+    <string name="profile">Profile</string>
+    <string name="permissions">Permissions</string>
+    <string name="email_permission">Email Permission</string>
+    <string name="user_posts_permission">User Posts Permission</string>
+    <string name="make_post_permission">Make Post Permission</string>
+    <string name="app_permission">Entire App Permission</string>
+    <string name="no_fb_review">Permissions Granted without FB Review</string>
+    <string name="fb_review">Permissions Requiring FB Review</string>
+    <string name="no_email_perm">Email permission not granted</string>
+
 </resources>

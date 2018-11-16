@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,6 +106,14 @@ public class LoginActivity extends Activity {
                 queue.add(jsonObjReq);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+
+        return true;
+
     }
 
     private void showDialog(String title, String message) {

@@ -50,14 +50,31 @@
             android:inputType="textPersonName" />
 
         <EditText
+            android:id="@+id/etCPFNewUserCad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu CPF"
+            android:inputType="number"
+            android:maxLength="11"/>
+
+        <EditText
+            android:id="@+id/etUserEmailCad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu email"
+            android:inputType="textEmailAddress" />
+
+        <!--<EditText
             android:id="@+id/etBirthdayNewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite a data do seu nascimento"
-            android:inputType="textPersonName|date" />
+            android:inputType="textPersonName|date" />-->
 
-        <EditText
+        <!--<EditText
             android:id="@+id/etAdressNewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,15 +88,15 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite seu telefone fixo"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName" />-->
 
-        <EditText
+        <!--<EditText
             android:id="@+id/etCellNewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite seu telefone celular"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName" />-->
 
         <EditText
             android:id="@+id/etPassNewUser"
@@ -88,12 +105,12 @@
             android:hint="Digite sua senha"
             android:inputType="textPassword" />
 
-        <EditText
+        <!--<EditText
             android:id="@+id/etPassNewUser2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirme sua senha"
-            android:inputType="textPassword" />
+            android:inputType="textPassword" />-->
 
         <Button
             android:id="@+id/buttonCad"

@@ -22,6 +22,8 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,6 +45,14 @@ public class CadReceitaActivity extends AppCompatActivity {
 
    private static String TAG = "CadReceitaActivity";
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_principal, menu);
+
+        return super.onCreateOptionsMenu(menu);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
