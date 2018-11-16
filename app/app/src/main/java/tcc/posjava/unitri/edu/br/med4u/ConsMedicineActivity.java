@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -103,11 +105,37 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 // Add JsonArrayRequest to the RequestQueue
                 requestQueue.add(jsonArrayRequest);
                 ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+                lvOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        // ListView Clicked item index
+                        int itemPosition = position;
+
+                        // ListView Clicked item value
+                        String itemValue = (String) lvOpcoes.getItemAtPosition(position);
+
+                        // Show Alert
+                        Toast.makeText(ConsMedicineActivity.this, "testando click", Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populaLista();
+    }
+
     public void populaLista() {
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -118,12 +146,10 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         // Process the JSON
                         lvOpcoes = findViewById(R.id.lvMedicines);
-                        showDialog("passo 1", "recebeu resposta");
                         opcoes = new ArrayList<>();
 
                         try {
                             // Loop through the array elements
-                            showDialog("passo 2", "popular lista");
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject medicine = response.getJSONObject(i);
@@ -147,6 +173,28 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     }
                 }
         );
+        // Add JsonArrayRequest to the RequestQueue
+        requestQueue.add(jsonArrayRequest);
+        ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+        if (lvOpcoes != null) {
+            lvOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    // ListView Clicked item index
+                    int itemPosition = position;
+
+                    // ListView Clicked item value
+                    String itemValue = (String) lvOpcoes.getItemAtPosition(position);
+
+                    // Show Alert
+                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
 
     }
 

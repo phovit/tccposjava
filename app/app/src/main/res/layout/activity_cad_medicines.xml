@@ -1,0 +1,194 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="225dp">
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#00A8EC"
+                android:src="@drawable/person" />
+
+            <Button
+                android:id="@+id/btPhotoNW"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:onClick="takePicture"
+                android:clickable="true"
+                android:background="@drawable/fundo_camera" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvNameMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Nome" />
+
+        <EditText
+            android:id="@+id/etNameCadMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvBarCodeMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Código de Barras" />
+
+        <EditText
+            android:id="@+id/etBarCodeMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Codigo de barras"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvRegMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Registro MS" />
+
+        <EditText
+            android:id="@+id/etRegMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Registro MS"
+            android:inputType="number"
+            android:maxLength="11"/>
+
+        <TextView
+            android:id="@+id/tvIndMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Indicação" />
+
+        <EditText
+            android:id="@+id/etIndMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Indicação"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/tvContIndMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Contraindicação" />
+
+        <EditText
+            android:id="@+id/etContIndMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Contraindicação"
+            android:inputType="textPersonName|date" />
+
+        <TextView
+            android:id="@+id/tvReactMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Reações adversas" />
+
+        <EditText
+            android:id="@+id/etReactMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Reações adversas"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tvPrecMedicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="0dp"
+            android:text="Precauções" />
+
+        <EditText
+            android:id="@+id/etPrecMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Precauções"
+            android:inputType="textPersonName" />
+
+        <!--<EditText
+            android:id="@+id/etCellNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Digite seu telefone celular"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etPassNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword" />-->
+
+        <!--<EditText
+            android:id="@+id/etPassNewUser2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirme sua senha"
+            android:inputType="textPassword" />-->
+
+        <Button
+            android:id="@+id/buttonCad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar" />
+
+
+    </LinearLayout>
+
+</ScrollView>

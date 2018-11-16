@@ -68,7 +68,6 @@ public class NewUserContinueActivity extends AppCompatActivity {
         btCadNU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog("Botão", "Clicado");
                 EditText etNameNU = findViewById(R.id.etNameNewUser);
                 String name = etNameNU.getText().toString();
                 EditText etUserNU = findViewById(R.id.etUserNewUser);

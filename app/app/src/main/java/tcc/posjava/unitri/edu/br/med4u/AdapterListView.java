@@ -38,8 +38,7 @@ public class AdapterListView extends BaseAdapter {
      * @param position
      * @return
      */
-    public itemList getItem(int position)
-    {
+    public itemList getItem(int position) {
         return itens.get(position);
     }
  
