@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadMedicoActivity">
+    tools:context=".CadReceitaActivity"
+    tools:menu="menu_principal">
 
     <LinearLayout
-        android:layout_width="381dp"
-        android:layout_height="647dp"
+        android:layout_width="366dp"
+        android:layout_height="494dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-84dp">
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="66dp">
 
         <!--<Button
             android:id="@+id/button_image"
@@ -26,11 +28,10 @@
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
+
             android:layout_height="146dp"
             android:layout_alignParentTop="true"
-
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="75dp"
             android:src="@drawable/iconbluehealth" />
 
         <TextView
@@ -75,8 +76,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Lembretes"
-            android:textAlignment="center"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -89,8 +90,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Dosagem"
-            android:textAlignment="center"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/btCadaRec"

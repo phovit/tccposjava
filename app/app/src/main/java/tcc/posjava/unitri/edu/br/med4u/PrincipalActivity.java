@@ -114,50 +114,41 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.cadCidade:
-                Intent cadastroCidade = new Intent(this, CadCidadeActivity.class);
-                startActivity(cadastroCidade);
-                break;
-            case R.id.cadEndereco:
-                Intent cadastroEndereco = new Intent(this, CadEnderecoActivity.class);
-                startActivity(cadastroEndereco);
-                break;
-            case R.id.cadEstado:
-                Intent cadastroEstado = new Intent(this, CadEstadoActivity.class);
-                startActivity(cadastroEstado);
-                break;
-            case R.id.cadFabricante:
-                Intent cadastroFabricante = new Intent(this, CadFabricanteActivity.class);
-                startActivity(cadastroFabricante);
-                break;
-            case R.id.cadFarmacia:
-                Intent cadastroFarmacia = new Intent(this, CadFarmaciaActivity.class);
-                startActivity(cadastroFarmacia);
-                break;
-            case R.id.cadMedico:
-                Intent cadastroMedico = new Intent(this, CadMedicoActivity.class);
-                startActivity(cadastroMedico);
-                break;
-            case R.id.cadReceita:
+            /*case R.id.menuCadMedicines:
+                Intent cadMedicines = new Intent(this, );
+                startActivity(cadMedicines);
+                break;*/
+            case R.id.menuCadReceita:
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
                 startActivity(cadastroReceita);
                 break;
-            case R.id.consEndereco:
-                Intent consultaEndereco = new Intent(this, ConsEnderecoActivity.class);
-                startActivity(consultaEndereco);
-            case R.id.consFabricante:
-                Intent consultaFabricante = new Intent(this, ConsFabricanteActivity.class);
-                startActivity(consultaFabricante);
-            case R.id.consFarmacia:
-                Intent consultaFermacia = new Intent(this, ConsFarmaciaActivity.class);
-                startActivity(consultaFermacia);
-            case R.id.consMedico:
-                Intent consultaMedico = new Intent(this, ConsMedicoActivity.class);
-                startActivity(consultaMedico);
-            case R.id.consReceita:
+            case R.id.menuCadUsuario:
+                Intent cadastroUsuario = new Intent(this, NewUserActivity.class);
+                startActivity(cadastroUsuario);
+                break;
+            case R.id.menuConsFarmacia:
+                Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
+                startActivity(consultaFarm);
+                break;
+            case R.id.menuConsMedicamentos:
+                Intent consultaMedicines = new Intent(this, ConsMedicineActivity.class);
+                startActivity(consultaMedicines);
+                break;
+            case R.id.menuConsMedico:
+                Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                startActivity(contultaMedicos);
+                break;
+            case R.id.menuConsReceita:
                 Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
                 startActivity(consultaReceita);
-
+            /*case R.id.menuPerfilEditar:
+                Intent editPerfil = new Intent(this, EditPerfil.class);
+                startActivity(editPerfil);
+                break;
+            case R.id.menuPerfilVisualizar:
+                Intent visPerfil = new Intent(this, visPerfil.class);
+                startActivity(visPerfil);
+                break;*/
             default:
                 return false;
         }

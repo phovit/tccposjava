@@ -3,9 +3,12 @@ package tcc.posjava.unitri.edu.br.med4u;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,14 +31,6 @@ import java.util.List;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
-
-        return true;
-
-    }
-
     /*ImageView campoFoto = findViewById(R.id.formulario_foto);*/
     private static String TAG = "NewUserActivity";
     private String cpf = "";
@@ -48,6 +43,8 @@ public class NewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setTitle("Med4U");
 
         Button btCadastro = findViewById(R.id.buttonCadastro);
         btCadastro.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +110,58 @@ public class NewUserActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_principal, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            /*case R.id.menuCadMedicines:
+                Intent cadMedicines = new Intent(this, );
+                startActivity(cadMedicines);
+                break;*/
+            case R.id.menuCadReceita:
+                Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
+                startActivity(cadastroReceita);
+                break;
+            case R.id.menuCadUsuario:
+                Intent cadastroUsuario = new Intent(this, NewUserActivity.class);
+                startActivity(cadastroUsuario);
+                break;
+            case R.id.menuConsFarmacia:
+                Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
+                startActivity(consultaFarm);
+                break;
+            case R.id.menuConsMedicamentos:
+                Intent consultaMedicines = new Intent(this, ConsMedicineActivity.class);
+                startActivity(consultaMedicines);
+                break;
+            case R.id.menuConsMedico:
+                Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                startActivity(contultaMedicos);
+                break;
+            case R.id.menuConsReceita:
+                Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
+                startActivity(consultaReceita);
+            /*case R.id.menuPerfilEditar:
+                Intent editPerfil = new Intent(this, EditPerfil.class);
+                startActivity(editPerfil);
+                break;
+            case R.id.menuPerfilVisualizar:
+                Intent visPerfil = new Intent(this, visPerfil.class);
+                startActivity(visPerfil);
+                break;*/
+            default:
+                return false;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void showDialog(String title, String message) {
