@@ -46,12 +46,14 @@ import java.util.Map;
 public class PrincipalActivity extends AppCompatActivity {
 
     private ListView listView;
-
+    private String autorizacao;
     private static String TAG = "PrincipalActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
 
         /*createListView();*/
 
@@ -114,10 +116,10 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menuCadMedicines:
-                Intent cadMedicines = new Intent(this, );
+            case R.id.menuCadMedicines:
+                Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
                 startActivity(cadMedicines);
-                break;*/
+                break;
             case R.id.menuCadReceita:
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
                 startActivity(cadastroReceita);
@@ -144,10 +146,6 @@ public class PrincipalActivity extends AppCompatActivity {
             /*case R.id.menuPerfilEditar:
                 Intent editPerfil = new Intent(this, EditPerfil.class);
                 startActivity(editPerfil);
-                break;
-            case R.id.menuPerfilVisualizar:
-                Intent visPerfil = new Intent(this, visPerfil.class);
-                startActivity(visPerfil);
                 break;*/
             default:
                 return false;
@@ -155,30 +153,4 @@ public class PrincipalActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-   /* private void createListView()
-    {
-        //Criamos nossa lista que preenchera o ListView
-        ArrayList itens = new ArrayList<itemList>();
-        itemList item1 = new itemList("Fármacias", R.drawable.buscamedicamento);
-        itemList item2 = new itemList("Medicamentos", R.drawable.buscamedicamento);
-        itemList item3 = new itemList("Médicos", R.drawable.buscamedicamento);
-
-
-        itens.add(item1);
-        itens.add(item2);
-        itens.add(item3);
-
-
-        //Cria o adapter
-        AdapterListView adapterListView = new AdapterListView(this, itens);
-
-        //Define o Adapte
-
-        listView.setAdapter(adapterListView);
-        //Cor quando a lista é selecionada para ralagem.
-        listView.setCacheColorHint(Color.TRANSPARENT);
-    }*/
-
-
 }

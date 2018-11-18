@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ConsReceitaActivity extends AppCompatActivity {
+
+    private String autorizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,8 @@ public class ConsReceitaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cons_receita);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,10 +33,14 @@ public class ConsReceitaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menuCadMedicines:
-                Intent cadMedicines = new Intent(this, );
-                startActivity(cadMedicines);
-                break;*/
+            case R.id.menuCadMedicines:
+                if (autorizacao != null) {
+                    Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
+                    startActivity(cadMedicines);
+                } else {
+                    Toast.makeText(ConsReceitaActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.menuCadReceita:
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
                 startActivity(cadastroReceita);
@@ -63,6 +72,8 @@ public class ConsReceitaActivity extends AppCompatActivity {
                 Intent visPerfil = new Intent(this, visPerfil.class);
                 startActivity(visPerfil);
                 break;*/
+            case R.id.menuSair:
+                finish();
             default:
                 return false;
         }

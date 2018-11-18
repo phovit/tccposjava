@@ -39,6 +39,6 @@
         </menu>
     </item>
     <item
-
+        android:id="@+id/menuSair"
         android:title="Sair"/>
 </menu>

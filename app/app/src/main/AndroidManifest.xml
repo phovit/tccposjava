@@ -31,30 +31,13 @@
             android:name=".PrincipalActivity"
             android:label="PrincipalActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
-            android:name=".CadCidadeActivity"
-            android:label="CadCidadeActivity"></activity>
-        <activity
-            android:name=".CadEnderecoActivity"
-            android:label="CadEnderecoActivity"></activity>
-        <activity
-            android:name=".CadEstadoActivity"
-            android:label="CadEstadoActivity"></activity>
-        <activity
-            android:name=".CadFabricanteActivity"
-            android:label="CadFabricanteActivity"></activity>
-        <activity
-            android:name=".CadFarmaciaActivity"
-            android:label="CadFarmaciaActivity"></activity>
-        <activity
-            android:name=".CadMedicoActivity"
-            android:label="CadMedicoActivity"></activity>
+            android:name=".CadMedicinesActivity"
+            android:label="CadMedicinesActivity"></activity>
         <activity
             android:name=".CadReceitaActivity"
             android:label="CadReceitaActivity"></activity>
-        <activity
-            android:name=".EnderecoActivity"
-            android:label="EnderecoActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="LoginActivity"></activity>
@@ -65,14 +48,8 @@
             android:name=".NewUserContinueActivity"
             android:label="NewUserContinueActivity"></activity>
         <activity
-            android:name=".ConsEnderecoActivity"
-            android:label="ConsEnderecoActivity"></activity>
-        <activity
             android:name=".ConsFarmaciaActivity"
             android:label="ConsFarmaciaActivity"></activity>
-        <activity
-            android:name=".ConsFabricanteActivity"
-            android:label="ConsFabricanteActivity"></activity>
         <activity
             android:name=".ConsMedicoActivity"
             android:label="ConsMedicoActivity"></activity>
@@ -82,10 +59,6 @@
         <activity
             android:name=".ConsReceitaActivity"
             android:label="ConsReceitaActivity"></activity>
-        <activity
-            android:name=".teste"
-            android:label="teste">
-        </activity>
 
         <meta-data android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />

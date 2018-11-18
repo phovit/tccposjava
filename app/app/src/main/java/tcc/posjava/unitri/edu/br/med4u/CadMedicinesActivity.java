@@ -1,17 +1,11 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -30,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -40,82 +35,67 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class NewUserContinueActivity extends AppCompatActivity {
+public class CadMedicinesActivity extends AppCompatActivity {
 
-    private Button takePictureButton;
-    private ImageView imageView;
     private Uri file;
-    private EditText etCpf;
-    private EditText etEmail;
-    private static String TAG = "NewUserContinueActivity";
-    String url = "http://med4u.herokuapp.com/users";
-    private String autorizacao;
+    private static String TAG = "CadMedicinesActivity";
+    String url = "http://med4u.herokuapp.com/medicine";
+    String autorizacao;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user_continue);
+        setContentView(R.layout.activity_cad_medicines);
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
+
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
-        etCpf = findViewById(R.id.etCPFNewUserCad);
-        etEmail = findViewById(R.id.etUserEmailCad);
-        Intent intent = getIntent();
-        autorizacao = intent.getStringExtra("autorizacao");
-        if (intent.hasExtra("cpf")) {
-            String cpfParameter = intent.getParcelableExtra("cpf");
-            etCpf.setText(cpfParameter);
-        }
-        if (intent.hasExtra("email")) {
-            String emailParameter = intent.getParcelableExtra("email");
-            etEmail.setText(emailParameter);
-        }
 
-
-        takePictureButton = findViewById(R.id.btPhotoNW);
-        imageView = findViewById(R.id.imageview);
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            takePictureButton.setEnabled(false);
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
-        }
-
-        Button btCadNU = findViewById(R.id.buttonCad);
+        Button btCadNU = findViewById(R.id.buttonCadMedicines);
         btCadNU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText etNameNU = findViewById(R.id.etNameNewUser);
-                String name = etNameNU.getText().toString();
-                EditText etUserNU = findViewById(R.id.etUserNewUser);
-                String userName = etUserNU.getText().toString();
-                String cpf = etCpf.getText().toString();
-                String email = etEmail.getText().toString();
-                /*EditText etPhone = findViewById(R.id.etPhoneNewUser);
-                String phone = etPhone.getText().toString();*/
-                /*EditText etCell = findViewById(R.id.etCellNewUser);
-                String cell = etCell.getText().toString();*/
-                EditText etPass = findViewById(R.id.etPassNewUser);
-                String pass = etPass.getText().toString();
-                /*EditText etPass2 = findViewById(R.id.etPassNewUser2);
-                String pass2 = etPass2.getText().toString();*/
+                EditText etNameCadMedicine = findViewById(R.id.etNameCadMedicine);
+                String name = etNameCadMedicine.getText().toString();
 
+                EditText etBarCodeMedicine = findViewById(R.id.etBarCodeMedicine);
+                String codeBar = etBarCodeMedicine.getText().toString();
 
-                RequestQueue queue = Volley.newRequestQueue(NewUserContinueActivity.this);
+                EditText etRegMedicine = findViewById(R.id.etRegMedicine);
+                String reg = etRegMedicine.getText().toString();
+
+                EditText etIndMedicine = findViewById(R.id.etIndMedicine);
+                String indication = etIndMedicine.getText().toString();
+
+                EditText etContIndMedicine = findViewById(R.id.etContIndMedicine);
+                String conIndi = etContIndMedicine.getText().toString();
+
+                EditText etReactMedicine = findViewById(R.id.etReactMedicine);
+                String reactMedicine = etReactMedicine.getText().toString();
+
+                EditText etPrecMedicine = findViewById(R.id.etPrecMedicine);
+                String prec = etPrecMedicine.getText().toString();
+
+                RequestQueue queue = Volley.newRequestQueue(CadMedicinesActivity.this);
 
                 JSONObject postRequest = new JSONObject();
 
                 try {
                     postRequest.put("name", name);
-                    postRequest.put("username", userName) ;
-                    postRequest.put("cpf", cpf) ;
-                    postRequest.put("email", email) ;
-                    postRequest.put("password", pass) ;
+                    postRequest.put("indications", indication);
+                    postRequest.put("contraindications", conIndi);
+                    postRequest.put("adverseReactions", reactMedicine);
+                    postRequest.put("precautions", prec);
+                    postRequest.put("codebar", codeBar);
+                    postRequest.put("msRecord", reg);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -131,14 +111,10 @@ public class NewUserContinueActivity extends AppCompatActivity {
                                 if (response == null) {
                                     Log.d(TAG, "API Response: null");
                                 } else {
-
                                     Log.d(TAG, "API Response: " + response.toString());
-
-                                    showDialog("Resposta", response.toString());
-
-                                    /*if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
-                                        Intent cadRec = new Intent(NewUserContinueActivity.this, CadReceitaActivity.class);
-                                        startActivity(cadRec);*/
+                                    if (response.equals("com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of")) {
+                                        Toast.makeText(CadMedicinesActivity.this, "Medicamento cadastrado com sucesso.", Toast.LENGTH_LONG).show();
+                                    }
                                 }
 
                             }
@@ -154,17 +130,31 @@ public class NewUserContinueActivity extends AppCompatActivity {
                                 Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
                             }
                         }) {
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", autorizacao);
+                        return params;
+                    }
+
+                    //Pass Your Parameters here
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        return params;
+                    }
                 };
                 queue.add(jsonObjReq);
 
-                etCpf.setText("");
-                etEmail.setText("");
-                etNameNU.setText("");
-                etPass.setText("");
-                etUserNU.setText("");
-
-                Intent login = new Intent(NewUserContinueActivity.this, LoginActivity.class);
-                startActivity(login);
+                etBarCodeMedicine.setText("");
+                etContIndMedicine.setText("");
+                etIndMedicine.setText("");
+                etNameCadMedicine.setText("");
+                etPrecMedicine.setText("");
+                etReactMedicine.setText("");
+                etRegMedicine.setText("");
             }
 
         });
@@ -188,7 +178,7 @@ public class NewUserContinueActivity extends AppCompatActivity {
                     cadMedicines.putExtra("autorizacao", autorizacao);
                     startActivity(cadMedicines);
                 } else {
-                    Toast.makeText(NewUserContinueActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadMedicinesActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.menuCadReceita:
@@ -229,6 +219,7 @@ public class NewUserContinueActivity extends AppCompatActivity {
                 break;*/
             case R.id.menuSair:
                 finish();
+                System.exit(0);
             default:
                 return false;
         }
@@ -236,59 +227,8 @@ public class NewUserContinueActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 0) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                takePictureButton.setEnabled(true);
-            }
-        }
-    }
-
-    public void takePicture(View view) {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        file = FileProvider.getUriForFile(
-                NewUserContinueActivity.this,
-                "tcc.posjava.unitri.edu.br.med4u",
-                getOutputMediaFile());
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-        startActivityForResult(intent, 100);
-    }
-
-    private static File getOutputMediaFile(){
-
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MED4U");
-
-        if (!mediaStorageDir.exists()){
-
-            if (!mediaStorageDir.mkdirs()){
-                Log.d(TAG, "Ocorreu um erro ao criar o diretório de imagens");
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG_"+ timeStamp + ".jpg");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (requestCode == 100) {
-            if (resultCode == RESULT_OK) {
-                Bitmap bitmap = CarregadorDeFoto.carrega(file.getPath());
-                imageView.setImageURI(file);
-                imageView.setImageBitmap(bitmap);
-            }
-        }
-    }
-
     private void showDialog(String title, String message) {
-        android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(NewUserContinueActivity.this).create();
+        android.support.v7.app.AlertDialog alertDialog = new android.support.v7.app.AlertDialog.Builder(CadMedicinesActivity.this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "OK",

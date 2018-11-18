@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -83,8 +84,10 @@ public class LoginActivity extends Activity {
 
                                     Log.d(TAG, "API Response: " + response.toString());
                                     if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
-                                        Intent cadRec = new Intent(LoginActivity.this, CadReceitaActivity.class);
-                                        startActivity(cadRec);
+                                        Toast.makeText(LoginActivity.this, "Bem vindo " + nomeUsuario, Toast.LENGTH_LONG).show();
+                                        Intent cadMed = new Intent(LoginActivity.this, CadMedicinesActivity.class);
+                                        cadMed.putExtra("autorizacao", response.toString());
+                                        startActivity(cadMed);
                                     } else {
                                         showDialog("Informação", "Nome de usuário ou senha inválidos.");
                                     }

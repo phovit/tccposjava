@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +39,7 @@ public class NewUserActivity extends AppCompatActivity {
     private String url = "http://med4u.herokuapp.com/users";
     private String resp = "";
     private List<String> opcoes;
+    private String autorizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
 
         Button btCadastro = findViewById(R.id.buttonCadastro);
         btCadastro.setOnClickListener(new View.OnClickListener() {
@@ -73,18 +77,18 @@ public class NewUserActivity extends AppCompatActivity {
                                     for (int i = 0; i < response.length(); i++) {
                                         // Get current json object
                                         JSONObject users = response.getJSONObject(i);
-                                        showDialog("Cpf", (users.getString("cpf")));
-                                        showDialog("email", (users.getString("email")));
                                         if ((users.getString("cpf").equalsIgnoreCase(cpf) || (users.getString("email").equalsIgnoreCase(email)))) {
                                             resp = "Usuário já cadastrado!";
                                         }
                                     }
                                     if (resp.equalsIgnoreCase("Usuário já cadastrado!")) {
-                                        showDialog("Atenção", resp);
+                                        Toast.makeText(NewUserActivity.this, "Usuário já cadastrado!", Toast.LENGTH_LONG).show();
                                         Intent newUser = new Intent(NewUserActivity.this, LoginActivity.class);
+                                        newUser.putExtra("cpf", cpf);
+                                        newUser.putExtra("email", email);
                                         startActivity(newUser);
                                     } else {
-                                        showDialog("Anteção", "Usuário não encontrado!");
+                                        Toast.makeText(NewUserActivity.this, "Usuário não encontrado!", Toast.LENGTH_LONG).show();
                                         Intent nuContinue = new Intent(NewUserActivity.this, NewUserContinueActivity.class);
                                         nuContinue.putExtra("cpf", cpf);
                                         nuContinue.putExtra("email", email);
@@ -122,20 +126,28 @@ public class NewUserActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menuCadMedicines:
-                Intent cadMedicines = new Intent(this, );
-                startActivity(cadMedicines);
-                break;*/
+            case R.id.menuCadMedicines:
+                if (autorizacao != null) {
+                    Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
+                    cadMedicines.putExtra("autorizacao", autorizacao);
+                    startActivity(cadMedicines);
+                } else {
+                    Toast.makeText(NewUserActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.menuCadReceita:
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
+                cadastroReceita.putExtra("autorizacao", autorizacao);
                 startActivity(cadastroReceita);
                 break;
             case R.id.menuCadUsuario:
                 Intent cadastroUsuario = new Intent(this, NewUserActivity.class);
+                cadastroUsuario.putExtra("autorizacao", autorizacao);
                 startActivity(cadastroUsuario);
                 break;
             case R.id.menuConsFarmacia:
                 Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
+                consultaFarm.putExtra("autorizacao", autorizacao);
                 startActivity(consultaFarm);
                 break;
             case R.id.menuConsMedicamentos:
@@ -144,10 +156,12 @@ public class NewUserActivity extends AppCompatActivity {
                 break;
             case R.id.menuConsMedico:
                 Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                contultaMedicos.putExtra("autorizacao", autorizacao);
                 startActivity(contultaMedicos);
                 break;
             case R.id.menuConsReceita:
                 Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
+                consultaReceita.putExtra("autorizacao", autorizacao);
                 startActivity(consultaReceita);
             /*case R.id.menuPerfilEditar:
                 Intent editPerfil = new Intent(this, EditPerfil.class);
@@ -157,6 +171,8 @@ public class NewUserActivity extends AppCompatActivity {
                 Intent visPerfil = new Intent(this, visPerfil.class);
                 startActivity(visPerfil);
                 break;*/
+            case R.id.menuSair:
+                finish();
             default:
                 return false;
         }

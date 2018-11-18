@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ConsMedicoActivity extends AppCompatActivity {
+
+    private String autorizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,8 @@ public class ConsMedicoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cons_medico);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,20 +33,28 @@ public class ConsMedicoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.menuCadMedicines:
-                Intent cadMedicines = new Intent(this, );
-                startActivity(cadMedicines);
-                break;*/
+            case R.id.menuCadMedicines:
+                if (autorizacao != null) {
+                    Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
+                    cadMedicines.putExtra("autorizacao", autorizacao);
+                    startActivity(cadMedicines);
+                } else {
+                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.menuCadReceita:
                 Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
+                cadastroReceita.putExtra("autorizacao", autorizacao);
                 startActivity(cadastroReceita);
                 break;
             case R.id.menuCadUsuario:
                 Intent cadastroUsuario = new Intent(this, NewUserActivity.class);
+                cadastroUsuario.putExtra("autorizacao", autorizacao);
                 startActivity(cadastroUsuario);
                 break;
             case R.id.menuConsFarmacia:
                 Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
+                consultaFarm.putExtra("autorizacao", autorizacao);
                 startActivity(consultaFarm);
                 break;
             case R.id.menuConsMedicamentos:
@@ -50,10 +63,12 @@ public class ConsMedicoActivity extends AppCompatActivity {
                 break;
             case R.id.menuConsMedico:
                 Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                contultaMedicos.putExtra("autorizacao", autorizacao);
                 startActivity(contultaMedicos);
                 break;
             case R.id.menuConsReceita:
                 Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
+                consultaReceita.putExtra("autorizacao", autorizacao);
                 startActivity(consultaReceita);
             /*case R.id.menuPerfilEditar:
                 Intent editPerfil = new Intent(this, EditPerfil.class);
@@ -63,6 +78,8 @@ public class ConsMedicoActivity extends AppCompatActivity {
                 Intent visPerfil = new Intent(this, visPerfil.class);
                 startActivity(visPerfil);
                 break;*/
+            case R.id.menuSair:
+                finish();
             default:
                 return false;
         }
