@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -51,14 +52,11 @@ public class DetailsMedicineActivity extends AppCompatActivity {
     private String precaucoes;
 
 
-    protected void onCreate(Bundle savedInstanceState, String name) {
+    protected void onCreate(Bundle savedInstanceState, final String name) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_medicines);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
-        setContentView(R.layout.activity_details_medicines);
-        Intent it = getIntent();
-        autorizacao = it.getStringExtra("autorizacao");
-
         EditText edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
         EditText edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
         EditText edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
@@ -67,16 +65,38 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
         EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
 
+        Intent it = getIntent();
+        autorizacao = it.getStringExtra("autorizacao");
+        nome = it.getStringExtra("name");
+
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
 
-        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>()
                 {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONArray response) {
                         // response
-                        Log.d("Response", response);
+                        Log.d("Response", response.toString());
+                        // Process the JSON
+                        try {
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject medicine = response.getJSONObject(i);
+                                if (medicine.getString("name").toLowerCase().contains(nome.toLowerCase())) {
+                                    barCode = medicine.getString("codebar");
+                                    registro = medicine.getString("msRecord");
+                                    indicacao = medicine.getString("indications");
+                                    contraIndicacao = medicine.getString("contraindications");
+                                    reacoes = medicine.getString("adverseReactions");
+                                    precaucoes = medicine.getString("precautions");
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener()
@@ -87,17 +107,34 @@ public class DetailsMedicineActivity extends AppCompatActivity {
                         Log.d("ERROR","error => "+error.toString());
                     }
                 }
-        ) {
+        )
+        {
+            //This is for Headers If You Needed
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<>();
-                params.put("name", "name");
-                params.put("cpf", "cpf");
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("token", autorizacao);
+                return params;
+            }
 
+            //Pass Your Parameters here
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 return params;
             }
         };
-        requestQueue.add(getRequest);
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(getRequest);
+
+        edDetNameMedicines.setText(nome);
+        edDetBarCodeMedicines.setText(barCode);
+        edDetContIndMedicines.setText(contraIndicacao);
+        edDetIndMedicines.setText(indicacao);
+        edDetPrecMedicines.setText(precaucoes);
+        edDetReactMedicines.setText(reacoes);
+        edDetRegMedicines.setText(registro);
 
         // Initialize a new JsonArrayRequest instance
         /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

@@ -13,17 +13,28 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/iconbluehealth" />
+
         <TextView
             android:id="@+id/tvConsReceita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Consutar - Receita" />
+            android:text="Consutar - Receita"
+            android:textSize="50px"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/tvBuscarData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione a data desejada:" />
+            android:text="Selecione a data desejada:"
+            android:textAlignment="center"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

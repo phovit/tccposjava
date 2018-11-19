@@ -121,15 +121,13 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("User", "admin");
-                        params.put("Pass", "admin");
                         return params;
                     }
                 };
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 queue.add(getRequest);
-// Adding the request to the queue along with a unique string tag
-                /*Volley.getInstance(this).addToRequestQueue(getRequest, "headerRequest");*/
+
+                // Adding the request to the queue along with a unique string tag
 
                 requestQueue.add(getRequest);
                 ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
@@ -147,7 +145,11 @@ public class ConsMedicineActivity extends AppCompatActivity {
 
 
                         // Show Alert
-                        Toast.makeText(ConsMedicineActivity.this, "testando click", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
+
+                        Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
+                        details.putExtra("name", itemValue);
+                        startActivity(details);
 
                     }
                 });
@@ -219,7 +221,9 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     String itemValue = (String) lvOpcoes.getItemAtPosition(position);
 
                     // Show Alert
-                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
+                    Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
+                    details.putExtra("name", itemValue);
 
                 }
             });
@@ -267,6 +271,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 break;
             case R.id.menuConsMedico:
                 Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                Toast.makeText(ConsMedicineActivity.this, "Autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
                 contultaMedicos.putExtra("autorizacao", autorizacao);
                 startActivity(contultaMedicos);
                 break;

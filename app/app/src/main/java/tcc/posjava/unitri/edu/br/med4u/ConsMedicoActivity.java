@@ -4,14 +4,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ConsMedicoActivity extends AppCompatActivity {
 
+    private static String TAG = "ConsMedicoActivity";
     private String autorizacao;
+    private String url = "http://med4u.herokuapp.com/doctors";
+    private String doctorName;
+    private String doctorCrm;
+
+    private List<String> doctors;
+    private ArrayAdapter<String> adaptador;
+    private ListView lvDoctors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +54,151 @@ public class ConsMedicoActivity extends AppCompatActivity {
         actionbar.setTitle("Med4U");
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
+
+        Button btConsultaMedicos = findViewById(R.id.btConsMed);
+        btConsultaMedicos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText edFindCrmDoctors = findViewById(R.id.edFindCrmMed);
+                doctorCrm = edFindCrmDoctors.getText().toString();
+                EditText edFindNameDoctors = findViewById(R.id.edFindNameMed);
+                doctorName = edFindNameDoctors.getText().toString();
+
+                RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
+
+                JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                // response
+                                Log.d("Response", response.toString());
+                                // Process the JSON
+                                lvDoctors = findViewById(R.id.listViewDoctors);
+                                doctors = new ArrayList<>();
+                                Toast.makeText(ConsMedicoActivity.this, "Tamanho da resposta" + response.length(), Toast.LENGTH_LONG).show();
+                                try {
+                                    // Loop through the array elements
+                                    for (int i = 0; i < response.length(); i++) {
+                                        // Get current json object
+                                        JSONObject doctor = response.getJSONObject(i);
+                                        if (doctor.getString("name").toLowerCase().contains(doctorName.toLowerCase())) {
+                                            doctors.add(doctor.getString("name"));
+                                        }
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                adaptador = new ArrayAdapter<>(ConsMedicoActivity.this, android.R.layout.simple_list_item_1, doctors);
+                                lvDoctors.setAdapter(adaptador);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO Auto-generated method stub
+                                Log.d("ERROR", "error => " + error.toString());
+                            }
+                        }
+                ) {
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", autorizacao);
+                        return params;
+                    }
+
+                    //Pass Your Parameters here
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        return params;
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(getRequest);
+// Adding the request to the queue along with a unique string tag
+                /*Volley.getInstance(this).addToRequestQueue(getRequest, "headerRequest");*/
+
+                requestQueue.add(getRequest);
+                ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populaLista();
+    }
+
+    public void populaLista() {
+
+        // Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Process the JSON
+                        lvDoctors = findViewById(R.id.listViewDoctors);
+                        doctors = new ArrayList<>();
+
+                        try {
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject doctor = response.getJSONObject(i);
+
+                                doctors.add(doctor.getString("name"));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adaptador = new ArrayAdapter<>(ConsMedicoActivity.this, android.R.layout.simple_list_item_1, doctors);
+
+                        lvDoctors.setAdapter(adaptador);
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        requestQueue.add(jsonArrayRequest);
+        ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+        if (lvDoctors != null) {
+            lvDoctors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    // ListView Clicked item index
+                    int itemPosition = position;
+
+                    // ListView Clicked item value
+                    String itemValue = (String) lvDoctors.getItemAtPosition(position);
+
+                    // Show Alert
+                    Toast.makeText(ConsMedicoActivity.this, "Item selecionado", Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
