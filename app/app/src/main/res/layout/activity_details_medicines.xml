@@ -93,6 +93,12 @@
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
+        <Button
+            android:id="@+id/btDetMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

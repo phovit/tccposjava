@@ -52,6 +52,12 @@ public class ConsMedicineActivity extends AppCompatActivity {
     private String autorizacao;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        populaLista();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionbar = getSupportActionBar();
@@ -59,9 +65,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cons_medicines);
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-        //consulta inicial
-
-        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
 
         //buscar por nome
         Button btConsultaMedicines = findViewById(R.id.btConsMed);
@@ -142,13 +145,12 @@ public class ConsMedicineActivity extends AppCompatActivity {
                         // ListView Clicked item value
                         String itemValue = (String) lvOpcoes.getItemAtPosition(position);
 
-
-
                         // Show Alert
                         Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
 
                         Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
                         details.putExtra("name", itemValue);
+
                         startActivity(details);
 
                     }
@@ -157,11 +159,12 @@ public class ConsMedicineActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         populaLista();
-    }
+    }*/
+
 
     public void populaLista() {
 
@@ -221,7 +224,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     String itemValue = (String) lvOpcoes.getItemAtPosition(position);
 
                     // Show Alert
-                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado inicial " + itemValue, Toast.LENGTH_LONG).show();
                     Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
                     details.putExtra("name", itemValue);
 
@@ -235,7 +238,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_principal, menu);
         return true;
-
     }
 
     @Override
@@ -294,19 +296,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showDialog(String title, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(ConsMedicineActivity.this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
 }
