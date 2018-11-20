@@ -7,13 +7,8 @@
     tools:context=".DetailsMedicineActivity">
 
     <LinearLayout
-<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-=======
-        android:layout_width="368dp"
-        android:layout_height="497dp"
->>>>>>> fe9543f3d63b5bf454157182e152e9f395b8243a
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="10dp">

@@ -220,7 +220,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         requestQueue.add(getRequest);
         ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
-        if (lvOpcoes != null)
             lvOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
