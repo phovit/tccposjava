@@ -24,6 +24,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookButtonBase;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +46,8 @@ public class LoginActivity extends Activity {
     private static String TAG = "LoginActivity";
     private String nomeUsuario = "";
     private String senhaUsuario = "";
+    /*private CallbackManager callbackManager;*/
+    private LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +76,7 @@ public class LoginActivity extends Activity {
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 JSONObject postRequest = new JSONObject();
                 try {
-                    postRequest.put("username", nomeUsuario) ;
+                    postRequest.put("username", nomeUsuario);
                     postRequest.put("password", senhaUsuario);
 
                 } catch (JSONException e) {
@@ -110,7 +121,68 @@ public class LoginActivity extends Activity {
                 queue.add(jsonObjReq);
             }
         });
+
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        // If using in a fragment
+        /*loginButton.setFragment(this);*/
+
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+
+                        try {
+                            String name = object.getString("name");
+                            String email = object.getString("email");
+                            Toast.makeText(getApplicationContext(), "Name: " + name + " Email: " + email, Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+
+
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,7 +205,7 @@ public class LoginActivity extends Activity {
         alertDialog.show();
     }
 
-    private String toString(Object palavra){
+    private String toString(Object palavra) {
         return palavra + "";
     }
 }

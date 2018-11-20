@@ -4,8 +4,9 @@
     <string name="title_activity_splash">splashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="facebook_app_id">1974833645929912</string>
-    <string name="fb_login_protocol_scheme">fb1974833645929912</string>
+    <string name="facebook_app_id">209814663249320</string>
+    <string name="fb_login_protocol_scheme">fb209814663249320</string>
+
 
     <string name="posts_feed">Posts</string>
     <string name="logout">Logout</string>

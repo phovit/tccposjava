@@ -71,18 +71,45 @@
             android:textSize="30px" />
 
         <Spinner
-            android:id="@+id/spinnerIntevalo"
+            android:id="@+id/spinnerFrequencia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtData"
+            android:layout_centerHorizontal="true"
+            android:text="Escolher uma data"
+            android:onClick="setDate"/>
 
         <EditText
-            android:id="@+id/edCadRecNmMed"
+            android:id="@+id/etCadRecDt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Lembretes"
             android:inputType="textPersonName"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btnData"
+            android:layout_below="@+id/txtHora"
+            android:text="Escolher horário de início"
+            />
+
+        <EditText
+            android:id="@+id/etCadRecHr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
 
         <Spinner
             android:id="@+id/spinner"
