@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,102 +33,76 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+
 public class DetailsMedicineActivity extends AppCompatActivity {
 
     private static String TAG = "DetailsMedicineActivity";
-    private String url = "http://med4u.herokuapp.com/medicine/";
+    private String url = "http://med4u.herokuapp.com/medicine";
     private String autorizacao;
     private String nome;
-    private String barCode;
-    private String registro;
-    private String indicacao;
-    private String contraIndicacao;
-    private String reacoes;
-    private String precaucoes;
 
-
-    protected void onCreate(Bundle savedInstanceState, String name) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details_medicines);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
-        setContentView(R.layout.activity_details_medicines);
+        populaLista();
+
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
+        nome = it.getStringExtra("name");
+        Toast.makeText(DetailsMedicineActivity.this, "Nome: " + nome, Toast.LENGTH_LONG).show();
 
-        EditText edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
-        EditText edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
-        EditText edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
-        EditText edDetIndMedicines = findViewById(R.id.edDetIndMedicines);
-        EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
-        EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
-        EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
+    }
+
+    public void populaLista() {
+
+        final EditText edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
+        final EditText edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
+        final EditText edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
+        final EditText edDetIndMedicines = findViewById(R.id.edDetIndMedicines);
+        final EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
+        final EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
+        final EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
-
-        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR","error => "+error.toString());
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<>();
-                params.put("name", "name");
-                params.put("cpf", "cpf");
-
-                return params;
-            }
-        };
-        requestQueue.add(getRequest);
-
         // Initialize a new JsonArrayRequest instance
-        /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                url + name,
+                url,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         // Process the JSON
-
-
                         try {
                             // Loop through the array elements
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject medicine = response.getJSONObject(i);
-                                nome = medicine.getString("name");
-                                barCode = medicine.getString("codebar");
-                                indicacao = medicine.getString("indications");
-                                contraIndicacao = medicine.getString("contraindications");
-                                reacoes = medicine.getString("adverseReactions");
-                                registro = medicine.getString("msRecord");
-                                precaucoes = medicine.getString("precautions");
+                                if (medicine.getString("name").toString().equalsIgnoreCase(nome)) {
+                                    edDetNameMedicines.setText(medicine.getString("name"));
+                                    edDetBarCodeMedicines.setText(medicine.getString("codebar"));
+                                    edDetContIndMedicines.setText(medicine.getString("contraindications"));
+                                    edDetIndMedicines.setText(medicine.getString("indications"));
+                                    edDetPrecMedicines.setText(medicine.getString("precautions"));
+                                    edDetReactMedicines.setText(medicine.getString("adverseReactions"));
+                                    edDetRegMedicines.setText(medicine.getString("msRecord"));
+
+                                }
 
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                 },
@@ -138,25 +113,11 @@ public class DetailsMedicineActivity extends AppCompatActivity {
                     }
                 }
         );
-
         // Add JsonArrayRequest to the RequestQueue
-        requestQueue.add(jsonArrayRequest);*/
-
-        edDetNameMedicines.setText(nome);
-        edDetBarCodeMedicines.setText(barCode);
-        edDetContIndMedicines.setText(contraIndicacao);
-        edDetIndMedicines.setText(indicacao);
-        edDetPrecMedicines.setText(precaucoes);
-        edDetReactMedicines.setText(reacoes);
-        edDetRegMedicines.setText(registro);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        requestQueue.add(jsonArrayRequest);
+        ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
     }
-
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -221,19 +182,6 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showDialog(String title, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(DetailsMedicineActivity.this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
 }

@@ -39,6 +39,9 @@
             android:name=".CadReceitaActivity"
             android:label="CadReceitaActivity"></activity>
         <activity
+            android:name=".DetailsMedicineActivity"
+            android:label="DetailsMedicineActivity"></activity>
+        <activity
             android:name=".LoginActivity"
             android:label="LoginActivity"></activity>
         <activity

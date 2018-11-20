@@ -51,6 +51,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
     private String url = "http://med4u.herokuapp.com/medicine";
     private String autorizacao;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +60,16 @@ public class ConsMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cons_medicines);
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-        //consulta inicial
+        lvOpcoes = findViewById(R.id.lvMedicines);
+        opcoes = new ArrayList<>();
+        consultaAutomatica();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //buscar por nome
         Button btConsultaMedicines = findViewById(R.id.btConsMed);
         btConsultaMedicines.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +81,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
 
                 JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                        new Response.Listener<JSONArray>()
-                        {
+                        new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 // response
@@ -99,12 +105,11 @@ public class ConsMedicineActivity extends AppCompatActivity {
                                 lvOpcoes.setAdapter(adaptador);
                             }
                         },
-                        new Response.ErrorListener()
-                        {
+                        new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 // TODO Auto-generated method stub
-                                Log.d("ERROR","error => "+error.toString());
+                                Log.d("ERROR", "error => " + error.toString());
                             }
                         }
                 ) {
@@ -121,18 +126,17 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("User", "admin");
-                        params.put("Pass", "admin");
                         return params;
                     }
                 };
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 queue.add(getRequest);
-// Adding the request to the queue along with a unique string tag
-                /*Volley.getInstance(this).addToRequestQueue(getRequest, "headerRequest");*/
+
+                // Adding the request to the queue along with a unique string tag
 
                 requestQueue.add(getRequest);
                 ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
                 lvOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -144,10 +148,13 @@ public class ConsMedicineActivity extends AppCompatActivity {
                         // ListView Clicked item value
                         String itemValue = (String) lvOpcoes.getItemAtPosition(position);
 
-
-
                         // Show Alert
-                        Toast.makeText(ConsMedicineActivity.this, "testando click", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
+
+                        Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
+                        details.putExtra("name", itemValue);
+
+                        startActivity(details);
 
                     }
                 });
@@ -155,58 +162,66 @@ public class ConsMedicineActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        populaLista();
-    }
+    public void consultaAutomatica() {
 
-    public void populaLista() {
-
-        // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicineActivity.this);
-        // Initialize a new JsonArrayRequest instance
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
+
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        // response
+                        Log.d("Response", response.toString());
                         // Process the JSON
-                        lvOpcoes = findViewById(R.id.lvMedicines);
-                        opcoes = new ArrayList<>();
-
                         try {
                             // Loop through the array elements
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject medicine = response.getJSONObject(i);
-
-                                opcoes.add(medicine.getString("name"));
-
+                                if (medicine.getString("name").toLowerCase().contains(nomeMedicamento.toLowerCase())) {
+                                    opcoes.add(medicine.getString("name"));
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         adaptador = new ArrayAdapter<>(ConsMedicineActivity.this, android.R.layout.simple_list_item_1, opcoes);
-
                         lvOpcoes.setAdapter(adaptador);
                     }
-
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        // TODO Auto-generated method stub
+                        Log.d("ERROR", "error => " + error.toString());
                     }
                 }
-        );
-        // Add JsonArrayRequest to the RequestQueue
-        requestQueue.add(jsonArrayRequest);
+        ) {
+            //This is for Headers If You Needed
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("token", autorizacao);
+                return params;
+            }
+
+            //Pass Your Parameters here
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(getRequest);
+
+        // Adding the request to the queue along with a unique string tag
+
+        requestQueue.add(getRequest);
         ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
-        if (lvOpcoes != null) {
+        if (lvOpcoes != null)
             lvOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
@@ -219,19 +234,24 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     String itemValue = (String) lvOpcoes.getItemAtPosition(position);
 
                     // Show Alert
-                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
+
+                    Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
+                    details.putExtra("name", itemValue);
+
+                    startActivity(details);
 
                 }
             });
-        }
+
 
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_principal, menu);
         return true;
-
     }
 
     @Override
@@ -267,6 +287,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 break;
             case R.id.menuConsMedico:
                 Intent contultaMedicos = new Intent(this, ConsMedicoActivity.class);
+                Toast.makeText(ConsMedicineActivity.this, "Autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
                 contultaMedicos.putExtra("autorizacao", autorizacao);
                 startActivity(contultaMedicos);
                 break;
@@ -289,19 +310,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showDialog(String title, String message) {
-        AlertDialog alertDialog = new AlertDialog.Builder(ConsMedicineActivity.this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
 }
