@@ -27,25 +27,43 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CadReceitaActivity extends AppCompatActivity {
 
-    //variaveis para criação da imagem
-    private Button takePictureButton;
-    private ImageView imageView;
+    private String url = "http://med4u.herokuapp.com/reminders";
+    private String urlMed = "http://med4u.herokuapp.com/medicine";
     private Uri file;
     private String autorizacao;
+    private String nomeMedicamento;
 
    private static String TAG = "CadReceitaActivity";
 
@@ -59,18 +77,69 @@ public class CadReceitaActivity extends AppCompatActivity {
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
 
-        /*takePictureButton = findViewById(R.id.button_image);
-        imageView = findViewById(R.id.ivCadRec);*/
+        Button btFindMedCadRec = findViewById(R.id.btFindMedCadRec);
+        btFindMedCadRec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final EditText edFindNameMedicines = findViewById(R.id.edCadRecNameMed);
+                nomeMedicamento = edFindNameMedicines.getText().toString();
 
-        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            takePictureButton.setEnabled(false);
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-        }*/
-        /*ImageView campoFoto = findViewById(R.id.ivCadRec);*/
+                RequestQueue requestQueue = Volley.newRequestQueue(CadReceitaActivity.this);
 
-        /*String caminho = returnPath();*/
-        /*Bitmap bitmap = CarregadorDeFoto.carrega(returnPath());*/
-        /*campoFoto.setImageBitmap(bitmap);*/
+                JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, urlMed, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                // response
+                                Log.d("Response", response.toString());
+                                // Process the JSON
+                                try {
+                                    // Loop through the array elements
+                                    for (int i = 0; i < response.length(); i++) {
+                                        // Get current json object
+                                        JSONObject medicine = response.getJSONObject(i);
+                                        if (medicine.getString("name").toString().equalsIgnoreCase(nomeMedicamento)) {
+                                            edFindNameMedicines.setText(medicine.getString("name"));
+                                        }
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO Auto-generated method stub
+                                Log.d("ERROR", "error => " + error.toString());
+                            }
+                        }
+                ) {
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", autorizacao);
+                        return params;
+                    }
+
+                    //Pass Your Parameters here
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        return params;
+                    }
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(getRequest);
+
+                // Adding the request to the queue along with a unique string tag
+
+                requestQueue.add(getRequest);
+                ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+            }
+        });
 
     }
 
@@ -136,64 +205,6 @@ public class CadReceitaActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 0) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                takePictureButton.setEnabled(true);
-            }
-        }
-    }
-
-    public void takePicture(View view) {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        file = FileProvider.getUriForFile(
-                CadReceitaActivity.this,
-                "tcc.posjava.unitri.edu.br.med4u",
-                getOutputMediaFile());
-
-        Log.d(TAG, "Tirou foto");
-
-
-
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
-
-
-        startActivityForResult(intent, 100);
-    }
-
-    private static File getOutputMediaFile() {
-
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "Med4U");
-
-        if (!mediaStorageDir.exists()) {
-
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d(TAG, "Ocorreu um erro ao criar o diretório de imagens");
-                return null;
-            }
-        }
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        /*file = ajustaFoto(file);*/
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 100) {
-            if (resultCode == RESULT_OK) {
-                imageView.setImageURI(file);
-            }
-        }
     }
 }
 

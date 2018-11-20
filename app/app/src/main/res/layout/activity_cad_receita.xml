@@ -50,13 +50,18 @@
             android:textSize="30px" />
 
         <EditText
-            android:id="@+id/edCadRecHor"
+            android:id="@+id/edCadRecNameMed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Digite o nome do medicamento"
             android:inputType="textPersonName"
             android:textAlignment="center" />
+        <Button
+            android:id="@+id/btFindMedCadRec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
 
         <TextView
             android:layout_width="match_parent"

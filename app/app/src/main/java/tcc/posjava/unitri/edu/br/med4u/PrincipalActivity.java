@@ -35,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +73,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
+        Log.d(TAG, "Token Firebase: " + FirebaseInstanceId.getInstance().getToken());
+        Log.i(TAG, "Token Firebase: " + FirebaseInstanceId.getInstance().getToken());
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
