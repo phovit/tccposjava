@@ -64,7 +64,6 @@ public class ConsMedicineActivity extends AppCompatActivity {
         opcoes = new ArrayList<>();
         consultaAutomatica();
 
-
     }
 
     @Override
