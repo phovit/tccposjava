@@ -188,14 +188,14 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-        TextView recoverUser = findViewById(R.id.tvRecoverPass);
+/*        TextView recoverUser = findViewById(R.id.tvRecoverPass);
         recoverUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent recUser = new Intent(LoginActivity.this, RecoverUserActivity.class);
                 startActivity(recUser);
             }
-        });
+        });*/
     }
 
 
@@ -236,39 +236,6 @@ public class LoginActivity extends Activity {
             }
         };
         queue.add(postRequest);
-
-/*
-
-
-
-
-
-        JSONObject postRequest = new JSONObject();
-        try {
-            postRequest.put("token", token);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                token,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d(TAG, "Sucesso ao chamar a API updateFirebaseToken");
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
-                    }
-                }) {
-        };
-        queue.add(jsonObjReq);*/
     }
 
     @Override
