@@ -228,9 +228,13 @@ public class CadReceitaActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.menuCadReceita:
-                Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
-                cadastroReceita.putExtra("autorizacao", autorizacao);
-                startActivity(cadastroReceita);
+                if (autorizacao != null) {
+                    Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
+                    cadastroReceita.putExtra("autorizacao", autorizacao);
+                    startActivity(cadastroReceita);
+                } else {
+                    Toast.makeText(CadReceitaActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.menuCadUsuario:
                 Intent cadastroUsuario = new Intent(this, NewUserActivity.class);
@@ -252,9 +256,15 @@ public class CadReceitaActivity extends AppCompatActivity {
                 startActivity(contultaMedicos);
                 break;
             case R.id.menuConsReceita:
-                Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
-                consultaReceita.putExtra("autorizacao", autorizacao);
-                startActivity(consultaReceita);
+                if (autorizacao != null) {
+                    Intent consultaReceita = new Intent(this, ConsReceitaActivity.class);
+                    consultaReceita.putExtra("autorizacao", autorizacao);
+                    startActivity(consultaReceita);
+                } else {
+                    Toast.makeText(CadReceitaActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
+                break;
+
             /*case R.id.menuPerfilEditar:
                 Intent editPerfil = new Intent(this, EditPerfil.class);
                 startActivity(editPerfil);

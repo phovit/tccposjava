@@ -187,6 +187,15 @@ public class LoginActivity extends Activity {
                         // App code
                     }
                 });
+
+        TextView recoverUser = findViewById(R.id.tvRecoverPass);
+        recoverUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent recUser = new Intent(LoginActivity.this, RecoverUserActivity.class);
+                startActivity(recUser);
+            }
+        });
     }
 
 

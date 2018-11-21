@@ -48,11 +48,11 @@
             android:layout_height="wrap_content"
             android:text="Efetuar Login" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/tvRecoverPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Esqueceu? Clique aqui" />
+            android:text="Esqueceu? Clique aqui" />-->
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
