@@ -23,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookButtonBase;
@@ -33,6 +34,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,6 +100,11 @@ public class LoginActivity extends Activity {
                                         Toast.makeText(LoginActivity.this, "Bem vindo " + nomeUsuario, Toast.LENGTH_LONG).show();
                                         Intent cadMed = new Intent(LoginActivity.this, CadMedicinesActivity.class);
                                         cadMed.putExtra("autorizacao", response.toString());
+                                        try {
+                                            updateFirebaseToken(FirebaseInstanceId.getInstance().getToken(), nomeUsuario, response.getString("Authorization"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                         startActivity(cadMed);
                                     } else {
                                         showDialog("Informação", "Nome de usuário ou senha inválidos.");
@@ -183,6 +190,77 @@ public class LoginActivity extends Activity {
     }
 
 
+    public void updateFirebaseToken(final String token, String username, final String auth){
+        String url = "http://med4u.herokuapp.com/users/updateFirebaseTokenByUsername/"+username;
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Sucesso ao chamar a API updateFirebaseToken");
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("token",token);
+
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", auth);
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+/*
+
+
+
+
+
+        JSONObject postRequest = new JSONObject();
+        try {
+            postRequest.put("token", token);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                token,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, "Sucesso ao chamar a API updateFirebaseToken");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
+                    }
+                }) {
+        };
+        queue.add(jsonObjReq);*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
