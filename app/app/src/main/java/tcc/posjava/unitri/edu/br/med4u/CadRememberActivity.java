@@ -1,6 +1,10 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +14,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,68 +36,94 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ConsMedicoActivity extends AppCompatActivity {
+public class CadRememberActivity extends AppCompatActivity {
 
-    private static String TAG = "ConsMedicoActivity";
+    private String url = "http://med4u.herokuapp.com/reminders";
+    private String urlMed = "http://med4u.herokuapp.com/medicine";
+    private Uri file;
     private String autorizacao;
-    private String url = "http://med4u.herokuapp.com/doctors";
-    private String doctorName;
-    private String doctorCrm;
+    private String nomeMedicamento;
 
-    private List<String> doctors;
-    private ArrayAdapter<String> adaptador;
-    private ListView lvDoctors;
+    private Spinner spnFreq;
+    private List<String> frequencia = new ArrayList<String>();
+    private String opcoes;
+
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private TextView dateView;
+    private int year, month, day;
+
+    private TextView timeView;
+
+    private static String TAG = "CadRememberActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cons_medico);
+        setContentView(R.layout.activity_cad_remember);
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
 
-        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
 
-        Button btConsultaMedicos = findViewById(R.id.btConsMed);
-        btConsultaMedicos.setOnClickListener(new View.OnClickListener() {
+        dateView = findViewById(R.id.etCadRecDt);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        showDate(year, month + 1, day);
+
+
+        //preencher frequencia
+        frequencia.add("Uma vez ao dia");
+        frequencia.add("Duas vezes ao dia");
+        frequencia.add("Três vezes ao dia");
+
+        //busca spinner na tela
+        spnFreq = findViewById(R.id.spinnerFrequencia);
+
+        //criar adapter
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, frequencia);
+        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spnFreq.setAdapter(spinnerArrayAdapter);
+
+        //busca do medicamento
+        Button btFindMedCadRec = findViewById(R.id.btFindMedCadRec);
+        btFindMedCadRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText edFindCrmDoctors = findViewById(R.id.edFindCrmMed);
-                doctorCrm = edFindCrmDoctors.getText().toString();
-                EditText edFindNameDoctors = findViewById(R.id.edFindNameMed);
-                doctorName = edFindNameDoctors.getText().toString();
+                final EditText edFindNameMedicines = findViewById(R.id.edCadRecNameMed);
+                nomeMedicamento = edFindNameMedicines.getText().toString();
 
-                RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
+                RequestQueue requestQueue = Volley.newRequestQueue(CadRememberActivity.this);
 
-                JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, urlMed, null,
                         new Response.Listener<JSONArray>() {
                             @Override
                             public void onResponse(JSONArray response) {
                                 // response
                                 Log.d("Response", response.toString());
                                 // Process the JSON
-                                lvDoctors = findViewById(R.id.listViewDoctors);
-                                doctors = new ArrayList<>();
-                                Toast.makeText(ConsMedicoActivity.this, "Tamanho da resposta" + response.length(), Toast.LENGTH_LONG).show();
                                 try {
                                     // Loop through the array elements
                                     for (int i = 0; i < response.length(); i++) {
                                         // Get current json object
-                                        JSONObject doctor = response.getJSONObject(i);
-                                        if (doctor.getString("name").toLowerCase().contains(doctorName.toLowerCase())) {
-                                            doctors.add(doctor.getString("name"));
+                                        JSONObject medicine = response.getJSONObject(i);
+                                        if (medicine.getString("name").toString().equalsIgnoreCase(nomeMedicamento)) {
+                                            edFindNameMedicines.setText(medicine.getString("name"));
                                         }
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                adaptador = new ArrayAdapter<>(ConsMedicoActivity.this, android.R.layout.simple_list_item_1, doctors);
-                                lvDoctors.setAdapter(adaptador);
                             }
                         },
                         new Response.ErrorListener() {
@@ -120,86 +152,35 @@ public class ConsMedicoActivity extends AppCompatActivity {
                 };
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 queue.add(getRequest);
-// Adding the request to the queue along with a unique string tag
-                /*Volley.getInstance(this).addToRequestQueue(getRequest, "headerRequest");*/
+
+                // Adding the request to the queue along with a unique string tag
 
                 requestQueue.add(getRequest);
                 ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        populaLista();
-    }
-
-    public void populaLista() {
-
-        // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(ConsMedicoActivity.this);
-        // Initialize a new JsonArrayRequest instance
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
+        timeView = findViewById(R.id.etCadRecHr);
+        timeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(CadRememberActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        // Process the JSON
-                        lvDoctors = findViewById(R.id.listViewDoctors);
-                        doctors = new ArrayList<>();
-
-                        try {
-                            // Loop through the array elements
-                            for (int i = 0; i < response.length(); i++) {
-                                // Get current json object
-                                JSONObject doctor = response.getJSONObject(i);
-
-                                doctors.add(doctor.getString("name"));
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        adaptador = new ArrayAdapter<>(ConsMedicoActivity.this, android.R.layout.simple_list_item_1, doctors);
-
-                        lvDoctors.setAdapter(adaptador);
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        timeView.setText(selectedHour + ":" + selectedMinute);
                     }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
 
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-        );
-        // Add JsonArrayRequest to the RequestQueue
-        requestQueue.add(jsonArrayRequest);
-        ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-
-        if (lvDoctors != null) {
-            lvDoctors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    // ListView Clicked item index
-                    int itemPosition = position;
-
-                    // ListView Clicked item value
-                    String itemValue = (String) lvDoctors.getItemAtPosition(position);
-
-                    // Show Alert
-                    Toast.makeText(ConsMedicoActivity.this, "Item selecionado", Toast.LENGTH_LONG).show();
-
-                }
-            });
-        }
-
+            }
+        });
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -217,25 +198,24 @@ public class ConsMedicoActivity extends AppCompatActivity {
                     cadLembretes.putExtra("autorizacao", autorizacao);
                     startActivity(cadLembretes);
                 } else {
-                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadRememberActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
-                break;
             case R.id.menuCadMedicines:
                 if (autorizacao != null) {
                     Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
                     cadMedicines.putExtra("autorizacao", autorizacao);
                     startActivity(cadMedicines);
                 } else {
-                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadRememberActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.menuCadReceita:
                 if (autorizacao != null) {
-                    Intent cadastroReceita = new Intent(this, CadReceitaActivity.class);
+                    Intent cadastroReceita = new Intent(this, CadRememberActivity.class);
                     cadastroReceita.putExtra("autorizacao", autorizacao);
                     startActivity(cadastroReceita);
                 } else {
-                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadRememberActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.menuCadUsuario:
@@ -247,15 +227,6 @@ public class ConsMedicoActivity extends AppCompatActivity {
                 Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
                 consultaFarm.putExtra("autorizacao", autorizacao);
                 startActivity(consultaFarm);
-                break;
-            case R.id.menuConsLembretes:
-                if (autorizacao != null) {
-                    Intent consLembretes = new Intent(this, ConsRememberActivity.class);
-                    consLembretes.putExtra("autorizacao", autorizacao);
-                    startActivity(consLembretes);
-                } else {
-                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
-                }
                 break;
             case R.id.menuConsMedicamentos:
                 Intent consultaMedicines = new Intent(this, ConsMedicineActivity.class);
@@ -272,8 +243,10 @@ public class ConsMedicoActivity extends AppCompatActivity {
                     consultaReceita.putExtra("autorizacao", autorizacao);
                     startActivity(consultaReceita);
                 } else {
-                    Toast.makeText(ConsMedicoActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadRememberActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
+                break;
+
             /*case R.id.menuPerfilEditar:
                 Intent editPerfil = new Intent(this, EditPerfil.class);
                 startActivity(editPerfil);
@@ -290,4 +263,38 @@ public class ConsMedicoActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
+        Toast.makeText(getApplicationContext(), "Selecione a data inicial",
+                Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            return new DatePickerDialog(this,
+                    myDateListener, year, month, day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener myDateListener = new
+            DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker arg0,
+                                      int arg1, int arg2, int arg3) {
+                    showDate(arg1, arg2 + 1, arg3);
+                }
+            };
+
+    private void showDate(int year, int month, int day) {
+        dateView.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
+    }
+
+
 }
