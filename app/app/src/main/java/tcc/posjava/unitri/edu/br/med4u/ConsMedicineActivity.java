@@ -2,6 +2,7 @@ package tcc.posjava.unitri.edu.br.med4u;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -328,7 +329,17 @@ public class ConsMedicineActivity extends AppCompatActivity {
                 startActivity(visPerfil);
                 break;*/
             case R.id.menuSair:
-                System.exit(0);
+                SharedPreferences myPrefs = getSharedPreferences("Logout",
+                        MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.clear();
+                editor.commit();
+                /*AppState.getSingleInstance().setLoggingOut(true);*/
+                Log.d(TAG, "Now log out and start the activity login");
+                Intent intent = new Intent(ConsMedicineActivity.this,
+                        PrincipalActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             default:
                 return false;
         }

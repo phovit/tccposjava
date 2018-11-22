@@ -3,6 +3,7 @@ package tcc.posjava.unitri.edu.br.med4u;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -248,8 +249,17 @@ public class CadMedicinesActivity extends AppCompatActivity {
                 startActivity(visPerfil);
                 break;*/
             case R.id.menuSair:
-                finish();
-                System.exit(0);
+                SharedPreferences myPrefs = getSharedPreferences("Logout",
+                        MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.clear();
+                editor.commit();
+                /*AppState.getSingleInstance().setLoggingOut(true);*/
+                Log.d(TAG, "Now log out and start the activity login");
+                Intent intent = new Intent(CadMedicinesActivity.this,
+                        PrincipalActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             default:
                 return false;
         }

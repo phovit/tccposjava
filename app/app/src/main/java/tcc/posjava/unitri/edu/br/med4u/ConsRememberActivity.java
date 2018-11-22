@@ -1,9 +1,11 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 public class ConsRememberActivity extends AppCompatActivity {
 
     private String autorizacao;
+    private String TAG = "ConsRememberActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +102,17 @@ public class ConsRememberActivity extends AppCompatActivity {
                 startActivity(visPerfil);
                 break;*/
             case R.id.menuSair:
-                finish();
+                SharedPreferences myPrefs = getSharedPreferences("Logout",
+                        MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.clear();
+                editor.commit();
+                /*AppState.getSingleInstance().setLoggingOut(true);*/
+                Log.d(TAG, "Now log out and start the activity login");
+                Intent intent = new Intent(ConsRememberActivity.this,
+                        PrincipalActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             default:
                 return false;
         }

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -256,7 +257,17 @@ public class CadRememberActivity extends AppCompatActivity {
                 startActivity(visPerfil);
                 break;*/
             case R.id.menuSair:
-                finish();
+                SharedPreferences myPrefs = getSharedPreferences("Logout",
+                        MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.clear();
+                editor.commit();
+                /*AppState.getSingleInstance().setLoggingOut(true);*/
+                Log.d(TAG, "Now log out and start the activity login");
+                Intent intent = new Intent(CadRememberActivity.this,
+                        PrincipalActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             default:
                 return false;
         }
