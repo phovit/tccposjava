@@ -107,6 +107,11 @@ public class LoginActivity extends Activity {
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putString("autorizacao", response.toString());
                                         editor.commit();
+                                        try {
+                                            updateFirebaseToken(FirebaseInstanceId.getInstance().getToken(), nomeUsuario, response.getString("Authorization"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                         startActivity(cadMed);
                                         try {
                                             updateFirebaseToken(FirebaseInstanceId.getInstance().getToken(), nomeUsuario, response.getString("Authorization"));
@@ -205,7 +210,6 @@ public class LoginActivity extends Activity {
         });*/
     }
 
-
     public void updateFirebaseToken(final String token, String username, final String auth) {
         String url = "http://med4u.herokuapp.com/users/updateFirebaseTokenByUsername/" + username;
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
@@ -217,7 +221,9 @@ public class LoginActivity extends Activity {
                         Log.d(TAG, "Sucesso ao chamar a API updateFirebaseToken");
                     }
                 },
-                new Response.ErrorListener() {
+
+                new Response.ErrorListener()
+                {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
