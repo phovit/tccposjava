@@ -225,11 +225,6 @@ public class DetailsMedicineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 JSONObject putRequest = new JSONObject();
-                try {
-                    putRequest.put("teste", "teste");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                         Request.Method.PUT,
