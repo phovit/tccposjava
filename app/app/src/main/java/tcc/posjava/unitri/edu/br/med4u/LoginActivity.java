@@ -1,16 +1,13 @@
 package tcc.posjava.unitri.edu.br.med4u;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,9 +20,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookButtonBase;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
@@ -33,8 +30,8 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,6 +50,12 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences preferences =
+                getSharedPreferences("autorizacao", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("autorizacao", null);
+        editor.commit();
 
         TextView newUser = findViewById(R.id.tvNewUserLogin);
         newUser.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +76,7 @@ public class LoginActivity extends Activity {
                 EditText editTextPsw = findViewById(R.id.etPassLogin);
                 senhaUsuario = editTextPsw.getText().toString();
                 String url = "http://med4u.herokuapp.com/loginApi";
+
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 JSONObject postRequest = new JSONObject();
                 try {
@@ -98,7 +102,17 @@ public class LoginActivity extends Activity {
                                         Toast.makeText(LoginActivity.this, "Bem vindo " + nomeUsuario, Toast.LENGTH_LONG).show();
                                         Intent cadMed = new Intent(LoginActivity.this, CadMedicinesActivity.class);
                                         cadMed.putExtra("autorizacao", response.toString());
+                                        SharedPreferences preferences =
+                                                getSharedPreferences("autorizacao", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("autorizacao", response.toString());
+                                        editor.commit();
                                         startActivity(cadMed);
+                                        try {
+                                            updateFirebaseToken(FirebaseInstanceId.getInstance().getToken(), nomeUsuario, response.getString("Authorization"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     } else {
                                         showDialog("Informação", "Nome de usuário ou senha inválidos.");
                                     }
@@ -181,17 +195,53 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-        TextView recoverUser = findViewById(R.id.tvRecoverPass);
+/*        TextView recoverUser = findViewById(R.id.tvRecoverPass);
         recoverUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent recUser = new Intent(LoginActivity.this, RecoverUserActivity.class);
                 startActivity(recUser);
             }
-        });
+        });*/
     }
 
 
+    public void updateFirebaseToken(final String token, String username, final String auth) {
+        String url = "http://med4u.herokuapp.com/users/updateFirebaseTokenByUsername/" + username;
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "Sucesso ao chamar a API updateFirebaseToken");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", token);
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", auth);
+
+                return params;
+            }
+        };
+        queue.add(postRequest);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

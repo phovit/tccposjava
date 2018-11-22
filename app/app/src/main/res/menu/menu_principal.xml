@@ -2,6 +2,8 @@
     <item
         android:title="Cadastro">
         <menu>
+            <item android:id="@+id/menuCadLembretes"
+                android:title="Lembretes" />
             <item android:id="@+id/menuCadMedicines"
                 android:title="Medicamentos" />
             <item android:id="@+id/menuCadReceita"
@@ -17,6 +19,9 @@
             <item
                 android:id="@+id/menuConsFarmacia"
                 android:title="Farmácia" />
+            <item
+                android:id="@+id/menuConsLembretes"
+                android:title="Lembretes" />
             <item
                 android:id="@+id/menuConsMedicamentos"
                 android:title="Medicamentos" />

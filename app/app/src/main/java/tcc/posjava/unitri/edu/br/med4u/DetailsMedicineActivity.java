@@ -197,6 +197,15 @@ public class DetailsMedicineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menuCadLembretes:
+                if (autorizacao != null) {
+                    Intent cadLembretes = new Intent(this, CadRememberActivity.class);
+                    cadLembretes.putExtra("autorizacao", autorizacao);
+                    startActivity(cadLembretes);
+                } else {
+                    Toast.makeText(DetailsMedicineActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.menuCadMedicines:
                 if (autorizacao != null) {
                     Intent cadMedicines = new Intent(this, CadMedicinesActivity.class);
@@ -224,6 +233,15 @@ public class DetailsMedicineActivity extends AppCompatActivity {
                 Intent consultaFarm = new Intent(this, ConsFarmaciaActivity.class);
                 consultaFarm.putExtra("autorizacao", autorizacao);
                 startActivity(consultaFarm);
+                break;
+            case R.id.menuConsLembretes:
+                if (autorizacao != null) {
+                    Intent consLembretes = new Intent(this, ConsRememberActivity.class);
+                    consLembretes.putExtra("autorizacao", autorizacao);
+                    startActivity(consLembretes);
+                } else {
+                    Toast.makeText(DetailsMedicineActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.menuConsMedicamentos:
                 Intent consultaMedicines = new Intent(this, ConsMedicineActivity.class);
