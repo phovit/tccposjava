@@ -13,42 +13,46 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="match_parent">
 
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/iconbluehealth" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
 
-        <TextView
-            android:id="@+id/tvTitlefindFarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consulta - Farmácia"
-            android:textSize="50px"
-            android:textAlignment="center"/>
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/iconbluehealth" />
 
-        <EditText
-            android:id="@+id/edFindRazaoFarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Busque aqui"
-            android:inputType="textPostalAddress"
-            android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/tvTitlefindFarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consulta - Farmácia"
+                android:textAlignment="center"
+                android:textSize="50px" />
 
-        <Button
-            android:id="@+id/btConsFarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buscar" />
+            <EditText
+                android:id="@+id/edFindRazaoFarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Busque aqui"
+                android:inputType="textPostalAddress"
+                android:textAlignment="center" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="237dp"
-            android:textAlignment="center" />
+            <Button
+                android:id="@+id/btConsFarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar" />
 
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="237dp"
+                android:textAlignment="center" />
+        </ScrollView>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

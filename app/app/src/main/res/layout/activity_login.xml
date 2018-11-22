@@ -16,57 +16,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="match_parent">
 
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="75dp"
-            android:src="@drawable/iconbluehealth" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="75dp"
+                android:src="@drawable/iconbluehealth" />
 
 
-        <EditText
-            android:id="@+id/etUserLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite seu nome de usuário"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/etUserLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite seu nome de usuário"
+                android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/etPassLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite sua senha"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/etPassLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite sua senha"
+                android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/btLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Efetuar Login" />
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Efetuar Login" />
 
-        <!--<TextView
-            android:id="@+id/tvRecoverPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Esqueceu? Clique aqui" />-->
+            <!--<TextView
+                android:id="@+id/tvRecoverPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Esqueceu? Clique aqui" />-->
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
-        <TextView
-            android:id="@+id/tvNewUserLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ainda não tem cadastro? Clique aqui" />
+            <TextView
+                android:id="@+id/tvNewUserLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ainda não tem cadastro? Clique aqui" />
+
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -13,27 +13,33 @@
         tools:layout_editor_absoluteX="64dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/iconbluehealth" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/etMailRecover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite o e-mail cadastrado"
-            android:inputType="textEmailAddress" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/iconbluehealth" />
 
-        <Button
-            android:id="@+id/btRecover"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar" />
+            <EditText
+                android:id="@+id/etMailRecover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o e-mail cadastrado"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/btRecover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enviar" />
+
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

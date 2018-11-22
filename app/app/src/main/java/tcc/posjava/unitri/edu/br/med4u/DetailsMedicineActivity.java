@@ -26,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -71,6 +72,8 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         final EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
         final EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
         final EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
+
+        alteraEdicaoBotoes(edDetNameMedicines, edDetBarCodeMedicines, edDetRegMedicines, edDetIndMedicines, edDetContIndMedicines, edDetReactMedicines, edDetPrecMedicines);
 
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
@@ -130,6 +133,10 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         final EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
         final EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
         final EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
+
+        alteraEdicaoBotoes(edDetNameMedicines, edDetBarCodeMedicines, edDetRegMedicines, edDetIndMedicines, edDetContIndMedicines, edDetReactMedicines, edDetPrecMedicines);
+
+
         // Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
         Button btDetails = findViewById(R.id.btDetMed);
@@ -192,6 +199,116 @@ public class DetailsMedicineActivity extends AppCompatActivity {
                 queue.add(getRequest);
             }
         });
+
+        Button btEdit = findViewById(R.id.btEditDetMed);
+        btEdit.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+                edDetNameMedicines.setEnabled(true);
+                edDetBarCodeMedicines.setEnabled(true);
+                edDetRegMedicines.setEnabled(true);
+                edDetIndMedicines.setEnabled(true);
+                edDetContIndMedicines.setEnabled(true);
+                edDetReactMedicines.setEnabled(true);
+                edDetPrecMedicines.setEnabled(true);
+            }
+        });
+
+        Button btSave = findViewById(R.id.btSaveDetMed);
+
+        btSave.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View view) {
+                JSONObject putRequest = new JSONObject();
+                try {
+                    putRequest.put("teste", "teste");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                        Request.Method.PUT,
+                        url,
+                        putRequest,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (response == null) {
+                                    Log.d(TAG, "API Response: null");
+                                } else {
+                                    Log.d(TAG, "API Response: " + response.toString());
+                                    if (response.equals("com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of")) {
+                                        Toast.makeText(DetailsMedicineActivity.this, "Medicamento atualizado com sucesso.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                            }
+
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // error
+                                Log.d("Error.Response", error.toString());
+                            }
+                        }
+                ) {
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("name", edDetNameMedicines.getText().toString());
+                        params.put("indications", edDetIndMedicines.getText().toString());
+                        params.put("contraindications", edDetContIndMedicines.getText().toString());
+                        params.put("adverseReactions", edDetReactMedicines.getText().toString());
+                        params.put("precautions", edDetPrecMedicines.getText().toString());
+                        params.put("codebar", edDetBarCodeMedicines.getText().toString());
+                        params.put("msRecord", edDetRegMedicines.getText().toString());
+
+
+                        return params;
+                    }
+
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", autorizacao);
+                        return params;
+                    }
+
+                };
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.add(jsonObjReq);
+            }
+        });
+    }
+
+    private void alteraEdicaoBotoes(EditText edDetNameMedicines, EditText
+            edDetBarCodeMedicines, EditText edDetRegMedicines, EditText edDetIndMedicines, EditText
+                                            edDetContIndMedicines, EditText edDetReactMedicines, EditText edDetPrecMedicines) {
+        if (edDetNameMedicines.isEnabled() == true) {
+            edDetNameMedicines.setEnabled(false);
+            edDetBarCodeMedicines.setEnabled(false);
+            edDetRegMedicines.setEnabled(false);
+            edDetIndMedicines.setEnabled(false);
+            edDetContIndMedicines.setEnabled(false);
+            edDetReactMedicines.setEnabled(false);
+            edDetPrecMedicines.setEnabled(false);
+        } else {
+            edDetNameMedicines.setEnabled(false);
+            edDetBarCodeMedicines.setEnabled(false);
+            edDetRegMedicines.setEnabled(false);
+            edDetIndMedicines.setEnabled(false);
+            edDetContIndMedicines.setEnabled(false);
+            edDetReactMedicines.setEnabled(false);
+            edDetPrecMedicines.setEnabled(false);
+        }
     }
 
     @Override
@@ -275,6 +392,7 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
 }

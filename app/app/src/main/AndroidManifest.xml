@@ -30,41 +30,53 @@
         <activity
             android:name=".PrincipalActivity"
             android:label="PrincipalActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".CadMedicinesActivity"
-            android:label="CadMedicinesActivity"></activity>
+            android:label="CadMedicinesActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".CadReceitaActivity"
-            android:label="CadReceitaActivity"></activity>
+            android:label="CadReceitaActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".DetailsMedicineActivity"
-            android:label="DetailsMedicineActivity"></activity>
+            android:label="DetailsMedicineActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".LoginActivity"
-            android:label="LoginActivity"></activity>
+            android:label="LoginActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".NewUserActivity"
-            android:label="NewUserActivity"></activity>
+            android:label="NewUserActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".NewUserContinueActivity"
-            android:label="NewUserContinueActivity"></activity>
+            android:label="NewUserContinueActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ConsFarmaciaActivity"
-            android:label="ConsFarmaciaActivity"></activity>
+            android:label="ConsFarmaciaActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ConsMedicoActivity"
-            android:label="ConsMedicoActivity"></activity>
+            android:label="ConsMedicoActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ConsMedicineActivity"
-            android:label="ConsMedicineActivity"></activity>
+            android:label="ConsMedicineActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ConsReceitaActivity"
-            android:label="ConsReceitaActivity"></activity>
+            android:label="ConsReceitaActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".CadRememberActivity"
-            android:label="CadRememberActivity"></activity>
+            android:label="CadRememberActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />

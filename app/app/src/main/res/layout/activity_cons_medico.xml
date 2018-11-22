@@ -13,53 +13,58 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="match_parent">
 
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/iconbluehealth" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
 
-        <TextView
-            android:id="@+id/tvTitlefindMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consulta - Médico"
-            android:textSize="50px"
-            android:textAlignment="center"/>
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/iconbluehealth" />
 
-        <EditText
-            android:id="@+id/edFindCrmMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite o CRM do Médico"
-            android:inputType="textPersonName"
-            android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/tvTitlefindMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consulta - Médico"
+                android:textAlignment="center"
+                android:textSize="50px" />
 
-        <EditText
-            android:id="@+id/edFindNameMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Digite o nome do Médico"
-            android:inputType="textPersonName"
-            android:textAlignment="center"/>
+            <EditText
+                android:id="@+id/edFindCrmMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o CRM do Médico"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/btConsMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buscar" />
+            <EditText
+                android:id="@+id/edFindNameMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o nome do Médico"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
 
-        <ListView
-            android:id="@+id/listViewDoctors"
-            android:layout_width="match_parent"
-            android:layout_height="188dp"
-            android:scrollbars="vertical"
-            android:textAlignment="center" />
+            <Button
+                android:id="@+id/btConsMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar" />
+
+            <ListView
+                android:id="@+id/listViewDoctors"
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:scrollbars="vertical"
+                android:textAlignment="center" />
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

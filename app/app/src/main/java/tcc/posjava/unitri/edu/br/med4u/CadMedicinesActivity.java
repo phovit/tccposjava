@@ -101,7 +101,6 @@ public class CadMedicinesActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-
                         Request.Method.POST,
                         url,
                         postRequest,

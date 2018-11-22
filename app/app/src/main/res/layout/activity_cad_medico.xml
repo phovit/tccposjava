@@ -13,57 +13,62 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/tvTitleCadMed"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cadastro - Médico" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/edNomeMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Nome"
-            android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/tvTitleCadMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastro - Médico" />
 
-        <EditText
-            android:id="@+id/edEnderecoMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Endereço"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/edNomeMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edEmailMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/edEnderecoMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Endereço"
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/etCrmMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="CRM"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/edEmailMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/edTelefone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Telefone"
-            android:inputType="phone" />
+            <EditText
+                android:id="@+id/etCrmMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="CRM"
+                android:inputType="number" />
 
-        <Button
-            android:id="@+id/btCadastroMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cadastrar" />
+            <EditText
+                android:id="@+id/edTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Telefone"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/btCadastroMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar" />
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

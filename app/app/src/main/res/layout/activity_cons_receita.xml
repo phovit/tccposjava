@@ -13,28 +13,34 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/iconbluehealth" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvConsReceita"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consutar - Receita"
-            android:textSize="50px"
-            android:textAlignment="center"/>
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/iconbluehealth" />
 
-        <ListView
-            android:id="@+id/lvReceitas"
-            android:layout_width="match_parent"
-            android:layout_height="208dp"
-            android:scrollbars="vertical"
-            android:textAlignment="center" />
+            <TextView
+                android:id="@+id/tvConsReceita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consutar - Receita"
+                android:textAlignment="center"
+                android:textSize="50px" />
+
+            <ListView
+                android:id="@+id/lvReceitas"
+                android:layout_width="match_parent"
+                android:layout_height="208dp"
+                android:scrollbars="vertical"
+                android:textAlignment="center" />
+
+        </ScrollView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

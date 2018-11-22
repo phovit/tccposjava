@@ -6,104 +6,109 @@
     android:layout_height="match_parent"
     tools:context=".DetailsMedicineActivity">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="10dp">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="129dp"
-            android:layout_alignParentTop="true"
-
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/iconbluehealth" />
-
-        <TextView
-            android:id="@+id/tvTitlefindMedicines"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detalhes - Medicamentos"
-            android:textAlignment="center"
-            android:textSize="50px" />
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="10dp">
 
-        <EditText
-            android:id="@+id/edDetNameMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName"/>
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_alignParentTop="true"
 
-        <EditText
-            android:id="@+id/edDetBarCodeMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName"/>
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/iconbluehealth" />
 
-        <EditText
-            android:id="@+id/edDetRegMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName"/>
+            <TextView
+                android:id="@+id/tvTitlefindMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalhes - Medicamentos"
+                android:textAlignment="center"
+                android:textSize="50px" />
 
-        <EditText
-            android:id="@+id/edDetIndMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName"/>
+            <EditText
+                android:id="@+id/edDetNameMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edDetContIndMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName"/>
+            <EditText
+                android:id="@+id/edDetBarCodeMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edDetReactMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/edDetRegMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/edDetPrecMedicines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint=""
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/edDetIndMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/btEditDetMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar" />
+            <EditText
+                android:id="@+id/edDetContIndMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/btSaveDetMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar" />
+            <EditText
+                android:id="@+id/edDetReactMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/btDetMed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buscar" />
+            <EditText
+                android:id="@+id/edDetPrecMedicines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/btEditDetMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/btSaveDetMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+
+            <Button
+                android:id="@+id/btDetMed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
