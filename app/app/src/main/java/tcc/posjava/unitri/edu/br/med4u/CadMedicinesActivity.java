@@ -157,12 +157,12 @@ public class CadMedicinesActivity extends AppCompatActivity {
                 etReactMedicine.setText("");
                 etRegMedicine.setText("");
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("autorizacao",autorizacao);
-                setResult(RESULT_OK,returnIntent);
+
             }
 
-        });
+        });/*Intent returnIntent = new Intent();
+                returnIntent.putExtra("autorizacao",autorizacao);
+                setResult(RESULT_OK,returnIntent);*/
 
 
     }

@@ -26,9 +26,9 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-
+/*
         SharedPreferences preferences = getSharedPreferences("autorizacao", MODE_PRIVATE);
-        autorizacao = preferences.toString();
+        autorizacao = preferences.toString();*/
 
         String[] dados = new String[] {"             Fármacias", "         Medicamentos", "              Médicos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dados);
@@ -91,7 +91,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         preencheAutorizacao();
@@ -100,6 +100,6 @@ public class PrincipalActivity extends AppCompatActivity {
     public void preencheAutorizacao(){
         SharedPreferences preferences = getSharedPreferences("autorizacao", MODE_PRIVATE);
         autorizacao = preferences.getString("autorizacao", "autorizacao");
-    }
+    }*/
 
 }

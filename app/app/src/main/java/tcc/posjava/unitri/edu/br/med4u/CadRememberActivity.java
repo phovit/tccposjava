@@ -50,6 +50,9 @@ public class CadRememberActivity extends AppCompatActivity {
     private String autorizacao;
     private String nomeMedicamento;
 
+    private String periodo;
+    private String dosesDia;
+
     private Spinner spnFreq;
     private List<String> frequencia = new ArrayList<String>();
 
@@ -71,7 +74,7 @@ public class CadRememberActivity extends AppCompatActivity {
         actionbar.setTitle("Med4U");
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-
+        Toast.makeText(CadRememberActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
 
         dateView = findViewById(R.id.etCadRemDt);
         timeView = findViewById(R.id.etCadRemHr);
@@ -173,7 +176,11 @@ public class CadRememberActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(CadRememberActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        timeView.setText(selectedHour + ":" + selectedMinute);
+                        if (selectedMinute == 0) {
+                            timeView.setText(selectedHour + ":" + selectedMinute + "0");
+                        } else {
+                            timeView.setText(selectedHour + ":" + selectedMinute);
+                        }
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -190,16 +197,20 @@ public class CadRememberActivity extends AppCompatActivity {
                 EditText name = findViewById(R.id.edCadRemNameMed);
                 EditText dataInicio = findViewById(R.id.etCadRemDt);
                 EditText horaInicio = findViewById(R.id.etCadRemHr);
+                String dataHora = ""+dataInicio.getText().toString()+"T"+horaInicio.getText().toString();
+                EditText periodo = findViewById(R.id.edCadRemPeriodo);
                 EditText dosagem = findViewById(R.id.edCadRemPeriodo);
+
                 RequestQueue queue = Volley.newRequestQueue(CadRememberActivity.this);
 
                 JSONObject postRequest = new JSONObject();
 
                 try {
-                    postRequest.put("name", name.toString());
-                    postRequest.put("firstDose", dataInicio.toString());
-                    postRequest.put("dosage", dosagem.toString());
-
+                    postRequest.put("name", name.getText().toString());
+                    postRequest.put("firstDose", dataHora);
+                    postRequest.put("dosage", dosagem.getText().toString());
+                    postRequest.put("medicine", name.getText().toString());
+                    postRequest.put("period", periodo.getText().toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -375,8 +386,8 @@ public class CadRememberActivity extends AppCompatActivity {
             };
 
     private void showDate(int year, int month, int day) {
-        dateView.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        dateView.setText(new StringBuilder().append(day).append("-")
+                .append(month).append("-").append(year));
     }
 }
 

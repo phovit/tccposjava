@@ -72,23 +72,6 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/btnDataInit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtData"
-                android:layout_centerHorizontal="true"
-                android:onClick="setDate"
-                android:text="Data de início" />
-
-            <EditText
-                android:id="@+id/etCadRemDtInit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textAlignment="center" />
-
-            <Button
                 android:id="@+id/btnData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
