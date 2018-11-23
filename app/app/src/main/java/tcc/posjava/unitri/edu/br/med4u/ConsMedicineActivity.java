@@ -61,6 +61,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cons_medicines);
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
+        Toast.makeText(ConsMedicineActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
         lvOpcoes = findViewById(R.id.lvMedicines);
         opcoes = new ArrayList<>();
         consultaAutomatica();
@@ -236,6 +237,7 @@ public class ConsMedicineActivity extends AppCompatActivity {
                     Toast.makeText(ConsMedicineActivity.this, "Item selecionado" + itemValue, Toast.LENGTH_LONG).show();
 
                     Intent details = new Intent(ConsMedicineActivity.this, DetailsMedicineActivity.class);
+                    details.putExtra("autorizacao", autorizacao);
                     details.putExtra("name", itemValue);
 
                     startActivity(details);

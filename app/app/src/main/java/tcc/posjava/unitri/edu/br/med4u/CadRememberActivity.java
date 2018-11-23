@@ -30,6 +30,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -46,20 +47,19 @@ public class CadRememberActivity extends AppCompatActivity {
 
     private String url = "http://med4u.herokuapp.com/reminders";
     private String urlMed = "http://med4u.herokuapp.com/medicine";
-    private Uri file;
     private String autorizacao;
     private String nomeMedicamento;
 
     private Spinner spnFreq;
     private List<String> frequencia = new ArrayList<String>();
-    private String opcoes;
 
-    private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
     private int year, month, day;
 
     private TextView timeView;
+
+    private EditText etPeriodo;
 
     private static String TAG = "CadRememberActivity";
 
@@ -73,7 +73,8 @@ public class CadRememberActivity extends AppCompatActivity {
         autorizacao = it.getStringExtra("autorizacao");
 
 
-        dateView = findViewById(R.id.etCadRecDt);
+        dateView = findViewById(R.id.etCadRemDt);
+        timeView = findViewById(R.id.etCadRemHr);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
 
@@ -101,7 +102,7 @@ public class CadRememberActivity extends AppCompatActivity {
         btFindMedCadRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText edFindNameMedicines = findViewById(R.id.edCadRecNameMed);
+                final EditText edFindNameMedicines = findViewById(R.id.edCadRemNameMed);
                 nomeMedicamento = edFindNameMedicines.getText().toString();
 
                 RequestQueue requestQueue = Volley.newRequestQueue(CadRememberActivity.this);
@@ -161,8 +162,8 @@ public class CadRememberActivity extends AppCompatActivity {
             }
         });
 
-        timeView = findViewById(R.id.etCadRecHr);
-        timeView.setOnClickListener(new View.OnClickListener() {
+        Button btnHour = findViewById(R.id.btnHora);
+        btnHour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar mcurrentTime = Calendar.getInstance();
@@ -174,10 +175,81 @@ public class CadRememberActivity extends AppCompatActivity {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         timeView.setText(selectedHour + ":" + selectedMinute);
                     }
-                }, hour, minute, true);
+                }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
+            }
+        });
 
+        //cadastro
+
+        Button btCadRemenber = findViewById(R.id.btCadaRemember);
+        btCadRemenber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText name = findViewById(R.id.edCadRemNameMed);
+                EditText dataInicio = findViewById(R.id.etCadRemDt);
+                EditText horaInicio = findViewById(R.id.etCadRemHr);
+                EditText dosagem = findViewById(R.id.edCadRemPeriodo);
+                RequestQueue queue = Volley.newRequestQueue(CadRememberActivity.this);
+
+                JSONObject postRequest = new JSONObject();
+
+                try {
+                    postRequest.put("name", name.toString());
+                    postRequest.put("firstDose", dataInicio.toString());
+                    postRequest.put("dosage", dosagem.toString());
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+                        Request.Method.POST,
+                        url,
+                        postRequest,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (response == null) {
+                                    Log.d(TAG, "API Response: null");
+                                } else {
+                                    Log.d(TAG, "API Response: " + response.toString());
+                                    if (response.equals("com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of")) {
+                                        Toast.makeText(CadRememberActivity.this, "Medicamento cadastrado com sucesso.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                            }
+
+                        },
+
+                        /* Callback chamado em caso de erro */
+
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
+                            }
+                        }) {
+                    //This is for Headers If You Needed
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/json; charset=UTF-8");
+                        params.put("token", autorizacao);
+                        return params;
+                    }
+
+                    //Pass Your Parameters here
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        return params;
+                    }
+                };
+                queue.add(jsonObjReq);
             }
         });
     }
@@ -306,6 +378,5 @@ public class CadRememberActivity extends AppCompatActivity {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
     }
-
-
 }
+

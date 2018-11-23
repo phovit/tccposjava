@@ -55,6 +55,7 @@ public class CadMedicinesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cad_medicines);
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
+        Toast.makeText(CadMedicinesActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
@@ -224,6 +225,7 @@ public class CadMedicinesActivity extends AppCompatActivity {
                 break;
             case R.id.menuConsMedicamentos:
                 Intent consultaMedicines = new Intent(this, ConsMedicineActivity.class);
+                consultaMedicines.putExtra("autorizacao", autorizacao);
                 startActivity(consultaMedicines);
                 break;
             case R.id.menuConsMedico:

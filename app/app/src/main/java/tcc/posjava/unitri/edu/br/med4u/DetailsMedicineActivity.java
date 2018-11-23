@@ -50,6 +50,14 @@ public class DetailsMedicineActivity extends AppCompatActivity {
     private String autorizacao;
     private String nome;
 
+    private EditText edDetNameMedicines; /*= findViewById(R.id.edDetNameMedicines);*/
+    private EditText edDetBarCodeMedicines; /*= findViewById(R.id.edDetBarCodeMedicines);*/
+    private EditText edDetRegMedicines; /*= findViewById(R.id.edDetRegMedicines);*/
+    private EditText edDetIndMedicines; /*= findViewById(R.id.edDetIndMedicines);*/
+    private EditText edDetContIndMedicines; /*= findViewById(R.id.edDetContIndMedicines);*/
+    private EditText edDetReactMedicines; /*= findViewById(R.id.edDetReactMedicines);*/
+    private EditText edDetPrecMedicines; /*= findViewById(R.id.edDetPrecMedicines);*/
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_medicines);
@@ -59,6 +67,7 @@ public class DetailsMedicineActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
+        Toast.makeText(DetailsMedicineActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
         nome = it.getStringExtra("name");
         Toast.makeText(DetailsMedicineActivity.this, "Nome: " + nome, Toast.LENGTH_LONG).show();
 
@@ -66,13 +75,13 @@ public class DetailsMedicineActivity extends AppCompatActivity {
 
     public void populaLista() {
 
-        final EditText edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
-        final EditText edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
-        final EditText edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
-        final EditText edDetIndMedicines = findViewById(R.id.edDetIndMedicines);
-        final EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
-        final EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
-        final EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
+        edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
+        edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
+        edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
+        edDetIndMedicines = findViewById(R.id.edDetIndMedicines);
+        edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
+        edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
+        edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
 
         alteraEdicaoBotoes(edDetNameMedicines, edDetBarCodeMedicines, edDetRegMedicines, edDetIndMedicines, edDetContIndMedicines, edDetReactMedicines, edDetPrecMedicines);
 
@@ -121,25 +130,7 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
         ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        final EditText edDetNameMedicines = findViewById(R.id.edDetNameMedicines);
-        final EditText edDetBarCodeMedicines = findViewById(R.id.edDetBarCodeMedicines);
-        final EditText edDetRegMedicines = findViewById(R.id.edDetRegMedicines);
-        final EditText edDetIndMedicines = findViewById(R.id.edDetIndMedicines);
-        final EditText edDetContIndMedicines = findViewById(R.id.edDetContIndMedicines);
-        final EditText edDetReactMedicines = findViewById(R.id.edDetReactMedicines);
-        final EditText edDetPrecMedicines = findViewById(R.id.edDetPrecMedicines);
-
-        alteraEdicaoBotoes(edDetNameMedicines, edDetBarCodeMedicines, edDetRegMedicines, edDetIndMedicines, edDetContIndMedicines, edDetReactMedicines, edDetPrecMedicines);
-
-
         // Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
         Button btDetails = findViewById(R.id.btDetMed);
         btDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,21 +209,29 @@ public class DetailsMedicineActivity extends AppCompatActivity {
         });
 
         Button btSave = findViewById(R.id.btSaveDetMed);
-
         btSave.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
             public void onClick(View view) {
+                Toast.makeText(DetailsMedicineActivity.this, "clicado ", Toast.LENGTH_LONG).show();
+                RequestQueue requestQueue = Volley.newRequestQueue(DetailsMedicineActivity.this);
                 JSONObject putRequest = new JSONObject();
-
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                        Request.Method.PUT,
-                        url,
-                        putRequest,
-                        new Response.Listener<JSONObject>() {
+                try {
+                    putRequest.put("name", edDetNameMedicines.getText().toString());
+                    putRequest.put("indications", edDetIndMedicines.getText().toString());
+                    putRequest.put("contraindications", edDetContIndMedicines.getText().toString());
+                    putRequest.put("adverseReactions", edDetReactMedicines.getText().toString());
+                    putRequest.put("precautions", edDetPrecMedicines.getText().toString());
+                    putRequest.put("codebar", edDetBarCodeMedicines.getText().toString());
+                    putRequest.put("msRecord", edDetRegMedicines.getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.PUT, url, null,
+                        new Response.Listener<JSONArray>() {
                             @Override
-                            public void onResponse(JSONObject response) {
+                            public void onResponse(JSONArray response) {
                                 if (response == null) {
                                     Log.d(TAG, "API Response: null");
                                 } else {
@@ -265,6 +264,8 @@ public class DetailsMedicineActivity extends AppCompatActivity {
                         params.put("codebar", edDetBarCodeMedicines.getText().toString());
                         params.put("msRecord", edDetRegMedicines.getText().toString());
 
+                        Toast.makeText(DetailsMedicineActivity.this, "name: " + edDetNameMedicines.getText().toString(), Toast.LENGTH_LONG).show();
+
 
                         return params;
                     }
@@ -280,7 +281,11 @@ public class DetailsMedicineActivity extends AppCompatActivity {
 
                 };
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                queue.add(jsonObjReq);
+                queue.add(getRequest);
+
+                // Adding the request to the queue along with a unique string tag
+
+                requestQueue.add(getRequest);
             }
         });
     }
