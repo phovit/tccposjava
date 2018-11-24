@@ -25,10 +25,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -37,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -52,6 +56,7 @@ public class CadRememberActivity extends AppCompatActivity {
 
     private String periodo;
     private String dosesDia;
+    private String nome;
 
     private Spinner spnFreq;
     private List<String> frequencia = new ArrayList<String>();
@@ -75,7 +80,7 @@ public class CadRememberActivity extends AppCompatActivity {
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
         Toast.makeText(CadRememberActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
-
+        final EditText edFindNameCadMedicines = findViewById(R.id.edCadRemNameMed);
         dateView = findViewById(R.id.etCadRemDt);
         timeView = findViewById(R.id.etCadRemHr);
         calendar = Calendar.getInstance();
@@ -84,21 +89,6 @@ public class CadRememberActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
-
-
-        //preencher frequencia
-        frequencia.add("Uma vez ao dia");
-        frequencia.add("Duas vezes ao dia");
-        frequencia.add("Três vezes ao dia");
-
-        //busca spinner na tela
-        spnFreq = findViewById(R.id.spinnerFrequencia);
-
-        //criar adapter
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, frequencia);
-        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spnFreq.setAdapter(spinnerArrayAdapter);
 
         //busca do medicamento
         Button btFindMedCadRec = findViewById(R.id.btFindMedCadRec);
@@ -124,6 +114,7 @@ public class CadRememberActivity extends AppCompatActivity {
                                         JSONObject medicine = response.getJSONObject(i);
                                         if (medicine.getString("name").toString().equalsIgnoreCase(nomeMedicamento)) {
                                             edFindNameMedicines.setText(medicine.getString("name"));
+
                                         }
                                     }
                                 } catch (JSONException e) {
@@ -188,29 +179,43 @@ public class CadRememberActivity extends AppCompatActivity {
             }
         });
 
-        //cadastro
 
-        Button btCadRemenber = findViewById(R.id.btCadaRemember);
-        btCadRemenber.setOnClickListener(new View.OnClickListener() {
+        Button btCadRemember = findViewById(R.id.btCadaRemember);
+        btCadRemember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText name = findViewById(R.id.edCadRemNameMed);
-                EditText dataInicio = findViewById(R.id.etCadRemDt);
-                EditText horaInicio = findViewById(R.id.etCadRemHr);
-                String dataHora = ""+dataInicio.getText().toString()+"T"+horaInicio.getText().toString();
-                EditText periodo = findViewById(R.id.edCadRemPeriodo);
-                EditText dosagem = findViewById(R.id.edCadRemPeriodo);
+                EditText etCadRemNomeMed = findViewById(R.id.edCadRemNameMed);
+                String name = etCadRemNomeMed.getText().toString();
+
+                EditText etCadRemDoseDia = findViewById(R.id.edCadRemDoseDia);
+                String doseDia = etCadRemDoseDia.getText().toString();
+
+                EditText etDate = findViewById(R.id.etCadRemDt);
+                String etDateString = etDate.getText().toString();
+
+                EditText etHour = findViewById(R.id.etCadRemHr);
+                String etHourString = etHour.getText().toString();
+
+                EditText etDoses = findViewById(R.id.edCadRemDoses);
+                String etDosesString = etDoses.getText().toString();
+
+                EditText etInterval = findViewById(R.id.edCadInterval);
+                String etIntervalString = etInterval.getText().toString();
+
 
                 RequestQueue queue = Volley.newRequestQueue(CadRememberActivity.this);
 
                 JSONObject postRequest = new JSONObject();
 
+                String auxData = formataData(etDateString, etHourString);
+
                 try {
-                    postRequest.put("name", name.getText().toString());
-                    postRequest.put("firstDose", dataHora);
-                    postRequest.put("dosage", dosagem.getText().toString());
-                    postRequest.put("medicine", name.getText().toString());
-                    postRequest.put("period", periodo.getText().toString());
+                    postRequest.put("name", name);
+                    /*postRequest.put("firstDose", auxData);*/
+                    postRequest.put("observation", etDosesString);
+                    /*postRequest.put("medicine", reactMedicine);
+                    postRequest.put("user", prec);*/
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -227,7 +232,7 @@ public class CadRememberActivity extends AppCompatActivity {
                                 } else {
                                     Log.d(TAG, "API Response: " + response.toString());
                                     if (response.equals("com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of")) {
-                                        Toast.makeText(CadRememberActivity.this, "Medicamento cadastrado com sucesso.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(CadRememberActivity.this, "Lembrete cadastrado com sucesso.", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
@@ -241,6 +246,22 @@ public class CadRememberActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
+                                NetworkResponse response = error.networkResponse;
+                                if (error instanceof ServerError && response != null) {
+                                    try {
+                                        String res = new String(response.data,
+                                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                                        // Now you can use any deserializer to make sense of data
+                                        JSONObject obj = new JSONObject(res);
+                                    } catch (UnsupportedEncodingException e1) {
+                                        // Couldn't properly decode data to string
+                                        e1.printStackTrace();
+                                    } catch (JSONException e2) {
+                                        // returned data is not JSONObject?
+                                        e2.printStackTrace();
+                                    }
+                                }
+
                                 Log.d(TAG, "Ocorreu um erro ao chamar a API " + error);
                             }
                         }) {
@@ -249,7 +270,12 @@ public class CadRememberActivity extends AppCompatActivity {
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("Content-Type", "application/json; charset=UTF-8");
-                        params.put("token", autorizacao);
+                        try {
+                            Object obj = new JSONObject(autorizacao).get("Authorization");
+                            params.put("Authorization", (String) obj);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         return params;
                     }
 
@@ -261,18 +287,33 @@ public class CadRememberActivity extends AppCompatActivity {
                     }
                 };
                 queue.add(jsonObjReq);
+/*
+
+                etBarCodeMedicine.setText("");
+                etContIndMedicine.setText("");
+                etIndMedicine.setText("");
+                etNameCadMedicine.setText("");
+                etPrecMedicine.setText("");
+                etReactMedicine.setText("");
+                etRegMedicine.setText("");
+*/
+
+
             }
+
         });
+
     }
 
+    public String formataData(String data, String hora) {
+        return data + "T" + hora + "Z";
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_principal, menu);
         return true;
-
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

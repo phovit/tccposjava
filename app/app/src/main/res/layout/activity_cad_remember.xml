@@ -65,10 +65,22 @@
                 android:textAlignment="center"
                 android:textSize="30px" />
 
-            <Spinner
-                android:id="@+id/spinnerFrequencia"
+            <EditText
+                android:id="@+id/edCadRemDoseDia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a quantidade de doses diárias"
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/edCadInterval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o intervalo de horas"
+                android:inputType="textPersonName"
                 android:textAlignment="center" />
 
             <Button
@@ -107,7 +119,7 @@
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/edCadRemPeriodo"
+                android:id="@+id/edCadRemDoses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -116,7 +128,7 @@
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/edCadRec"
+                android:id="@+id/edCadRemDos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
