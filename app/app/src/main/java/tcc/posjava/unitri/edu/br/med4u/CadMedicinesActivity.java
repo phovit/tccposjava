@@ -32,6 +32,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,7 +138,13 @@ public class CadMedicinesActivity extends AppCompatActivity {
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("Content-Type", "application/json; charset=UTF-8");
-                        params.put("token", autorizacao);
+                        Gson gson = new Gson();
+                        try {
+                            Object obj = new JSONObject(autorizacao).get("Authorization");
+                            params.put("Authorization", (String) obj);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         return params;
                     }
 
