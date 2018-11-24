@@ -67,7 +67,6 @@ public class DetailsMedicineActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-        Toast.makeText(DetailsMedicineActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
         nome = it.getStringExtra("name");
         Toast.makeText(DetailsMedicineActivity.this, "Nome: " + nome, Toast.LENGTH_LONG).show();
 

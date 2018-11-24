@@ -35,6 +35,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,8 +52,10 @@ public class CadRememberActivity extends AppCompatActivity {
 
     private String url = "http://med4u.herokuapp.com/reminders";
     private String urlMed = "http://med4u.herokuapp.com/medicine";
+    private String urlUsers = "http://med4u.herokuapp.com/users";
     private String autorizacao;
     private String nomeMedicamento;
+    private List<String> opcoes;
 
     private String periodo;
     private String dosesDia;
@@ -60,6 +63,7 @@ public class CadRememberActivity extends AppCompatActivity {
 
     private Spinner spnFreq;
     private List<String> frequencia = new ArrayList<String>();
+    private JSONObject result = null;
 
     private Calendar calendar;
     private TextView dateView;
@@ -79,7 +83,6 @@ public class CadRememberActivity extends AppCompatActivity {
         actionbar.setTitle("Med4U");
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-        Toast.makeText(CadRememberActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
         final EditText edFindNameCadMedicines = findViewById(R.id.edCadRemNameMed);
         dateView = findViewById(R.id.etCadRemDt);
         timeView = findViewById(R.id.etCadRemHr);
@@ -212,9 +215,17 @@ public class CadRememberActivity extends AppCompatActivity {
                 try {
                     postRequest.put("name", name);
                     /*postRequest.put("firstDose", auxData);*/
-                    postRequest.put("observation", etDosesString);
-                    /*postRequest.put("medicine", reactMedicine);
-                    postRequest.put("user", prec);*/
+                    postRequest.put("observation", etDoses);
+                    postRequest.put("medicine", name);
+                    postRequest.put("dosage", doseDia);
+                    postRequest.put("period", etDosesString);
+                    postRequest.put("observation", etIntervalString);
+
+                    JSONObject user = new JSONObject();
+                    int ident = 5005;
+                    user = buscaUsuario(ident);
+
+                    postRequest.put("user", user);
 
 
                 } catch (JSONException e) {
@@ -231,11 +242,11 @@ public class CadRememberActivity extends AppCompatActivity {
                                     Log.d(TAG, "API Response: null");
                                 } else {
                                     Log.d(TAG, "API Response: " + response.toString());
-                                    if (response.equals("com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of")) {
+                                    if (response.equals("Ocorreu um erro ao chamar a API com.android.volley.ServerError")) {
                                         Toast.makeText(CadRememberActivity.this, "Lembrete cadastrado com sucesso.", Toast.LENGTH_LONG).show();
                                     }
                                 }
-
+                                /*Toast.makeText(CadRememberActivity.this, "Lembrete cadastrado com sucesso.", Toast.LENGTH_LONG).show();*/
                             }
 
                         },
@@ -287,22 +298,64 @@ public class CadRememberActivity extends AppCompatActivity {
                     }
                 };
                 queue.add(jsonObjReq);
-/*
 
-                etBarCodeMedicine.setText("");
-                etContIndMedicine.setText("");
-                etIndMedicine.setText("");
-                etNameCadMedicine.setText("");
-                etPrecMedicine.setText("");
-                etReactMedicine.setText("");
-                etRegMedicine.setText("");
-*/
+                etCadRemNomeMed.setText("");
+                etCadRemDoseDia.setText("");
+                etDate.setText("");
+                etHour.setText("");
+                etDoses.setText("");
+                etInterval.setText("");
 
 
             }
 
         });
 
+    }
+
+    public JSONObject buscaUsuario(final int id) {
+        // Initialize a new RequestQueue instance
+
+        RequestQueue requestQueue = Volley.newRequestQueue(CadRememberActivity.this);
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                urlUsers,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        opcoes = new ArrayList<>();
+
+                        try {
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject users = response.getJSONObject(i);
+                                if (users.getInt("id") == id) {
+                                    result = response.getJSONObject(i);
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+        );
+
+        // Add JsonArrayRequest to the RequestQueue
+        requestQueue.add(jsonArrayRequest);
+        return result;
     }
 
     public String formataData(String data, String hora) {

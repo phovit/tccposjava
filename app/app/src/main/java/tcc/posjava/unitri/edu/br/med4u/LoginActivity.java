@@ -51,12 +51,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*SharedPreferences preferences =
-                getSharedPreferences("autorizacao", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("autorizacao", null);
-        editor.commit();*/
-
         TextView newUser = findViewById(R.id.tvNewUserLogin);
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +96,8 @@ public class LoginActivity extends Activity {
                                         Toast.makeText(LoginActivity.this, "Bem vindo " + nomeUsuario, Toast.LENGTH_LONG).show();
                                         Intent cadMed = new Intent(LoginActivity.this, CadMedicinesActivity.class);
                                         cadMed.putExtra("autorizacao", response.toString());
-                                        /*SharedPreferences preferences =
-                                                getSharedPreferences("autorizacao", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = preferences.edit();
-                                        editor.putString("autorizacao", response.toString());
-                                        editor.commit();*/
+
+
                                         try {
                                             updateFirebaseToken(FirebaseInstanceId.getInstance().getToken(), nomeUsuario, response.getString("Authorization"));
                                         } catch (JSONException e) {

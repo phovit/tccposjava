@@ -58,7 +58,6 @@ public class CadMedicinesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cad_medicines);
         Intent it = getIntent();
         autorizacao = it.getStringExtra("autorizacao");
-        Toast.makeText(CadMedicinesActivity.this, "autorizacao: " + autorizacao, Toast.LENGTH_LONG).show();
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setTitle("Med4U");
@@ -168,18 +167,13 @@ public class CadMedicinesActivity extends AppCompatActivity {
 
             }
 
-        });/*Intent returnIntent = new Intent();
-                returnIntent.putExtra("autorizacao",autorizacao);
-                setResult(RESULT_OK,returnIntent);*/
-
-
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_principal, menu);
         return true;
-
     }
 
     @Override
@@ -250,21 +244,12 @@ public class CadMedicinesActivity extends AppCompatActivity {
                     Toast.makeText(CadMedicinesActivity.this, "Necessita autenticação", Toast.LENGTH_LONG).show();
                 }
                 break;
-            /*case R.id.menuPerfilEditar:
-                Intent editPerfil = new Intent(this, EditPerfil.class);
-                startActivity(editPerfil);
-                break;
-            case R.id.menuPerfilVisualizar:
-                Intent visPerfil = new Intent(this, visPerfil.class);
-                startActivity(visPerfil);
-                break;*/
             case R.id.menuSair:
                 SharedPreferences myPrefs = getSharedPreferences("Logout",
                         MODE_PRIVATE);
                 SharedPreferences.Editor editor = myPrefs.edit();
                 editor.clear();
                 editor.commit();
-                /*AppState.getSingleInstance().setLoggingOut(true);*/
                 Log.d(TAG, "Now log out and start the activity login");
                 Intent intent = new Intent(CadMedicinesActivity.this,
                         PrincipalActivity.class);

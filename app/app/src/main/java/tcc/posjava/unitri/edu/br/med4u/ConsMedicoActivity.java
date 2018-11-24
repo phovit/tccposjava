@@ -121,9 +121,6 @@ public class ConsMedicoActivity extends AppCompatActivity {
                 };
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 queue.add(getRequest);
-// Adding the request to the queue along with a unique string tag
-                /*Volley.getInstance(this).addToRequestQueue(getRequest, "headerRequest");*/
-
                 requestQueue.add(getRequest);
                 ((InputMethodManager) getSystemService(ConsMedicineActivity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }

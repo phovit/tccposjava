@@ -20,15 +20,10 @@ public class PrincipalActivity extends AppCompatActivity {
     private String autorizacao;
     private static String TAG = "PrincipalActivity";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-/*
-        SharedPreferences preferences = getSharedPreferences("autorizacao", MODE_PRIVATE);
-        autorizacao = preferences.toString();*/
 
         String[] dados = new String[] {"             Fármacias", "         Medicamentos", "              Médicos"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dados);

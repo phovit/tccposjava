@@ -96,14 +96,8 @@ public class NewUserContinueActivity extends AppCompatActivity {
                 String userName = etUserNU.getText().toString();
                 String cpf = etCpf.getText().toString();
                 String email = etEmail.getText().toString();
-                /*EditText etPhone = findViewById(R.id.etPhoneNewUser);
-                String phone = etPhone.getText().toString();*/
-                /*EditText etCell = findViewById(R.id.etCellNewUser);
-                String cell = etCell.getText().toString();*/
                 EditText etPass = findViewById(R.id.etPassNewUser);
                 String pass = etPass.getText().toString();
-                /*EditText etPass2 = findViewById(R.id.etPassNewUser2);
-                String pass2 = etPass2.getText().toString();*/
 
 
                 RequestQueue queue = Volley.newRequestQueue(NewUserContinueActivity.this);
@@ -136,9 +130,6 @@ public class NewUserContinueActivity extends AppCompatActivity {
 
                                     showDialog("Resposta", response.toString());
 
-                                    /*if ((response.toString().contains(("Authorization\":\"Bearer eyJhbGciOiJIUzUxMiJ9.")))) {
-                                        Intent cadRec = new Intent(NewUserContinueActivity.this, CadReceitaActivity.class);
-                                        startActivity(cadRec);*/
                                 }
 
                             }
