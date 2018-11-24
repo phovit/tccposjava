@@ -23,13 +23,21 @@
           }
         },
         {
+          "client_id": "1086155159243-uj5icprp6rju4rbitdhn9qj2f6kmc3d2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tcc.posjava.unitri.edu.br.med4u",
+            "certificate_hash": "2528f7678665b80d6d3085018f588c2cc57c764a"
+          }
+        },
+        {
           "client_id": "1086155159243-1dt9qocn81opn0rfm5ki5sbm2vn0j462.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDBxQyFwCBKoX4b_80ZuY8w-HGB90Bldeg"
+          "current_key": "AIzaSyBHiAWCHYo3FvsPJpfDeUDYteo8wkFWdtY"
         }
       ],
       "services": {
